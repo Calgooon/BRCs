@@ -19,6 +19,7 @@ BRC | Standard
 138  | [Single-Use Signed Proofs for Request Authentication](./0138.md)
 141  | [Fountain-Coded Air-Gap Transport for Arbitrary Payloads](./0141.md)
 169  | [Universal Handle Addressing and Resolution for the Metanet](./0169.md)
+182  | [Pairwise Authentication](./0182.md)
 200  | [Operating Practices for Identity Certifiers](./0200.md)
 201  | [Social Account Certificate Types and Issuance Profile](./0201.md)
 202  | [Identity-Key Decentralized Identifiers](./0202.md)
@@ -26,4 +27,5 @@ BRC | Standard
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./0225.md)
 231  | [Binary Encoding for the Message Relay Interface](./0231.md)
 232  | [Unsolicited Transaction Delivery to a BRC-169 Mailbox](./0232.md)
+248  | [Offline Issuer Identity Packages](./0248.md)
 369  | [Keyed Content and Conditional Key Release](./0369.md)

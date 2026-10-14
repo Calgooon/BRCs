@@ -27,3 +27,4 @@ BRC | Standard
 195  | [Private Overlay Data and Recoverable Paid Lookup](./0195.md)
 196  | [STEAK with POTATOES](./0196.md)
 199  | [SHIP and SLAP Root-Host Output Eviction Coordination](./0199.md)
+211  | [Signed On-Chain Reachability Manifest](./0211.md)
