@@ -4,7 +4,7 @@ import { PrivateKey, Transaction, Script, LockingScript, UnlockingScript, Spend,
 
 const holder = PrivateKey.fromRandom(), recipient = PrivateKey.fromRandom()
 const issuer = [PrivateKey.fromRandom(), PrivateKey.fromRandom()]                          // 1-of-2, hot
-const successor = [PrivateKey.fromRandom(), PrivateKey.fromRandom(), PrivateKey.fromRandom()] // 2-of-3, cold
+const release = [PrivateKey.fromRandom(), PrivateKey.fromRandom(), PrivateKey.fromRandom()] // 2-of-3, custodians
 const assetId = (seed) => [...Hash.sha256(Utils.toArray(seed, 'utf8')), 0, 0, 0, 0]          // deploy outpoint: txid ‖ vout LE
 const tokenId = assetId('token'), itemId = assetId('item')
 const num = (n) => { const s = new Script(); s.writeNumber(n); return s.chunks[0] }
@@ -15,15 +15,15 @@ function multisig(s, m, keys) {
   smallInt(s, m); for (const k of keys) s.writeBin(k.toPublicKey().encode(true)); smallInt(s, keys.length)
   s.writeOpCode(OP.OP_CHECKMULTISIG)
 }
-/** Countersign clause alone: holder AND (issuer m-of-n OR successor k-of-j). */
-function clauseOnly(pkh, iss = issuer, suc = successor) {
+/** Countersign clause alone: holder AND (issuer m-of-n OR release k-of-j). */
+function clauseOnly(pkh, iss = issuer, suc = release) {
   const s = new Script()
   s.writeOpCode(OP.OP_DUP).writeOpCode(OP.OP_HASH160).writeBin(pkh).writeOpCode(OP.OP_EQUALVERIFY).writeOpCode(OP.OP_CHECKSIGVERIFY)
   s.writeOpCode(OP.OP_IF); multisig(s, 1, iss); s.writeOpCode(OP.OP_ELSE); multisig(s, 2, suc); s.writeOpCode(OP.OP_ENDIF)
   return s
 }
 /** BRC-162 prefix + countersign clause. An item is the same output with amount 1. */
-function clause(pkh, amount, iss = issuer, suc = successor, id = tokenId) {
+function clause(pkh, amount, iss = issuer, suc = release, id = tokenId) {
   const s = new Script()
   s.writeBin(id); s.chunks.push(num(amount)); s.writeOpCode(OP.OP_2DROP)
   s.chunks.push(...clauseOnly(pkh, iss, suc).chunks)
@@ -43,7 +43,7 @@ function sig(tx, i, key, scope) {
     inputIndex: i, outputs: tx.outputs, inputSequence: inp.sequence, subscript: src.lockingScript, lockTime: tx.lockTime, scope })
   const s = key.sign(Hash.sha256(pre)); return new TransactionSignature(s.r, s.s, scope).toChecksigFormat()
 }
-/** OP_0 <countersignatures> <branch> <holder sig> <holder pubkey>; branch OP_1 = issuer, OP_0 = successor. */
+/** OP_0 <countersignatures> <branch> <holder sig> <holder pubkey>; branch OP_1 = issuer, OP_0 = release. */
 function unlock(countersigs, branch, holderSig, holderKey = holder) {
   const s = new Script(); s.writeOpCode(OP.OP_0); for (const x of countersigs) s.writeBin(x)
   s.writeOpCode(branch === 'issuer' ? OP.OP_1 : OP.OP_0); s.writeBin(holderSig); s.writeBin(holderKey.toPublicKey().encode(true))
@@ -104,13 +104,13 @@ function resolve(efBytes, deploys, me) {
   }
   return mine
 }
-const deploys = { [hex(tokenId)]: { kind: 'token', iss: issuer, suc: successor }, [hex(itemId)]: { kind: 'item', iss: issuer, suc: successor } }
+const deploys = { [hex(tokenId)]: { kind: 'token', iss: issuer, suc: release }, [hex(itemId)]: { kind: 'item', iss: issuer, suc: release } }
 
 // Item transfer: same clause, amount 1.
-const itemParent = fundedBy([{ lockingScript: clause(pkh(holder), 1, issuer, successor, itemId), satoshis: 1 }])
+const itemParent = fundedBy([{ lockingScript: clause(pkh(holder), 1, issuer, release, itemId), satoshis: 1 }])
 function itemTransfer(amounts) {
   const t = new Transaction(); t.addInput(spendOf(itemParent))
-  for (const a of amounts) t.addOutput({ lockingScript: clause(pkh(recipient), a, issuer, successor, itemId), satoshis: 1 })
+  for (const a of amounts) t.addOutput({ lockingScript: clause(pkh(recipient), a, issuer, release, itemId), satoshis: 1 })
   const hs = sig(t, 0, holder, ACP); t.addInput(spendOf(feeParent))
   t.inputs[0].unlockingScript = unlock([sig(t, 0, issuer[0], ALL)], 'issuer', hs)
   return t.toEF()
@@ -120,7 +120,7 @@ const buyerTokens = fundedBy([{ lockingScript: clause(pkh(recipient), 30), satos
 function swap(itemTo = recipient) {
   const t = new Transaction()
   t.addInput(spendOf(itemParent)); t.addInput(spendOf(buyerTokens))
-  t.addOutput({ lockingScript: clause(pkh(itemTo), 1, issuer, successor, itemId), satoshis: 1 })
+  t.addOutput({ lockingScript: clause(pkh(itemTo), 1, issuer, release, itemId), satoshis: 1 })
   t.addOutput({ lockingScript: clause(pkh(holder), 25), satoshis: 1 })
   t.addOutput({ lockingScript: clause(pkh(recipient), 5), satoshis: 1 })
   const a = sig(t, 0, holder, ACP), b = sig(t, 1, recipient, ACP)
@@ -130,7 +130,7 @@ function swap(itemTo = recipient) {
   return t.toEF()
 }
 // A forger copies the issuer's key sets into its own deploy and pays the recipient directly.
-const forgedDeploy = (() => { const t = new Transaction(); t.addInput(spendOf(feeParent)); t.addOutput({ lockingScript: clause(pkh(recipient), 1, issuer, successor, itemId), satoshis: 1 }); return t.toEF() })()
+const forgedDeploy = (() => { const t = new Transaction(); t.addInput(spendOf(feeParent)); t.addOutput({ lockingScript: clause(pkh(recipient), 1, issuer, release, itemId), satoshis: 1 }); return t.toEF() })()
 
 let failed = 0
 const report = (pass, name) => { if (!pass) failed++; console.log((pass ? 'ok   ' : 'FAIL ') + name) }
@@ -141,17 +141,17 @@ console.log(`EF bytes: ${ef.length}`)
 ok('recipient verifies the issuer-countersigned input from EF alone', () => verify(Transaction.fromEF(ef)))
 fails('a claimed spent output with a bigger amount fails', () => verify(Transaction.fromEF(ef), 0, clause(pkh(holder), 1000)))
 fails('a claimed spent output naming other issuer keys fails', () => verify(Transaction.fromEF(ef), 0, clause(pkh(holder), 100, [PrivateKey.fromRandom()])))
-fails('a claimed spent output naming other successor keys fails', () => verify(Transaction.fromEF(ef), 0, clause(pkh(holder), 100, issuer, [PrivateKey.fromRandom(), PrivateKey.fromRandom()])))
+fails('a claimed spent output naming other release keys fails', () => verify(Transaction.fromEF(ef), 0, clause(pkh(holder), 100, issuer, [PrivateKey.fromRandom(), PrivateKey.fromRandom()])))
 fails('a claimed spent output with other satoshis fails', () => verify(Transaction.fromEF(ef), 0, undefined, 2))
 fails('holder signature alone does not spend', () => verify(withUnlock(() => unlock([holderSig], 'issuer', holderSig))))
 fails('a key outside the set does not countersign', () => verify(withUnlock((t) => unlock([sig(t, 0, PrivateKey.fromRandom(), ALL)], 'issuer', holderSig))))
 fails('changing an output after the issuer signed fails', () => { const t = Transaction.fromEF(ef); t.outputs[0].lockingScript = clause(pkh(PrivateKey.fromRandom()), 60); return verify(t) })
 fails('adding an input after the issuer signed fails', () => { const t = Transaction.fromEF(ef); t.addInput(spendOf(feeParent)); return verify(t) })
-ok('two successor keys countersign through the successor branch', () => verify(withUnlock((t) => unlock([sig(t, 0, successor[0], ALL), sig(t, 0, successor[2], ALL)], 'successor', holderSig))))
-fails('one successor key is not enough', () => verify(withUnlock((t) => unlock([sig(t, 0, successor[1], ALL)], 'successor', holderSig))))
-fails('successor keys cannot use the issuer branch', () => verify(withUnlock((t) => unlock([sig(t, 0, successor[0], ALL)], 'issuer', holderSig))))
-fails('an issuer key cannot use the successor branch', () => verify(withUnlock((t) => unlock([sig(t, 0, issuer[0], ALL), sig(t, 0, successor[0], ALL)], 'successor', holderSig))))
-fails('successors cannot spend without the holder', () => verify(withUnlock((t) => unlock([sig(t, 0, successor[0], ALL), sig(t, 0, successor[1], ALL)], 'successor', sig(t, 0, PrivateKey.fromRandom(), ACP)))))
+ok('two release keys countersign through the release branch', () => verify(withUnlock((t) => unlock([sig(t, 0, release[0], ALL), sig(t, 0, release[2], ALL)], 'release', holderSig))))
+fails('one release key is not enough', () => verify(withUnlock((t) => unlock([sig(t, 0, release[1], ALL)], 'release', holderSig))))
+fails('release keys cannot use the issuer branch', () => verify(withUnlock((t) => unlock([sig(t, 0, release[0], ALL)], 'issuer', holderSig))))
+fails('an issuer key cannot use the release branch', () => verify(withUnlock((t) => unlock([sig(t, 0, issuer[0], ALL), sig(t, 0, release[0], ALL)], 'release', holderSig))))
+fails('release keys cannot spend without the holder', () => verify(withUnlock((t) => unlock([sig(t, 0, release[0], ALL), sig(t, 0, release[1], ALL)], 'release', sig(t, 0, PrivateKey.fromRandom(), ACP)))))
 ok('a token transfer resolves to the recipient output', () => { const m = resolve(ef, deploys, recipient); return m.length === 1 && m[0].amount === 60 })
 ok('an item transfer resolves to the recipient', () => { const m = resolve(itemTransfer([1]), deploys, recipient); return m.length === 1 && m[0].id === hex(itemId) })
 fails('an item written twice is refused', () => resolve(itemTransfer([1, 1]), deploys, recipient).length > 0)
@@ -162,6 +162,52 @@ ok('the swap resolves the item to the buyer and 25 tokens to the seller', () => 
   return toBuyer.some((o) => o.id === hex(itemId)) && toSeller.length === 1 && toSeller[0].amount === 25
 })
 fails('changing who receives the item after both signed fails', () => {
-  const t = Transaction.fromEF(swap()); t.outputs[0].lockingScript = clause(pkh(PrivateKey.fromRandom()), 1, issuer, successor, itemId); return verify(t, 0)
+  const t = Transaction.fromEF(swap()); t.outputs[0].lockingScript = clause(pkh(PrivateKey.fromRandom()), 1, issuer, release, itemId); return verify(t, 0)
+})
+
+// §9 beacon: OP_IF <issuer m-of-n> OP_ELSE <release k-of-j> OP_ENDIF.
+function beaconLock() {
+  const s = new Script(); s.writeOpCode(OP.OP_IF); multisig(s, 1, issuer); s.writeOpCode(OP.OP_ELSE); multisig(s, 2, release); s.writeOpCode(OP.OP_ENDIF)
+  return LockingScript.fromBinary(s.toBinary())
+}
+const beaconUnlock = (sigs, branch) => { const s = new Script(); s.writeOpCode(OP.OP_0); for (const x of sigs) s.writeBin(x); s.writeOpCode(branch === 'issuer' ? OP.OP_1 : OP.OP_0); return UnlockingScript.fromBinary(s.toBinary()) }
+const beacon = fundedBy([{ lockingScript: beaconLock(), satoshis: 1 }])
+const RELEASE_TAG = Utils.toArray('countersign release', 'utf8')
+function beaconSpend(outputs, sign) {
+  const t = new Transaction(); t.addInput(spendOf(beacon)); t.addInput(spendOf(feeParent))
+  for (const o of outputs) t.addOutput(o)
+  t.inputs[0].unlockingScript = sign(t); return t
+}
+const refresh = () => beaconSpend([{ lockingScript: beaconLock(), satoshis: 1 }], (t) => beaconUnlock([sig(t, 0, issuer[0], ALL)], 'issuer'))
+function disclosure(keys, id = tokenId) {
+  const s = new Script(); s.writeOpCode(OP.OP_FALSE).writeOpCode(OP.OP_RETURN).writeBin(RELEASE_TAG).writeBin(id)
+  for (const k of keys) s.writeBin(k.toArray('be', 32))
+  return LockingScript.fromBinary(s.toBinary())
+}
+const releaseTx = (keys = [release[0], release[2]]) => beaconSpend([{ lockingScript: disclosure(keys), satoshis: 0 }],
+  (t) => beaconUnlock([sig(t, 0, release[0], ALL), sig(t, 0, release[2], ALL)], 'release'))
+// A wallet reads a release from the beacon spend alone: k distinct disclosed keys of the release set.
+function readRelease(t, id = tokenId) {
+  const pushes = (o) => { const c = o.lockingScript.chunks; return c[0]?.op === OP.OP_FALSE && c[1]?.op === OP.OP_RETURN && c[1].data ? Script.fromBinary(c[1].data).chunks : [] }
+  const c = t.outputs.map(pushes).find((p) => p[0]?.data && hex(p[0].data) === hex(RELEASE_TAG))
+  if (!c || hex(c[1]?.data ?? []) !== hex(id)) return null
+  const pubs = release.map((k) => hex(k.toPublicKey().encode(true)))
+  const keys = c.slice(2).map((x) => new PrivateKey(x.data))
+  const named = new Set(keys.map((k) => hex(k.toPublicKey().encode(true))).filter((p) => pubs.includes(p)))
+  return named.size >= 2 && named.size === keys.length ? keys : null
+}
+
+ok('the issuer refreshes its beacon through the issuer branch', () => verify(refresh()))
+fails('release keys cannot refresh the beacon through the issuer branch', () => verify(beaconSpend([{ lockingScript: beaconLock(), satoshis: 1 }], (t) => beaconUnlock([sig(t, 0, release[0], ALL)], 'issuer'))))
+fails('an issuer key cannot release through the release branch', () => verify(beaconSpend([{ lockingScript: disclosure([release[0], release[1]]), satoshis: 0 }], (t) => beaconUnlock([sig(t, 0, issuer[0], ALL), sig(t, 0, release[1], ALL)], 'release'))))
+ok('two release keys spend the final beacon and disclose their private keys', () => verify(releaseTx()) && readRelease(releaseTx()) !== null)
+fails('a disclosure with one key, or a key outside the set, is no release', () => readRelease(releaseTx([release[0]])) !== null || readRelease(releaseTx([release[0], PrivateKey.fromRandom()])) !== null)
+ok('after release anyone countersigns with the disclosed keys; the holder still signs', () => {
+  const keys = readRelease(releaseTx())
+  return verify(withUnlock((t) => unlock([sig(t, 0, keys[0], ALL), sig(t, 0, keys[1], ALL)], 'release', holderSig)))
+})
+fails('after release a stranger still cannot spend without the holder', () => {
+  const keys = readRelease(releaseTx())
+  return verify(withUnlock((t) => unlock([sig(t, 0, keys[0], ALL), sig(t, 0, keys[1], ALL)], 'release', sig(t, 0, PrivateKey.fromRandom(), ACP))))
 })
 if (failed) process.exitCode = 1
