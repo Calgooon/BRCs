@@ -132,6 +132,20 @@ function swap(itemTo = recipient) {
   t.inputs[1].unlockingScript = unlock([sig(t, 1, issuer[0], ALL)], 'issuer', b, recipient)
   return t.toEF()
 }
+// §6 sender-funded sale: the seller signs its item input SINGLE|ANYONECANPAY bound to its payment at
+// the same index, before any buyer exists. A buyer appends its item output and its own coin, then the
+// issuer countersigns. The buyer funds and broadcasts; the issuer adds nothing.
+const SALE = TransactionSignature.SIGHASH_SINGLE | TransactionSignature.SIGHASH_ANYONECANPAY | TransactionSignature.SIGHASH_FORKID
+const payment = () => ({ lockingScript: new Script().writeOpCode(OP.OP_DUP).writeOpCode(OP.OP_HASH160).writeBin(pkh(holder)).writeOpCode(OP.OP_EQUALVERIFY).writeOpCode(OP.OP_CHECKSIG), satoshis: 500 })
+const saleSig = (() => { const t = new Transaction(); t.addInput(spendOf(itemParent)); t.addOutput(payment()); return sig(t, 0, holder, SALE) })()
+function sale(buyer = recipient, coinSats = 1000) {
+  const t = new Transaction()
+  t.addInput(spendOf(itemParent)); t.addInput(spendOf(fundedBy([{ lockingScript: new Script().writeOpCode(OP.OP_TRUE), satoshis: coinSats }])))
+  t.addOutput(payment())
+  t.addOutput({ lockingScript: clause(pkh(buyer), 1, issuer, release, itemId), satoshis: 1 })
+  t.inputs[0].unlockingScript = unlock([sig(t, 0, issuer[0], ALL)], 'issuer', saleSig)
+  return t.toEF()
+}
 // A forger copies the issuer's key sets into its own deploy and pays the recipient directly.
 const forgedDeploy = (() => { const t = new Transaction(); t.addInput(spendOf(feeParent)); t.addOutput({ lockingScript: clause(pkh(recipient), 1, issuer, release, itemId), satoshis: 1 }); return t.toEF() })()
 
@@ -166,6 +180,15 @@ ok('the swap resolves the item to the buyer and 25 tokens to the seller', () => 
 })
 fails('changing who receives the item after both signed fails', () => {
   const t = Transaction.fromEF(swap()); t.outputs[0].lockingScript = clause(pkh(PrivateKey.fromRandom()), 1, issuer, release, itemId); return verify(t, 0)
+})
+ok('a sale signed before the buyer existed verifies once a buyer completes it and the issuer countersigns', () => verify(Transaction.fromEF(sale())))
+ok('the sale resolves the item to the buyer', () => { const m = resolve(sale(), deploys, recipient); return m.length === 1 && m[0].id === hex(itemId) })
+ok('two buyers can each complete the same signed sale; both spend the item, so at most one is mined', () => {
+  const a = Transaction.fromEF(sale(recipient)), b = Transaction.fromEF(sale(PrivateKey.fromRandom(), 2000))
+  return verify(a) && verify(b) && a.id('hex') !== b.id('hex')
+})
+fails('lowering the seller payment after the seller signed fails', () => {
+  const t = Transaction.fromEF(sale()); t.outputs[0].satoshis = 1; t.inputs[0].unlockingScript = unlock([sig(t, 0, issuer[0], ALL)], 'issuer', saleSig); return verify(t)
 })
 
 // §6 replacement: same token input, byte-identical outputs, a different acceptor fee input. The holder's
