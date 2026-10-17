@@ -68,6 +68,7 @@
 * [1Color Minimal Resource Profile](./wallet/0209.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
+* [Wallet Failure Presentation](./wallet/0326.md)
 
 ## Transactions
 
