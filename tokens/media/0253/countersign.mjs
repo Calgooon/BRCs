@@ -81,12 +81,15 @@ function readAsset(script) {
   return { id: hex(c[0].data), amount, pkh: pkhChunk?.data, clause: new Script(c.slice(rest)).toBinary() }
 }
 const keepsClause = (a, d) => a.pkh?.length === 20 && hex(a.clause) === hex(clauseOnly(a.pkh, d.iss, d.suc).toBinary())
+/** The branch push sits third from the end: `… <branch> <holder sig> <holder pubkey>`. */
+const usesReleaseBranch = (inp) => { const c = inp.unlockingScript.chunks; return c[c.length - 3]?.op === OP.OP_0 }
 function resolve(efBytes, deploys, me) {
   const t = Transaction.fromEF(efBytes), ins = {}, outs = {}
   t.inputs.forEach((inp, i) => {
     const a = readAsset(inp.sourceTransaction.outputs[inp.sourceOutputIndex].lockingScript)
     if (!a || !deploys[a.id]) return
     if (!keepsClause(a, deploys[a.id]) || verify(t, i) !== true) throw new Error('input')
+    if (usesReleaseBranch(inp) && !deploys[a.id].released) throw new Error('release branch before a release')
     ins[a.id] = (ins[a.id] ?? 0) + a.amount
   })
   const mine = []
@@ -163,6 +166,33 @@ ok('the swap resolves the item to the buyer and 25 tokens to the seller', () => 
 })
 fails('changing who receives the item after both signed fails', () => {
   const t = Transaction.fromEF(swap()); t.outputs[0].lockingScript = clause(pkh(PrivateKey.fromRandom()), 1, issuer, release, itemId); return verify(t, 0)
+})
+
+// §6 replacement: same token input, byte-identical outputs, a different acceptor fee input. The holder's
+// ALL|ANYONECANPAY signature covers only its own input and the outputs, so it is reused unchanged.
+const feeParent2 = fundedBy([{ lockingScript: new Script().writeOpCode(OP.OP_TRUE), satoshis: 300 }])
+const replacement = (() => {
+  const t = new Transaction(); t.addInput(spendOf(parent))
+  for (const o of tx.outputs) t.addOutput({ lockingScript: o.lockingScript, satoshis: o.satoshis })
+  t.addInput(spendOf(feeParent2))
+  t.inputs[0].unlockingScript = unlock([sig(t, 0, issuer[0], ALL)], 'issuer', holderSig)
+  return t
+})()
+ok('a replacement with a new acceptor fee input verifies with the original holder signature', () => verify(replacement))
+ok('the replacement has a new txid and byte-identical outputs', () =>
+  replacement.id('hex') !== tx.id('hex') && hex(replacement.outputs.flatMap((o) => o.lockingScript.toBinary())) === hex(tx.outputs.flatMap((o) => o.lockingScript.toBinary())))
+fails('a replacement that changes an output does not verify with the original holder signature', () => {
+  const t = Transaction.fromEF(replacement.toEF()); t.outputs[1].lockingScript = clause(pkh(PrivateKey.fromRandom()), 40)
+  t.inputs[0].unlockingScript = unlock([sig(t, 0, issuer[0], ALL)], 'issuer', holderSig); return verify(t)
+})
+
+// §11 release branch: custodians can countersign a live asset's transfer without publishing a release.
+const custodianTransfer = withUnlock((t) => unlock([sig(t, 0, release[0], ALL), sig(t, 0, release[1], ALL)], 'release', holderSig)).toEF()
+ok('custodians can countersign a live asset privately: script validation passes', () => verify(Transaction.fromEF(custodianTransfer)))
+fails('resolution refuses a release-branch input while no release is known', () => resolve(custodianTransfer, deploys, recipient).length > 0)
+ok('resolution accepts the same input once the release is known', () => {
+  const released = { ...deploys, [hex(tokenId)]: { ...deploys[hex(tokenId)], released: true } }
+  return resolve(custodianTransfer, released, recipient).length === 1
 })
 
 // §9 beacon: OP_IF <issuer m-of-n> OP_ELSE <release k-of-j> OP_ENDIF.
