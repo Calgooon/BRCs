@@ -1,6 +1,6 @@
 // BRC-253 countersign clause and §11 resolution, checked with @bsv/sdk's script interpreter.
 // Run: npm install && npm test
-import { PrivateKey, Transaction, Script, LockingScript, UnlockingScript, Spend, TransactionSignature, Hash, BigNumber, OP, Utils } from '@bsv/sdk'
+import { PrivateKey, PublicKey, KeyDeriver, ProtoWallet, Transaction, Script, LockingScript, UnlockingScript, Spend, TransactionSignature, Hash, BigNumber, OP, Utils } from '@bsv/sdk'
 
 const holder = PrivateKey.fromRandom(), recipient = PrivateKey.fromRandom()
 const issuer = [PrivateKey.fromRandom(), PrivateKey.fromRandom()]                          // 1-of-2, hot
@@ -239,5 +239,35 @@ ok('after release anyone countersigns with the disclosed keys; the holder still 
 fails('after release a stranger still cannot spend without the holder', () => {
   const keys = readRelease(releaseTx())
   return verify(withUnlock((t) => unlock([sig(t, 0, keys[0], ALL), sig(t, 0, keys[1], ALL)], 'release', sig(t, 0, PrivateKey.fromRandom(), ACP))))
+})
+
+// §2 holder keys and §5 linkage: the sender derives the recipient's p color child; the acceptor opens the
+// specific linkage sealed to it and checks identityKey + linkage·G against the holder pubkey hash.
+const utf8Hex = (v) => hex(Utils.toArray(v, 'utf8'))
+const colorProto = [2, `p color ${hex(tokenId.slice(0, 32))}v0 ${utf8Hex('cHJlZml4')} ${utf8Hex('c3VmZml4')}`]
+const pubOf = (k) => k.toPublicKey().toString()
+const childPub = new KeyDeriver(holder).derivePublicKey(colorProto, 'color', pubOf(recipient))
+const childPriv = new KeyDeriver(recipient).derivePrivateKey(colorProto, 'color', pubOf(holder))
+const revealed = await new ProtoWallet(holder).revealSpecificKeyLinkage({
+  counterparty: pubOf(recipient), verifier: pubOf(issuer[0]), protocolID: colorProto, keyID: 'color',
+})
+const opened = (acceptorKey) => {
+  const sym = new KeyDeriver(acceptorKey).deriveSymmetricKey([2, `specific linkage revelation 2 ${colorProto[1]}`], 'color', pubOf(holder))
+  const linkage = sym.decrypt(revealed.encryptedLinkage)
+  return hex(new PublicKey(recipient.toPublicKey().add(new PrivateKey(linkage).toPublicKey())).toHash())
+}
+ok('the recipient derives the private key of the holder hash its sender wrote', () => hex(childPriv.toPublicKey().toHash()) === hex(childPub.toHash()))
+fails('the holder hash is not the recipient identity hash', () => hex(childPub.toHash()) === hex(pkh(recipient)))
+ok('the acceptor opens the linkage sealed to it, and it hashes to the holder hash', () => opened(issuer[0]) === hex(childPub.toHash()))
+fails('no other acceptor key opens that linkage', () => opened(issuer[1]) === hex(childPub.toHash()))
+ok('the derived holder key spends under the issuer countersignature', () => {
+  const held = fundedBy([{ lockingScript: clause(childPub.toHash(), 5), satoshis: 1 }])
+  const t = new Transaction()
+  t.addInput(spendOf(held))
+  t.addOutput({ lockingScript: clause(pkh(holder), 5), satoshis: 1 })
+  const hs = sig(t, 0, childPriv, ACP)
+  t.addInput(spendOf(feeParent))
+  t.inputs[0].unlockingScript = unlock([sig(t, 0, issuer[0], ALL)], 'issuer', hs, childPriv)
+  return verify(t)
 })
 if (failed) process.exitCode = 1
