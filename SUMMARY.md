@@ -150,7 +150,7 @@
 * [BSV-21 — Validity Proofs](./tokens/0176.md)
 * [Accumulating Right-of-Sale Listings and Purchase Orders](./tokens/0197.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
-* [Countersigned Tokens](./tokens/0253.md)
+* [Countersigned Tokens and Items](./tokens/0253.md)
 
 ## Overlays
 
