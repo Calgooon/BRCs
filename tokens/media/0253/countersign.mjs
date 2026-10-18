@@ -264,18 +264,18 @@ fails('after release a stranger still cannot spend without the holder', () => {
   return verify(withUnlock((t) => unlock([sig(t, 0, keys[0], ALL), sig(t, 0, keys[1], ALL)], 'release', sig(t, 0, PrivateKey.fromRandom(), ACP))))
 })
 
-// §2 holder keys and §5 linkage: the sender derives the recipient's p color child; the acceptor opens the
+// §2 holder keys and §5 linkage: the sender derives the recipient's BRC-29 child; the acceptor opens the
 // specific linkage sealed to it and checks identityKey + linkage·G against the holder pubkey hash.
-const utf8Hex = (v) => hex(Utils.toArray(v, 'utf8'))
-const colorProto = [2, `p color ${hex(tokenId.slice(0, 32))}v0 ${utf8Hex('cHJlZml4')} ${utf8Hex('c3VmZml4')}`]
+const brc29Proto = [2, '3241645161d8']
+const brc29KeyID = 'cHJlZml4 c3VmZml4'
 const pubOf = (k) => k.toPublicKey().toString()
-const childPub = new KeyDeriver(holder).derivePublicKey(colorProto, 'color', pubOf(recipient))
-const childPriv = new KeyDeriver(recipient).derivePrivateKey(colorProto, 'color', pubOf(holder))
+const childPub = new KeyDeriver(holder).derivePublicKey(brc29Proto, brc29KeyID, pubOf(recipient))
+const childPriv = new KeyDeriver(recipient).derivePrivateKey(brc29Proto, brc29KeyID, pubOf(holder))
 const revealed = await new ProtoWallet(holder).revealSpecificKeyLinkage({
-  counterparty: pubOf(recipient), verifier: pubOf(issuer[0]), protocolID: colorProto, keyID: 'color',
+  counterparty: pubOf(recipient), verifier: pubOf(issuer[0]), protocolID: brc29Proto, keyID: brc29KeyID,
 })
 const opened = (acceptorKey) => {
-  const sym = new KeyDeriver(acceptorKey).deriveSymmetricKey([2, `specific linkage revelation 2 ${colorProto[1]}`], 'color', pubOf(holder))
+  const sym = new KeyDeriver(acceptorKey).deriveSymmetricKey([2, `specific linkage revelation 2 ${brc29Proto[1]}`], brc29KeyID, pubOf(holder))
   const linkage = sym.decrypt(revealed.encryptedLinkage)
   return hex(new PublicKey(recipient.toPublicKey().add(new PrivateKey(linkage).toPublicKey())).toHash())
 }
