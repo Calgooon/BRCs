@@ -70,6 +70,7 @@
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 * [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
+* [Wallet Failure Presentation](./wallet/0326.md)
 
 ## Transactions
 

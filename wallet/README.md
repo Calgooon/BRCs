@@ -56,3 +56,4 @@ BRC | Standard
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./0325.md)
+326  | [Wallet Failure Presentation](./0326.md)
