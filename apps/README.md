@@ -13,6 +13,7 @@ BRC   | Standard
 192  | [Application Output Knowledge and Source Adapters](./0192.md)
 198  | [LCH Acquisition through Private Overlays and Listing Covenants](./0198.md)
 210   | [Derived Collectibles](./0210.md)
+216   | [Dead-Man Timed Reveal of a Sealed Secret](./0216.md)
 218   | [Chat-Native Command Grammar for the Metanet](./0218.md)
 220   | [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./0220.md)
 222   | [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./0222.md)

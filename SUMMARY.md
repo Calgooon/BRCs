@@ -19,6 +19,7 @@
 * [Application Output Knowledge and Source Adapters](./apps/0192.md)
 * [LCH Acquisition through Private Overlays and Listing Covenants](./apps/0198.md)
 * [Derived Collectibles](./apps/0210.md)
+* [Dead-Man Timed Reveal of a Sealed Secret](./apps/0216.md)
 * [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
 * [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./apps/0220.md)
 * [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./apps/0222.md)
