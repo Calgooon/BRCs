@@ -22,6 +22,8 @@ pub enum StepError {
     MissingParent { vin: usize },
     /// A claim was supplied for a transaction that is not a parent.
     StrayClaim,
+    /// A batch names a transaction twice, or as both a member and a parent.
+    Duplicate,
 }
 
 /// A parent as the prover supplies it: raw bytes, read once.
@@ -170,13 +172,22 @@ fn check_asset(tx: &Tx, sources: &[Source<'_>], asset: &AssetId) -> Option<Asset
 /// those parents that carry assets. A missing claim only leaves an asset out.
 pub fn step(raw: &[u8], parents: &[Parent], claims: &[Claim]) -> Result<Claim, StepError> {
     let tx = parse_tx(raw).ok_or(StepError::Malformed)?;
+    step_parsed(&tx, txid(raw), |id| parents.iter().find(|p| p.txid == *id).map(|p| &p.tx), claims)
+}
+
+pub(crate) fn step_parsed<'a>(
+    tx: &Tx,
+    id: Txid,
+    parent_of: impl Fn(&Txid) -> Option<&'a Tx>,
+    claims: &[Claim],
+) -> Result<Claim, StepError> {
     if claims.iter().any(|c| !tx.inputs.iter().any(|i| i.prev_txid == c.txid)) {
         return Err(StepError::StrayClaim);
     }
     let mut sources = Vec::with_capacity(tx.inputs.len());
     for (vin, input) in tx.inputs.iter().enumerate() {
-        let parent = parents.iter().find(|p| p.txid == input.prev_txid).ok_or(StepError::MissingParent { vin })?;
-        let out = parent.tx.outputs.get(input.prev_vout as usize).ok_or(StepError::BadParent { vin })?;
+        let parent = parent_of(&input.prev_txid).ok_or(StepError::MissingParent { vin })?;
+        let out = parent.outputs.get(input.prev_vout as usize).ok_or(StepError::BadParent { vin })?;
         let read = script::read(&out.script);
         let deploy_of = match read {
             Some(Output::Deploy { .. }) => asset_id(&input.prev_txid, input.prev_vout),
@@ -201,7 +212,7 @@ pub fn step(raw: &[u8], parents: &[Parent], claims: &[Claim]) -> Result<Claim, S
 
     let assets = candidates
         .into_iter()
-        .filter_map(|id| check_asset(&tx, &sources, &id).map(|rules| ProvenAsset { id, rules }))
+        .filter_map(|asset| check_asset(tx, &sources, &asset).map(|rules| ProvenAsset { id: asset, rules }))
         .collect();
-    Ok(Claim { txid: txid(raw), assets })
+    Ok(Claim { txid: id, assets })
 }

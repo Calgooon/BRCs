@@ -67,6 +67,11 @@ impl Claim {
     }
 
     pub fn decode(bytes: &[u8]) -> Option<Claim> {
+        Claim::read(bytes).and_then(|(claim, used)| (used == bytes.len()).then_some(claim))
+    }
+
+    /// Decode the claim at the start of `bytes`, with the number of bytes it took.
+    pub fn read(bytes: &[u8]) -> Option<(Claim, usize)> {
         let txid: Txid = bytes.get(..32)?.try_into().ok()?;
         let count = u16::from_le_bytes(bytes.get(32..34)?.try_into().ok()?) as usize;
         let mut at = 34;
@@ -90,30 +95,39 @@ impl Claim {
             let size = cap(flags & SIZE != 0)?;
             assets.push(ProvenAsset { id, rules: AssetRules { item: flags & ITEM != 0, auth: flags & AUTH != 0, max, size } });
         }
-        (at == bytes.len()).then_some(Claim { txid, assets })
+        Some((Claim { txid, assets }, at))
     }
 }
 
 /// What a step proof commits to: the program's own verifying key digest, then
-/// the claim. A step verifies each parent's proof under the key it was given and
-/// requires the parent to have committed that same key, so one pinned key
-/// covers every proof in the chain.
-pub fn public_values(vkey: &[u32; 8], claim: &[u8]) -> Vec<u8> {
-    let mut out = Vec::with_capacity(32 + claim.len());
+/// the claims, in the order the batch proved them. A step verifies each
+/// parent's proof under the key it was given and requires the parent to have
+/// committed that same key, so one pinned key covers every proof in the chain.
+pub fn public_values(vkey: &[u32; 8], claims: &[Claim]) -> Vec<u8> {
+    let mut out = Vec::with_capacity(32 + claims.len() * 55);
     for word in vkey {
         out.extend(word.to_le_bytes());
     }
-    out.extend_from_slice(claim);
+    for claim in claims {
+        out.extend(claim.encode());
+    }
     out
 }
 
-/// Split public values into the key they were made under and the claim.
-pub fn read_public_values(bytes: &[u8]) -> Option<([u32; 8], Claim)> {
+/// Split public values into the key they were made under and the claims.
+pub fn read_public_values(bytes: &[u8]) -> Option<([u32; 8], Vec<Claim>)> {
     let mut vkey = [0u32; 8];
     for (i, word) in vkey.iter_mut().enumerate() {
         *word = u32::from_le_bytes(bytes.get(4 * i..4 * i + 4)?.try_into().ok()?);
     }
-    Some((vkey, Claim::decode(bytes.get(32..)?)?))
+    let mut at = 32;
+    let mut claims = Vec::new();
+    while at < bytes.len() {
+        let (claim, used) = Claim::read(&bytes[at..])?;
+        claims.push(claim);
+        at += used;
+    }
+    Some((vkey, claims))
 }
 
 #[cfg(test)]
@@ -121,10 +135,20 @@ mod tests {
     use super::*;
 
     #[test]
-    fn public_values_carry_the_key_and_the_claim() {
-        let claim = Claim { txid: [3; 32], assets: vec![] };
+    fn public_values_carry_the_key_and_the_claims() {
         let vkey = [1, 2, 3, 4, 5, 6, 7, u32::MAX];
-        assert_eq!(read_public_values(&public_values(&vkey, &claim.encode())), Some((vkey, claim)));
+        let one = Claim { txid: [3; 32], assets: vec![] };
+        let two = Claim {
+            txid: [4; 32],
+            assets: vec![ProvenAsset { id: [1; 20], rules: AssetRules { item: false, auth: true, max: Some(9), size: Some(2) } }],
+        };
+        assert_eq!(public_values(&vkey, &[one.clone()])[32..], one.encode()[..]);
+        let both = vec![one, two];
+        assert_eq!(read_public_values(&public_values(&vkey, &both)), Some((vkey, both.clone())));
+        assert_eq!(read_public_values(&public_values(&vkey, &[])), Some((vkey, vec![])));
+        let mut cut = public_values(&vkey, &both);
+        cut.pop();
+        assert_eq!(read_public_values(&cut), None);
     }
 
     #[test]

@@ -4,11 +4,13 @@ The step program of draft BRC-252 §4: a proof that a transaction's outputs carr
 BRC-255 assets validly, made from its parents' proofs, so its size and its
 check stay the same however long the history behind it is.
 
-- `crates/bnt-step`: one step in plain Rust. It reads the transaction, every
-  parent, and the parents' claims, and returns the transaction's claim. Scripts
-  are left to Bitcoin and deploys to the recipient (BRC-252 §4).
-- `program`: the SP1 program that proves a step and verifies the parents'
-  proofs inside it. Build it with the SP1 toolchain (`cargo prove build`).
+- `crates/bnt-step`: steps in plain Rust. A step reads the transaction, every
+  parent, and the parents' claims, and returns the transaction's claim. A batch
+  steps many transactions in order and returns the claims of those with an
+  asset output no later member spends, so a chain commits only its last.
+  Scripts are left to Bitcoin and deploys to the recipient (BRC-252 §4).
+- `program`: the SP1 program that proves a batch and verifies the proofs of
+  the parents outside it. Build it with the SP1 toolchain (`cargo prove build`).
 - `vectors/desktop.json`: scenarios, scripts and payloads that HandCash
   Desktop built and judged with its own BRC-255 rules.
 
@@ -17,6 +19,7 @@ check stay the same however long the history behind it is.
 ```sh
 cargo test                               # unit tests and the Desktop vectors
 cargo run --release --example chain      # step cost against history length
+cd script && cargo run --release --bin bnt-step-script  # program cycles: chains of 1 to 1000 transfers in one batch
 ```
 
 To regenerate the vectors from HandCash Desktop:
@@ -48,28 +51,44 @@ first run installs the pinned `@bsv/sdk` 2.8.11 into `experiment/`.
 
 ## Step proofs
 
-`proofs/` holds the first step proofs, of the E2E token's split and of its
-merge, whose proof verifies the split's inside it. Both are SP1 v6.1.0
-compressed proofs.
+`proofs/` holds the first step proofs: the E2E token's split and its merge,
+whose proof verifies the split's inside it, each a batch of one, and chains of
+synthetic transfers proved as one batch. All are SP1 v6.1.0 compressed proofs
+of 1,272,656 bytes, whatever the batch holds.
 
-- `split.proof`, `merge.proof`: 1,272,656 bytes each.
+- `split.proof`, `merge.proof`: the mainnet transactions.
+- `batch-10.proof`, `batch-100.proof`: chains of 10 and 100 transfers from a
+  synthetic deploy (`script/src/synthetic.rs`), each committing only the
+  chain's last claim.
 - `bnt-step-program.elf`: the program they prove (SHA-256
-  `38817c6f…06f2d`), key
-  `0x008104150cf035722573ab57683c558e390a4a4d35c779b64cd3f5bea29be964`.
+  `cfece37e…39b73`), key
+  `0x00743a85773cc14bbf0e2e494d6e199bab319550586afe0aba3185ea8aacd3e1`.
 - `results.json`: key, sizes and proving times.
-- `prove.log`: the run that made them on an Apple M2 with 8 GB: split 239.4 s,
-  merge 222.9 s, peak memory footprint 18,870,320,008 bytes (`/usr/bin/time -l`).
+- The runs that made them on an Apple M2 with 8 GB, timed with
+  `/usr/bin/time -l`:
+
+| Log | Transactions | Time | Per transaction | Peak memory footprint |
+| --- | --- | --- | --- | --- |
+| `prove.log` | split, then merge | 154.5 s, 350.5 s | about 4 min | 18,497,714,672 bytes |
+| `batch-10.log` | 10 | 181.0 s | 18.1 s | 15,754,703,256 bytes |
+| `batch-100.log` | 100 | 483.0 s | 4.8 s | 15,175,315,336 bytes |
+
+With SP1's default workers, the 100-transfer batch passed 24 GB and macOS
+stopped it; `sh script/prove-small.sh batch 100` runs one shard at a time and
+made it.
 
 ```sh
 cd script && cargo run --release --bin verify
 ```
 
 checks that the published binary has that key, that each proof verifies under
-it and commits the claim `bnt-step` computes from `experiment/mainnet.json`,
-that each has the size `results.json` reports, and whether the program built
-from this source is byte-identical to the published binary. It needs the SP1
-toolchain (`sp1up`). `cargo run --release --bin prove` remakes the proofs, and
-`-- groth16` wraps the merge to Groth16, which needs 16 GB of memory or more.
+it and commits the claims `bnt-step` computes from `experiment/mainnet.json`
+or from the synthetic chain it names, that each has the size `results.json`
+reports, and whether the program built from this source is byte-identical to
+the published binary. It needs the SP1 toolchain (`sp1up`).
+`cargo run --release --bin prove` remakes the split and merge proofs,
+`-- batch 100` proves a chain of 100 transfers, and `-- groth16` wraps the
+merge to Groth16, which needs 16 GB of memory or more.
 
 ## Claims and their checks
 
@@ -81,6 +100,8 @@ toolchain (`sp1up`). `cargo run --release --bin prove` remakes the proofs, and
 | A transfer is about 450 bytes: the split is 449, the BRC-255 §12 model 452 | `crates/bnt-step/tests/mainnet_e2e.rs` |
 | A step proof of a mainnet transaction is 1,272,656 bytes compressed | `script` `verify` |
 | A step took about four minutes and 19 GB of memory to prove on a laptop | `proofs/prove.log` |
+| One proof of a chain of 100 transfers took 483 s, about 5 s per transfer, and commits only the last claim | `proofs/batch-100.log`, `script` `verify` |
+| In a batch the program spends about 50,000 cycles per transfer, against 83,776 for a transfer alone | `proofs/cycles.log` (`cd script && cargo run --release --bin bnt-step-script`) |
 
 ## Not yet
 

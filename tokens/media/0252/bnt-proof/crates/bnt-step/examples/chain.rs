@@ -70,7 +70,7 @@ fn prove(tx: &Tx, token_parents: &[&Proven], coin: &Tx) -> (Proven, u128, usize)
     let claims: Vec<Claim> = token_parents.iter().map(|p| p.claim.clone()).collect();
     let read = raw.len()
         + coin_raw.len()
-        + token_parents.iter().map(|p| p.raw.len() + public_values(&[0; 8], &p.claim.encode()).len()).sum::<usize>();
+        + token_parents.iter().map(|p| p.raw.len() + public_values(&[0; 8], std::slice::from_ref(&p.claim)).len()).sum::<usize>();
     let runs = 200;
     let start = Instant::now();
     let mut claim = None;
@@ -151,5 +151,5 @@ fn main() {
     println!("\nmerge of {width} branches, {} transactions of history behind it", 5000 + 1 + width * 200);
     println!("{:>9} {:>11} {:>9} {:>14}", "tx bytes", "bytes read", "step µs", "parent proofs");
     println!("{:>9} {read:>11} {micros:>9} {width:>14}", merged.raw.len());
-    println!("\nclaim: {} bytes; public values: {} bytes", merged.claim.encode().len(), public_values(&[0; 8], &merged.claim.encode()).len());
+    println!("\nclaim: {} bytes; public values: {} bytes", merged.claim.encode().len(), public_values(&[0; 8], std::slice::from_ref(&merged.claim)).len());
 }
