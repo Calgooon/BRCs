@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "contract": "Ordered commands operate on the frozen wire corpus. Times are seconds after its clock. old/new mean the actual genesis/first-purchase output zero. Every command is a separate durable commit unless it explicitly names a crash point. expected is the complete public view, including permitted wallet effects.",
+  "cases": [
+    {
+      "name": "192 received group waits for all verification",
+      "kind": "knowledge",
+      "commands": [["receive"], ["verify-spend"], ["project"]],
+      "expected": {
+        "received": 1,
+        "accepted": 0,
+        "projected": 0,
+        "members": ["old"],
+        "pending": true,
+        "stale": true,
+        "reset": false,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 whole-group acceptance after restart",
+      "kind": "knowledge",
+      "commands": [
+        ["receive"],
+        ["verify-spend"],
+        ["restart"],
+        ["verify-output"],
+        ["accept"],
+        ["project"]
+      ],
+      "expected": {
+        "received": 2,
+        "accepted": 1,
+        "projected": 1,
+        "members": ["new"],
+        "pending": false,
+        "stale": false,
+        "reset": false,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 invalid successor quarantines complete group",
+      "kind": "knowledge",
+      "commands": [
+        ["receive"],
+        ["verify-spend"],
+        ["invalid-output-index"],
+        ["accept"],
+        ["project"]
+      ],
+      "expected": {
+        "received": 1,
+        "accepted": 0,
+        "projected": 0,
+        "members": ["old"],
+        "pending": true,
+        "stale": true,
+        "reset": true,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 context change fences queued verification",
+      "kind": "knowledge",
+      "commands": [
+        ["receive"],
+        ["verify-spend"],
+        ["verify-output"],
+        ["context-change"],
+        ["accept"],
+        ["project"]
+      ],
+      "expected": {
+        "received": 2,
+        "accepted": 1,
+        "projected": 1,
+        "members": ["old"],
+        "pending": true,
+        "stale": true,
+        "reset": false,
+        "context": "view-1",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 commit replay is no additional revision",
+      "kind": "knowledge",
+      "commands": [
+        ["receive"],
+        ["receive"],
+        ["verify-spend"],
+        ["verify-output"],
+        ["accept"],
+        ["accept"],
+        ["project"],
+        ["project"]
+      ],
+      "expected": {
+        "received": 2,
+        "accepted": 1,
+        "projected": 1,
+        "members": ["new"],
+        "pending": false,
+        "stale": false,
+        "reset": false,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 crash before receipt commit rolls back all cells",
+      "kind": "knowledge",
+      "commands": [["receive", "crash-before-commit"], ["restart"]],
+      "expected": {
+        "received": 0,
+        "accepted": 0,
+        "projected": 0,
+        "members": ["old"],
+        "pending": false,
+        "stale": false,
+        "reset": false,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 crash after receipt commit retains work and cursor",
+      "kind": "knowledge",
+      "commands": [["receive", "crash-after-commit"], ["restart"]],
+      "expected": {
+        "received": 1,
+        "accepted": 0,
+        "projected": 0,
+        "members": ["old"],
+        "pending": true,
+        "stale": true,
+        "reset": false,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "192 acceptance durable before projection crash",
+      "kind": "knowledge",
+      "commands": [
+        ["receive"],
+        ["verify-spend"],
+        ["verify-output"],
+        ["accept", "crash-after-commit"],
+        ["restart"]
+      ],
+      "expected": {
+        "received": 2,
+        "accepted": 1,
+        "projected": 0,
+        "members": ["old"],
+        "pending": false,
+        "stale": true,
+        "reset": false,
+        "context": "view-0",
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "193 lost open retains snapshot and fixed deadlines",
+      "kind": "session",
+      "commands": [
+        ["open", 0],
+        ["open", 20],
+        ["read", 299]
+      ],
+      "expected": {
+        "state": "open",
+        "snapshot": "W10",
+        "expires": 300,
+        "replayUntil": 900,
+        "last": "resume",
+        "opens": 1,
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "193 exact session deadline rejects read",
+      "kind": "session",
+      "commands": [
+        ["open", 0],
+        ["read", 300]
+      ],
+      "expected": {
+        "state": "expired",
+        "snapshot": "W10",
+        "expires": 300,
+        "replayUntil": 900,
+        "last": "reset-required",
+        "opens": 1,
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "193 close fences a waiting response",
+      "kind": "session",
+      "commands": [["open", 0], ["close"], ["serialize", 1], ["open", 2]],
+      "expected": {
+        "state": "closed",
+        "snapshot": "W10",
+        "expires": 300,
+        "replayUntil": 900,
+        "last": "expired",
+        "opens": 1,
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "193 authorization loss prohibits old replay",
+      "kind": "session",
+      "commands": [["open", 0], ["revoke"], ["serialize", 1]],
+      "expected": {
+        "state": "revoked",
+        "snapshot": "W10",
+        "expires": 300,
+        "replayUntil": 900,
+        "last": "unauthorized",
+        "opens": 1,
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "194 finalization intent survives uncertain admission",
+      "kind": "proposal",
+      "commands": [["put"], ["finalize"], ["restart"], ["update"]],
+      "expected": {
+        "status": "finalizing",
+        "headRevision": 0,
+        "admissions": 0,
+        "last": "conflict",
+        "events": ["active", "finalizing"],
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "194 admission committed before channel linkage",
+      "kind": "proposal",
+      "commands": [
+        ["put"],
+        ["finalize"],
+        ["admit", "crash-after-commit"],
+        ["restart"],
+        ["reconcile"],
+        ["finalize"]
+      ],
+      "expected": {
+        "status": "finalized",
+        "headRevision": 0,
+        "admissions": 1,
+        "last": "replayed",
+        "events": ["active", "finalizing", "finalized"],
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "194 expired channel never restarts at revision zero",
+      "kind": "proposal",
+      "commands": [["put"], ["expire"], ["compact"], ["restart"], ["put"]],
+      "expected": {
+        "status": "expired",
+        "headRevision": 0,
+        "admissions": 0,
+        "last": "conflict",
+        "events": ["active", "expired"],
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "195 wallet reply loss reconciles exact output once",
+      "kind": "acquisition",
+      "commands": [
+        ["quote"],
+        ["receive-payment", 173399],
+        ["wallet-accept", "crash-after-commit"],
+        ["restart"],
+        ["reconcile"],
+        ["reconcile"],
+        ["deliver", 173500]
+      ],
+      "expected": {
+        "status": "delivered",
+        "pinned": true,
+        "walletEffects": 1,
+        "internalizeCalls": 1,
+        "reconcileCalls": 2,
+        "last": "delivered",
+        "recoverUntil": 259900
+      }
+    },
+    {
+      "name": "195 first delivery exactly at recovery expiry rejected",
+      "kind": "acquisition",
+      "commands": [["quote"], ["receive-payment", 173400]],
+      "expected": {
+        "status": "expired",
+        "pinned": false,
+        "walletEffects": 0,
+        "internalizeCalls": 0,
+        "reconcileCalls": 0,
+        "last": "expired",
+        "recoverUntil": 173400
+      }
+    },
+    {
+      "name": "195 pinned obligation survives deadline and old manifest",
+      "kind": "acquisition",
+      "commands": [
+        ["quote"],
+        ["receive-payment", 601],
+        ["wallet-accept"],
+        ["reconcile"],
+        ["recover", 200000]
+      ],
+      "expected": {
+        "status": "delivery-pending",
+        "pinned": true,
+        "walletEffects": 1,
+        "internalizeCalls": 1,
+        "reconcileCalls": 1,
+        "last": "delivery-pending",
+        "recoverUntil": 173400
+      }
+    },
+    {
+      "name": "195 wrong recipient learns nothing and creates no effect",
+      "kind": "acquisition",
+      "commands": [["quote"], ["wrong-recipient"]],
+      "expected": {
+        "status": "quoted",
+        "pinned": false,
+        "walletEffects": 0,
+        "internalizeCalls": 0,
+        "reconcileCalls": 0,
+        "last": "not-found",
+        "recoverUntil": 173400
+      }
+    },
+    {
+      "name": "199 both suppressions survive independent restoration",
+      "kind": "root",
+      "commands": [
+        ["suppress-A"],
+        ["suppress-B"],
+        ["restore-A"],
+        ["serve-cache"],
+        ["serve-snapshot"],
+        ["serve-live"],
+        ["gasp-reindex"]
+      ],
+      "expected": {
+        "revision": 3,
+        "blockers": ["B"],
+        "served": false,
+        "continuity": "reset-required",
+        "actions": ["suppress-A", "suppress-B", "restore-A"],
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "199 completed retry retains action and current serving",
+      "kind": "root",
+      "commands": [
+        ["suppress-A"],
+        ["suppress-B"],
+        ["restore-A"],
+        ["restore-B"],
+        ["restore-A"],
+        ["serve-cache"]
+      ],
+      "expected": {
+        "revision": 4,
+        "blockers": [],
+        "served": true,
+        "continuity": "intact",
+        "actions": ["suppress-A", "suppress-B", "restore-A", "restore-B"],
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "199 crash after suppression fences stale cache",
+      "kind": "root",
+      "commands": [
+        ["suppress-A", "crash-after-commit"],
+        ["restart"],
+        ["gasp-reindex"],
+        ["serve-cache"]
+      ],
+      "expected": {
+        "revision": 1,
+        "blockers": ["A"],
+        "served": false,
+        "continuity": "intact",
+        "actions": ["suppress-A"],
+        "walletEffects": 0
+      }
+    },
+    {
+      "name": "199 rollback does not claim applied suppression",
+      "kind": "root",
+      "commands": [
+        ["suppress-A", "crash-before-commit"],
+        ["restart"],
+        ["serve-cache"]
+      ],
+      "expected": {
+        "revision": 0,
+        "blockers": [],
+        "served": true,
+        "continuity": "intact",
+        "actions": [],
+        "walletEffects": 0
+      }
+    }
+  ]
+}

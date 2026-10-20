@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title description">
+  <title id="title">Identity relationships</title>
+  <desc id="description">A person connected to three independent peers. Original BRC-189 registry icon, dedicated to the public domain under CC0-1.0.</desc>
+  <metadata>SPDX-License-Identifier: CC0-1.0</metadata>
+  <rect width="128" height="128" rx="24" fill="#eef5fb"/>
+  <g fill="none" stroke="#326987" stroke-width="5">
+    <path d="M64 58V26M51 73 27 92M77 73l24 19"/>
+  </g>
+  <g fill="#326987">
+    <circle cx="64" cy="21" r="10"/>
+    <circle cx="23" cy="96" r="10"/>
+    <circle cx="105" cy="96" r="10"/>
+  </g>
+  <circle cx="64" cy="65" r="28" fill="#fff" stroke="#326987" stroke-width="4"/>
+  <circle cx="64" cy="57" r="9" fill="#326987"/>
+  <path d="M48 81c0-18 32-18 32 0" fill="#326987"/>
+</svg>

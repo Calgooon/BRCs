@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "dependencyCommit": "8f36bdf2eca8298ed1a269054f8c5054156dae95",
+  "compatibility": "Normative dependency bytes are pinned here. BRC-29 and BRC-42 include the explicit pre-adoption BRC-197 security amendments in this proposal; other baseline files remain from dependencyCommit. Later revisions are not adopted silently. SDK version is a test tool, not normative precedence.",
+  "dependencies": [
+    {
+      "path": "wallet/0100.md",
+      "sha256": "537ab393c655195e8cd61897b00d6b187a36f17d930493f8af48430752064082"
+    },
+    {
+      "path": "overlays/0022.md",
+      "sha256": "f9d464ba7609e11df7a13d7c0bda0e732a48cb10b9783ba7354897a892ea764b"
+    },
+    {
+      "path": "overlays/0024.md",
+      "sha256": "394199b4312d7563f9b2be8ab0da96c39e70e716cb6accbead29073012d1a729"
+    },
+    {
+      "path": "overlays/0088.md",
+      "sha256": "b357151cd5acc0cdaacb4a40acd8ca11c2c3bdf56e49e7d379b4a12eb2521ce0"
+    },
+    {
+      "path": "overlays/0101.md",
+      "sha256": "23fc1c035e324c1ec45fe1c31ef882f3959b00f8308d59878f1e12a311b78a0c"
+    },
+    {
+      "path": "overlays/0183.md",
+      "sha256": "916005b45074ac1c0ab2a23827437353e68ee5597faaaf739378f52b309dc5b9"
+    },
+    {
+      "path": "payments/0029.md",
+      "sha256": "340d205d297de4ce09ef39688480d4f35dbdcdf21dee0cc89277e4fbba90857f"
+    },
+    {
+      "path": "key-derivation/0042.md",
+      "sha256": "0a040431d1b88d9db22f3322f70e26fc6684761c89eb8c749af115e207776ba2"
+    },
+    {
+      "path": "payments/0105.md",
+      "sha256": "5c59f2438a9c0b3b52964347760eadfe027c851e80a5f08ab3bb4743a8a75116"
+    },
+    {
+      "path": "payments/0118.md",
+      "sha256": "448be4e74ac23023f6c7a4dac7e6a351e8fcda0d55a0688558a37804189fee4a"
+    },
+    {
+      "path": "peer-to-peer/0077.md",
+      "sha256": "843a8c362999ad70e48255a1204f0cea3e13a57e958b63c7e27ac8799d2881c9"
+    },
+    {
+      "path": "peer-to-peer/0078.md",
+      "sha256": "179e718e583a82cab933b2327da220ecd0c9fd883513ba9c2c35c2b6554db5ba"
+    },
+    {
+      "path": "peer-to-peer/0103.md",
+      "sha256": "dc841d5d2d0a5e75a3c694619d79a1ce91b4ff4fccc3350c142699d4e0fb82ca"
+    },
+    {
+      "path": "peer-to-peer/0104.md",
+      "sha256": "1a08df9a553d7672cdf8901556962222d023ca70be1c5fe5c63a59cdfa1c3298"
+    },
+    {
+      "path": "apps/0170.md",
+      "sha256": "02c6a9ffba3f4cd3802162aae99c9a4fe881c83f94b62ba5ab02c48b07a7a23a"
+    },
+    {
+      "path": "scripts/0021.md",
+      "sha256": "2a7799d7355e8147844d543901eaf422f442125cd77bc89ebc0a90bb7a387054"
+    }
+  ],
+  "digestDomains": [
+    "capabilities",
+    "lookup-query",
+    "service-rules",
+    "proposal-policy",
+    "proposal",
+    "private-publication",
+    "publication-request",
+    "acquisition",
+    "acquire-request",
+    "wallet-funding",
+    "purchase",
+    "purchase-request",
+    "purchase-terms",
+    "potatoes",
+    "processor-acceptance",
+    "release-evidence",
+    "sale-listing",
+    "sale-genesis",
+    "lch-lookup-settlement",
+    "lch-covenant-settlement",
+    "root-eviction-request",
+    "root-eviction-result",
+    "root-eviction-decision",
+    "root-advertisement",
+    "transaction-fact",
+    "assessment",
+    "knowledge-mutation"
+  ],
+  "identifiers": [
+    {
+      "id": "https://bsv.brc.dev/apps/0192#bitcoin-spend-reconciliation-v1",
+      "definition": "apps/0192.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/apps/0192#legacy-lookup-context-json-v1",
+      "definition": "apps/0192.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/apps/0198#listing-accumulation-v1",
+      "definition": "apps/0198.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/apps/0198#overlay-acquisition-v1",
+      "definition": "apps/0198.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/apps/0198#paid-lookup-settlement-v1",
+      "definition": "apps/0198.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/apps/0198#standing-offer-v1",
+      "definition": "apps/0198.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0193#lookup-live-v1",
+      "definition": "overlays/0193.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0194#author-document-v1",
+      "definition": "overlays/0194.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0194#proposal-channel-heads-v1",
+      "definition": "overlays/0194.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0194#proposal-v1",
+      "definition": "overlays/0194.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0195#paid-lookup-v1",
+      "definition": "overlays/0195.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0195#private-publish-v1",
+      "definition": "overlays/0195.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0196#processor-attestation-v1",
+      "definition": "overlays/0196.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0196#steak-potatoes-v1",
+      "definition": "overlays/0196.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/overlays/0199#root-eviction-v1",
+      "definition": "overlays/0199.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/tokens/0197#lineage-package-v1",
+      "definition": "tokens/0197.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/tokens/0197#listing-purchase-v1",
+      "definition": "tokens/0197.md",
+      "immutable": true
+    },
+    {
+      "id": "https://bsv.brc.dev/tokens/0197#revenue-listing-v1",
+      "definition": "tokens/0197.md",
+      "immutable": true
+    }
+  ],
+  "testDependencies": {
+    "node": ">=22.13",
+    "sdk": "@bsv/sdk@2.8.10",
+    "python": ">=3.11",
+    "bitcoinX": "0.9",
+    "cryptography": "46.0.3",
+    "cbor2": "5.7.1",
+    "bitcoinScriptArtifact": "tokens/media/0197/artifact.json"
+  },
+  "externalProtocolSources": [
+    {
+      "repository": "bitcoin-sv-specs/protocol",
+      "commit": "67d7de07c75d03598fb059d59c61c29ae3dbf87b",
+      "path": "updates/genesis-spec.md",
+      "sha256": "ad7f2356b5b7da67920403803ca310f073cffe4da2c82e4b00bd9cd6e7953c02",
+      "role": "Ordered-input, componentwise non-final replacement relation; finality equality prose is not adopted."
+    },
+    {
+      "repository": "bitcoin-sv/bitcoin-sv",
+      "commit": "879fc8b42168dd0e608dafd51b39c6dabad37d4d",
+      "path": "src/validation.cpp",
+      "sha256": "f6a54858d6ec82e9eac06c52ce6ec9f22eca04008830345b65423d62c9b22f29",
+      "role": "Strict IsFinalTx locktime boundary; contextual block height and preceding-chain median time."
+    },
+    {
+      "repository": "bitcoin-sv/bitcoin-sv",
+      "commit": "879fc8b42168dd0e608dafd51b39c6dabad37d4d",
+      "path": "src/time_locked_mempool.cpp",
+      "sha256": "0fe2d992abd8122e06931c560cc99a41a70b2c8454ab29abdfdf8cd9e611750d",
+      "role": "validateUpdateNL ordered input and pairwise sequence checks; rate/resource limits remain local policy."
+    }
+  ]
+}

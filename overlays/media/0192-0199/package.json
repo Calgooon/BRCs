@@ -1,0 +1,15 @@
+{
+  "name": "brc-192-199-specification-corpus",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node verify.mjs && node verify-proposal-query.mjs && node verify-reconciliation.mjs && node ../../../tokens/media/0197/test-family.mjs",
+    "generate": "node generate.mjs"
+  },
+  "dependencies": {
+    "@bsv/sdk": "2.8.10"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

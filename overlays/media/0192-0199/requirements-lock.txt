@@ -1,0 +1,9 @@
+asn1crypto==1.5.1
+attrs==26.1.0
+bitcoinX==0.9
+cbor2==5.9.0
+cffi==2.1.1
+cryptography==50.0.0
+electrumsv-secp256k1==18.0.0
+pycparser==3.0
+pycryptodomex==3.23.0

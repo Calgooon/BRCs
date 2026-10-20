@@ -16,9 +16,13 @@
 * [Verifiable Time Allocation](./apps/0168.md)
 * [Locked Content Header (LCH) — Licensed, Micropayment-Enabled Content](./apps/0170.md)
 * [Access Gates for Metanet Rooms](./apps/0190.md)
+* [Application Output Knowledge and Source Adapters](./apps/0192.md)
+* [LCH Acquisition through Private Overlays and Listing Covenants](./apps/0198.md)
 * [Derived Collectibles](./apps/0210.md)
+* [Dead-Man Timed Reveal of a Sealed Secret](./apps/0216.md)
 * [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
 * [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./apps/0220.md)
+* [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./apps/0222.md)
 * [Block Media Format (BMF) — Composable On-Chain Audio/Video](./apps/0224.md)
 * [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
 
@@ -56,8 +60,18 @@
 * [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./wallet/0179.md)
 * [Wallet-Enforced Autonomous-Agent Spend Policy](./wallet/0181.md)
 * [Optional Metadata Registries and Their Stewardship](./wallet/0184.md)
+* [Wallet Substrate Discovery, Selection, and Encrypted Mobile Connections](./wallet/0185.md)
+* [User Management Protocol (UMP)](./wallet/0188.md)
+* [Identity, Certificates, Discovery, and Personal Trust in Applications](./wallet/0189.md)
+* [Agent Allowances](./wallet/0204.md)
+* [Extensible Wallet Version Strings and Account Labels](./wallet/0205.md)
+* [1Color Wallet Module](./wallet/0207.md)
+* [Vault Sub-Accounts](./wallet/0208.md)
+* [1Color Minimal Resource Profile](./wallet/0209.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
+* [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
+* [Wallet Failure Presentation](./wallet/0326.md)
 
 ## Transactions
 
@@ -97,6 +111,7 @@
 * [Multicast Shard Domain Partitioning and the BEEF Object Plane](./transactions/0148.md)
 * [Multicast BEEF Object Frame Format](./transactions/0149.md)
 * [Outpoint BEEF](./transactions/0158.md)
+* [Subject BEEF](./transactions/0233.md)
 
 ## Scripts
 
@@ -111,13 +126,13 @@
 * [Pay to Push Drop](./scripts/0048.md)
 * [Bitcoin Script ASM Format](./scripts/0106.md)
 * [Bitcoin Script to and from Bitcoin BASIC — a compiler and a decompiler](./scripts/0173.md)
+* [Block-Height Deadline Covenant Templates (OP_PUSH_TX)](./scripts/0215.md)
 
 ## Tokens
 
 * [There is no BRC-20](./tokens/0020.md)
 * [Definition of UTXOs as Bitcoin Tokens](./tokens/0045.md)
 * [Token Exchange Protocol for UTXO-based Overlay Networks](./tokens/0079.md)
-* [Mandala Token Protocol](./tokens/0092.md)
 * [Enhanced Mandala Token Protocol](./tokens/0107.md)
 * [Identity-Linked Token Protocol](./tokens/0108.md)
 * [Merkle Proof Token](./tokens/0113.md)
@@ -128,11 +143,12 @@
 * [1Sat Ordinals — Single-Satoshi Tokens and Origin Tracking](./tokens/0159.md)
 * [1Sat Ordinals — Inscription Envelopes](./tokens/0160.md)
 * [BSV-21 Fungible Tokens (JSON / Legacy)](./tokens/0161.md)
-* [BSV-21 Fungible Tokens (Binary)](./tokens/0162.md)
+* [1Color](./tokens/0162.md)
 * [BSV-21 Basket Profile for BRC-46 / BRC-100](./tokens/0163.md)
 * [P1Sat Permission Scheme for Basket `1sat`](./tokens/0165.md)
 * [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
 * [BSV-21 — Validity Proofs](./tokens/0176.md)
+* [Accumulating Right-of-Sale Listings and Purchase Orders](./tokens/0197.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 
 ## Overlays
@@ -153,6 +169,12 @@
 * [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
 * [Overlay Service Discovery at an Internet Domain](./overlays/0180.md)
 * [A Framework for Strict and Federated Overlays](./overlays/0183.md)
+* [Incremental Lookup and Resumable Live Results](./overlays/0193.md)
+* [Overlay Capabilities and Non-Final Proposal Sessions](./overlays/0194.md)
+* [Private Overlay Data and Recoverable Paid Lookup](./overlays/0195.md)
+* [STEAK with POTATOES](./overlays/0196.md)
+* [SHIP and SLAP Root-Host Output Eviction Coordination](./overlays/0199.md)
+* [Signed On-Chain Reachability Manifest](./overlays/0211.md)
 
 ## Payments
 
@@ -169,6 +191,7 @@
 * [Simple 402 Payments](./payments/0121.md)
 * [PeerPay URI Scheme for BRC-29 Payments](./payments/0125.md)
 * [P2PKH Payments for HTTP 402](./payments/0166.md)
+* [1Color Offline Peer-to-Peer Payments](./payments/0175.md)
 * [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 
 ## Peer-to-Peer
@@ -188,7 +211,14 @@
 * [Single-Use Signed Proofs for Request Authentication](./peer-to-peer/0138.md)
 * [Fountain-Coded Air-Gap Transport for Arbitrary Payloads](./peer-to-peer/0141.md)
 * [Universal Handle Addressing and Resolution for the Metanet](./peer-to-peer/0169.md)
+* [Pairwise Authentication](./peer-to-peer/0182.md)
+* [Operating Practices for Identity Certifiers](./peer-to-peer/0200.md)
+* [Social Account Certificate Types and Issuance Profile](./peer-to-peer/0201.md)
+* [Identity-Key Decentralized Identifiers](./peer-to-peer/0202.md)
+* [BRC-52 Encrypted Certificate Profile for Verifiable Credential Interoperability](./peer-to-peer/0203.md)
 * [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
+* [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
+* [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
 * [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## Key Derivation
@@ -229,6 +259,9 @@
 * [Device-Aware Wallet Onboarding and Fallback Login for BRC-100 Applications](./opinions/0137.md)
 * [BRC-100 Risk Assessment and Best Integration Practices](./opinions/0151.md)
 * [Best Practices for Regulated Tokens in a BRC-100 Ecosystem](./opinions/0152.md)
+* [Thoughts on UTXO-Driven Applications and Private Overlays](./opinions/0186.md)
+* [Thoughts on Declarative Stewardship](./opinions/0187.md)
+* [Thoughts on Identity, Privacy and Recovery on the Metanet](./opinions/0191.md)
 
 ## State Machines
 
