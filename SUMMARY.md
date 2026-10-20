@@ -262,6 +262,7 @@
 * [Thoughts on UTXO-Driven Applications and Private Overlays](./opinions/0186.md)
 * [Thoughts on Declarative Stewardship](./opinions/0187.md)
 * [Thoughts on Identity, Privacy and Recovery on the Metanet](./opinions/0191.md)
+* [Progressive Contraction of Chain-Scanned Address and Transaction Index Spaces](./opinions/0234.md)
 
 ## State Machines
 

@@ -1,0 +1,3008 @@
+{
+  "brcNumber": 234,
+  "profileVersion": 1,
+  "description": "Conformance examples for profile logic. Block identities and decoded transaction effects are synthetic inputs, not mainnet block proofs or signed transactions. Predicate addresses are checksum-valid synthetic HASH160 encodings; no private-key ownership is asserted. Implementations must independently validate their actual chain and transaction data.",
+  "addressPredicateCases": [
+    {
+      "id": "address-stage-0-positive",
+      "stage": 0,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-1-positive",
+      "stage": 1,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-1-valid-outside",
+      "stage": 1,
+      "address": "15W11111111111111111111111111nqR93",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-2-positive",
+      "stage": 2,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-2-valid-outside",
+      "stage": 2,
+      "address": "18W11111111111111111111111111dJqTY",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-3-positive",
+      "stage": 3,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-3-valid-outside",
+      "stage": 3,
+      "address": "1AW111111111111111111111111149niMy",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-4-positive",
+      "stage": 4,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-4-valid-outside",
+      "stage": 4,
+      "address": "1BVzzzzzzzzzzzzzzzzzzzzzzzzzwvWnPV",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-5-positive",
+      "stage": 5,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-5-valid-outside",
+      "stage": 5,
+      "address": "1DW11111111111111111111111111MN2jD",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-6-positive",
+      "stage": 6,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-6-valid-outside",
+      "stage": 6,
+      "address": "1CSW1111111111111111111111112ViiaZ",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-7-positive",
+      "stage": 7,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-7-valid-outside",
+      "stage": 7,
+      "address": "1CZW1111111111111111111111113VMDoH",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-8-positive",
+      "stage": 8,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-8-valid-outside",
+      "stage": 8,
+      "address": "1CdW1111111111111111111111115QaBR7",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-9-positive",
+      "stage": 9,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-9-valid-outside",
+      "stage": 9,
+      "address": "1CfW1111111111111111111111111w8uF5",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-10-positive",
+      "stage": 10,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-10-valid-outside",
+      "stage": 10,
+      "address": "1CgVzzzzzzzzzzzzzzzzzzzzzzzzxd95wj",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-11-positive",
+      "stage": 11,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-11-valid-outside",
+      "stage": 11,
+      "address": "1CiW1111111111111111111111111rqDi5",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-12-positive",
+      "stage": 12,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-12-valid-outside",
+      "stage": 12,
+      "address": "1ChTVzzzzzzzzzzzzzzzzzzzzzzzxShv96",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-13-positive",
+      "stage": 13,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-13-valid-outside",
+      "stage": 13,
+      "address": "1ChaW1111111111111111111111113jVCR",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-14-positive",
+      "stage": 14,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-14-valid-outside",
+      "stage": 14,
+      "address": "1CheVzzzzzzzzzzzzzzzzzzzzzzzyxvdWs",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-15-positive",
+      "stage": 15,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-15-valid-outside",
+      "stage": 15,
+      "address": "1ChgVzzzzzzzzzzzzzzzzzzzzzzzybj73T",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-16-positive",
+      "stage": 16,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-16-valid-outside",
+      "stage": 16,
+      "address": "1ChhW111111111111111111111111uMDue",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-17-positive",
+      "stage": 17,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-17-valid-outside",
+      "stage": 17,
+      "address": "1ChjW111111111111111111111112JesrU",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-18-positive",
+      "stage": 18,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-18-valid-outside",
+      "stage": 18,
+      "address": "1ChidW11111111111111111111112Zhi6g",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-19-positive",
+      "stage": 19,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-19-valid-outside",
+      "stage": 19,
+      "address": "1ChicmW11111111111111111111119RD8J",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-20-positive",
+      "stage": 20,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-20-valid-outside",
+      "stage": 20,
+      "address": "1ChickfW111111111111111111112TQkJE",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-21-positive",
+      "stage": 21,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-21-valid-outside",
+      "stage": 21,
+      "address": "1ChickeoW111111111111111111149as5V",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-22-positive",
+      "stage": 22,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-22-valid-outside",
+      "stage": 22,
+      "address": "1ChickenPVzzzzzzzzzzzzzzzzzzyUy9VW",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-23-positive",
+      "stage": 23,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-23-valid-outside",
+      "stage": 23,
+      "address": "1ChickenNvW1111111111111111121GgQR",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-24-positive",
+      "stage": 24,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-24-valid-outside",
+      "stage": 24,
+      "address": "1ChickenNuhW11111111111111116Fxdfc",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-25-positive",
+      "stage": 25,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-25-valid-outside",
+      "stage": 25,
+      "address": "1ChickenNughVzzzzzzzzzzzzzzzyEBK2z",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-26-positive",
+      "stage": 26,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-26-valid-outside",
+      "stage": 26,
+      "address": "1ChickenNuggfW111111111111113PW6by",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-stage-27-positive",
+      "stage": 27,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": true
+    },
+    {
+      "id": "address-stage-27-valid-outside",
+      "stage": 27,
+      "address": "1ChickenNuggeuVzzzzzzzzzzzzzxcUJXU",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-invalid-checksum",
+      "stage": 0,
+      "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ2",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-testnet-outside-profile",
+      "stage": 0,
+      "address": "mfWxJ45yp2SFn7UciZyNpvDM6P5f7LS17o",
+      "expectedMatches": false
+    },
+    {
+      "id": "address-whitespace-invalid",
+      "stage": 0,
+      "address": " 1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "expectedMatches": false
+    }
+  ],
+  "txidPredicateCases": [
+    {
+      "id": "txid-stage-0-unrestricted",
+      "stage": 0,
+      "txid": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-0-uppercase-normalization",
+      "stage": 0,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-1-lower",
+      "stage": 1,
+      "txid": "8000000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-1-upper",
+      "stage": 1,
+      "txid": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-1-last-required-bit-wrong",
+      "stage": 1,
+      "txid": "1999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-1-uppercase-normalization",
+      "stage": 1,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-2-lower",
+      "stage": 2,
+      "txid": "8000000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-2-upper",
+      "stage": 2,
+      "txid": "bfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-2-last-required-bit-wrong",
+      "stage": 2,
+      "txid": "d999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-2-uppercase-normalization",
+      "stage": 2,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-3-lower",
+      "stage": 3,
+      "txid": "8000000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-3-upper",
+      "stage": 3,
+      "txid": "bfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-3-last-required-bit-wrong",
+      "stage": 3,
+      "txid": "d999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-3-uppercase-normalization",
+      "stage": 3,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-4-lower",
+      "stage": 4,
+      "txid": "8000000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-4-upper",
+      "stage": 4,
+      "txid": "9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-4-last-required-bit-wrong",
+      "stage": 4,
+      "txid": "b999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-4-uppercase-normalization",
+      "stage": 4,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-5-lower",
+      "stage": 5,
+      "txid": "9000000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-5-upper",
+      "stage": 5,
+      "txid": "9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-5-last-required-bit-wrong",
+      "stage": 5,
+      "txid": "8999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-5-uppercase-normalization",
+      "stage": 5,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-6-lower",
+      "stage": 6,
+      "txid": "9800000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-6-upper",
+      "stage": 6,
+      "txid": "9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-6-last-required-bit-wrong",
+      "stage": 6,
+      "txid": "9199999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-6-uppercase-normalization",
+      "stage": 6,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-7-lower",
+      "stage": 7,
+      "txid": "9800000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-7-upper",
+      "stage": 7,
+      "txid": "9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-7-last-required-bit-wrong",
+      "stage": 7,
+      "txid": "9199999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-7-uppercase-normalization",
+      "stage": 7,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-8-lower",
+      "stage": 8,
+      "txid": "9800000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-8-upper",
+      "stage": 8,
+      "txid": "9bffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-8-last-required-bit-wrong",
+      "stage": 8,
+      "txid": "9d99999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-8-uppercase-normalization",
+      "stage": 8,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-9-lower",
+      "stage": 9,
+      "txid": "9800000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-9-upper",
+      "stage": 9,
+      "txid": "99ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-9-last-required-bit-wrong",
+      "stage": 9,
+      "txid": "9b99999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-9-uppercase-normalization",
+      "stage": 9,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-10-lower",
+      "stage": 10,
+      "txid": "9800000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-10-upper",
+      "stage": 10,
+      "txid": "99ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-10-last-required-bit-wrong",
+      "stage": 10,
+      "txid": "9b99999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-10-uppercase-normalization",
+      "stage": 10,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-11-lower",
+      "stage": 11,
+      "txid": "9900000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-11-upper",
+      "stage": 11,
+      "txid": "99ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-11-last-required-bit-wrong",
+      "stage": 11,
+      "txid": "9899999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-11-uppercase-normalization",
+      "stage": 11,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-12-lower",
+      "stage": 12,
+      "txid": "9980000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-12-upper",
+      "stage": 12,
+      "txid": "99ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-12-last-required-bit-wrong",
+      "stage": 12,
+      "txid": "9919999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-12-uppercase-normalization",
+      "stage": 12,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-13-lower",
+      "stage": 13,
+      "txid": "9980000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-13-upper",
+      "stage": 13,
+      "txid": "99ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-13-last-required-bit-wrong",
+      "stage": 13,
+      "txid": "9919999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-13-uppercase-normalization",
+      "stage": 13,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-14-lower",
+      "stage": 14,
+      "txid": "9980000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-14-upper",
+      "stage": 14,
+      "txid": "99bfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-14-last-required-bit-wrong",
+      "stage": 14,
+      "txid": "99d9999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-14-uppercase-normalization",
+      "stage": 14,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-15-lower",
+      "stage": 15,
+      "txid": "9980000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-15-upper",
+      "stage": 15,
+      "txid": "999fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-15-last-required-bit-wrong",
+      "stage": 15,
+      "txid": "99b9999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-15-uppercase-normalization",
+      "stage": 15,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-16-lower",
+      "stage": 16,
+      "txid": "9980000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-16-upper",
+      "stage": 16,
+      "txid": "999fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-16-last-required-bit-wrong",
+      "stage": 16,
+      "txid": "99b9999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-16-uppercase-normalization",
+      "stage": 16,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-17-lower",
+      "stage": 17,
+      "txid": "9990000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-17-upper",
+      "stage": 17,
+      "txid": "999fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-17-last-required-bit-wrong",
+      "stage": 17,
+      "txid": "9989999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-17-uppercase-normalization",
+      "stage": 17,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-18-lower",
+      "stage": 18,
+      "txid": "9999000000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-18-upper",
+      "stage": 18,
+      "txid": "9999ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-18-last-required-bit-wrong",
+      "stage": 18,
+      "txid": "9998999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-18-uppercase-normalization",
+      "stage": 18,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-19-lower",
+      "stage": 19,
+      "txid": "9999900000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-19-upper",
+      "stage": 19,
+      "txid": "99999fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-19-last-required-bit-wrong",
+      "stage": 19,
+      "txid": "9999899999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-19-uppercase-normalization",
+      "stage": 19,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-20-lower",
+      "stage": 20,
+      "txid": "9999990000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-20-upper",
+      "stage": 20,
+      "txid": "999999ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-20-last-required-bit-wrong",
+      "stage": 20,
+      "txid": "9999989999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-20-uppercase-normalization",
+      "stage": 20,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-21-lower",
+      "stage": 21,
+      "txid": "9999999000000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-21-upper",
+      "stage": 21,
+      "txid": "9999999fffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-21-last-required-bit-wrong",
+      "stage": 21,
+      "txid": "9999998999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-21-uppercase-normalization",
+      "stage": 21,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-22-lower",
+      "stage": 22,
+      "txid": "9999999900000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-22-upper",
+      "stage": 22,
+      "txid": "99999999ffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-22-last-required-bit-wrong",
+      "stage": 22,
+      "txid": "9999999899999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-22-uppercase-normalization",
+      "stage": 22,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-23-lower",
+      "stage": 23,
+      "txid": "9999999990000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-23-upper",
+      "stage": 23,
+      "txid": "999999999fffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-23-last-required-bit-wrong",
+      "stage": 23,
+      "txid": "9999999989999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-23-uppercase-normalization",
+      "stage": 23,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-24-lower",
+      "stage": 24,
+      "txid": "9999999999000000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-24-upper",
+      "stage": 24,
+      "txid": "9999999999ffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-24-last-required-bit-wrong",
+      "stage": 24,
+      "txid": "9999999998999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-24-uppercase-normalization",
+      "stage": 24,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-25-lower",
+      "stage": 25,
+      "txid": "9999999999900000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-25-upper",
+      "stage": 25,
+      "txid": "99999999999fffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-25-last-required-bit-wrong",
+      "stage": 25,
+      "txid": "9999999999899999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-25-uppercase-normalization",
+      "stage": 25,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-26-lower",
+      "stage": 26,
+      "txid": "9999999999990000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-26-upper",
+      "stage": 26,
+      "txid": "999999999999ffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-26-last-required-bit-wrong",
+      "stage": 26,
+      "txid": "9999999999989999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-26-uppercase-normalization",
+      "stage": 26,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-27-lower",
+      "stage": 27,
+      "txid": "9999999999999000000000000000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-27-upper",
+      "stage": 27,
+      "txid": "9999999999999fffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-stage-27-last-required-bit-wrong",
+      "stage": 27,
+      "txid": "9999999999998999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-stage-27-uppercase-normalization",
+      "stage": 27,
+      "txid": "9999999999999AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "txid-short",
+      "stage": 0,
+      "txid": "999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-long",
+      "stage": 0,
+      "txid": "99999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-invalid-hex",
+      "stage": 0,
+      "txid": "g999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-hex-prefix",
+      "stage": 0,
+      "txid": "0x9999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    },
+    {
+      "id": "txid-whitespace",
+      "stage": 0,
+      "txid": " 9999999999999999999999999999999999999999999999999999999999999999",
+      "expectedMatches": false
+    }
+  ],
+  "calendarCases": [
+    {
+      "anchor": "2028-10-20T00:00:00Z",
+      "expectedGateTimes": {
+        "1": "2029-04-20T00:00:00Z",
+        "2": "2029-05-10T01:37:08Z",
+        "3": "2029-06-01T03:23:59Z",
+        "4": "2029-06-25T10:09:31Z",
+        "5": "2029-07-22T03:11:36Z",
+        "6": "2029-08-20T12:19:54Z",
+        "7": "2029-09-21T19:59:01Z",
+        "8": "2029-10-27T09:12:03Z",
+        "9": "2029-12-05T11:44:23Z",
+        "10": "2030-01-17T12:07:58Z",
+        "11": "2030-03-05T19:45:53Z",
+        "12": "2030-04-26T20:57:37Z",
+        "13": "2030-06-23T03:04:30Z",
+        "14": "2030-08-25T02:36:05Z",
+        "15": "2030-11-02T09:16:49Z",
+        "16": "2031-01-17T14:13:38Z",
+        "17": "2031-04-11T10:04:08Z",
+        "18": "2031-07-12T15:05:41Z",
+        "19": "2031-10-22T01:25:23Z",
+        "20": "2032-02-10T15:11:03Z",
+        "21": "2032-06-12T08:43:17Z",
+        "22": "2032-10-25T08:48:45Z",
+        "23": "2033-03-22T20:54:45Z",
+        "24": "2033-09-02T05:25:22Z",
+        "25": "2034-02-28T21:59:02Z",
+        "26": "2034-09-14T13:48:04Z",
+        "27": "2035-04-20T00:00:00Z"
+      }
+    },
+    {
+      "anchor": "2028-08-31T12:34:56Z",
+      "expectedGateTimes": {
+        "1": "2029-02-28T12:34:56Z",
+        "2": "2029-03-20T14:12:04Z",
+        "3": "2029-04-11T15:58:55Z",
+        "4": "2029-05-05T22:44:27Z",
+        "5": "2029-06-01T15:46:32Z",
+        "6": "2029-07-01T00:54:50Z",
+        "7": "2029-08-02T08:33:57Z",
+        "8": "2029-09-06T21:46:59Z",
+        "9": "2029-10-16T00:19:19Z",
+        "10": "2029-11-28T00:42:54Z",
+        "11": "2030-01-14T08:20:49Z",
+        "12": "2030-03-07T09:32:33Z",
+        "13": "2030-05-03T15:39:26Z",
+        "14": "2030-07-05T15:11:01Z",
+        "15": "2030-09-12T21:51:45Z",
+        "16": "2030-11-28T02:48:34Z",
+        "17": "2031-02-19T22:39:04Z",
+        "18": "2031-05-23T03:40:37Z",
+        "19": "2031-09-01T14:00:19Z",
+        "20": "2031-12-22T03:45:59Z",
+        "21": "2032-04-22T21:18:13Z",
+        "22": "2032-09-04T21:23:41Z",
+        "23": "2033-01-31T09:29:41Z",
+        "24": "2033-07-13T18:00:18Z",
+        "25": "2034-01-09T10:33:58Z",
+        "26": "2034-07-26T02:23:00Z",
+        "27": "2035-02-28T12:34:56Z"
+      }
+    },
+    {
+      "anchor": "2028-02-29T23:59:59Z",
+      "expectedGateTimes": {
+        "1": "2028-08-29T23:59:59Z",
+        "2": "2028-09-19T01:37:07Z",
+        "3": "2028-10-11T03:23:58Z",
+        "4": "2028-11-04T10:09:30Z",
+        "5": "2028-12-01T03:11:35Z",
+        "6": "2028-12-30T12:19:53Z",
+        "7": "2029-01-31T19:59:00Z",
+        "8": "2029-03-08T09:12:02Z",
+        "9": "2029-04-16T11:44:22Z",
+        "10": "2029-05-29T12:07:57Z",
+        "11": "2029-07-15T19:45:52Z",
+        "12": "2029-09-05T20:57:36Z",
+        "13": "2029-11-02T03:04:29Z",
+        "14": "2030-01-04T02:36:04Z",
+        "15": "2030-03-14T09:16:48Z",
+        "16": "2030-05-29T14:13:37Z",
+        "17": "2030-08-21T10:04:07Z",
+        "18": "2030-11-21T15:05:40Z",
+        "19": "2031-03-03T01:25:22Z",
+        "20": "2031-06-22T15:11:02Z",
+        "21": "2031-10-23T08:43:16Z",
+        "22": "2032-03-06T08:48:44Z",
+        "23": "2032-08-01T20:54:44Z",
+        "24": "2033-01-12T05:25:21Z",
+        "25": "2033-07-10T21:59:01Z",
+        "26": "2034-01-24T13:48:03Z",
+        "27": "2034-08-29T23:59:59Z"
+      }
+    }
+  ],
+  "gateCases": [
+    {
+      "id": "gate-1-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-04-20T00:00:00Z",
+      "volume": "400000",
+      "expectedCandidate": 1
+    },
+    {
+      "id": "gate-1-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-04-19T23:59:59Z",
+      "volume": "400000",
+      "expectedCandidate": 0
+    },
+    {
+      "id": "gate-1-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-04-20T00:00:00Z",
+      "volume": "399999",
+      "expectedCandidate": 0
+    },
+    {
+      "id": "gate-2-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-05-10T01:37:08Z",
+      "volume": "800000",
+      "expectedCandidate": 2
+    },
+    {
+      "id": "gate-2-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-05-10T01:37:07Z",
+      "volume": "800000",
+      "expectedCandidate": 1
+    },
+    {
+      "id": "gate-2-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-05-10T01:37:08Z",
+      "volume": "799999",
+      "expectedCandidate": 1
+    },
+    {
+      "id": "gate-3-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-06-01T03:23:59Z",
+      "volume": "1200000",
+      "expectedCandidate": 3
+    },
+    {
+      "id": "gate-3-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-06-01T03:23:58Z",
+      "volume": "1200000",
+      "expectedCandidate": 2
+    },
+    {
+      "id": "gate-3-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-06-01T03:23:59Z",
+      "volume": "1199999",
+      "expectedCandidate": 2
+    },
+    {
+      "id": "gate-4-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-06-25T10:09:31Z",
+      "volume": "1600000",
+      "expectedCandidate": 4
+    },
+    {
+      "id": "gate-4-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-06-25T10:09:30Z",
+      "volume": "1600000",
+      "expectedCandidate": 3
+    },
+    {
+      "id": "gate-4-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-06-25T10:09:31Z",
+      "volume": "1599999",
+      "expectedCandidate": 3
+    },
+    {
+      "id": "gate-5-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-07-22T03:11:36Z",
+      "volume": "2000000",
+      "expectedCandidate": 5
+    },
+    {
+      "id": "gate-5-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-07-22T03:11:35Z",
+      "volume": "2000000",
+      "expectedCandidate": 4
+    },
+    {
+      "id": "gate-5-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-07-22T03:11:36Z",
+      "volume": "1999999",
+      "expectedCandidate": 4
+    },
+    {
+      "id": "gate-6-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-08-20T12:19:54Z",
+      "volume": "2333334",
+      "expectedCandidate": 6
+    },
+    {
+      "id": "gate-6-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-08-20T12:19:53Z",
+      "volume": "2333334",
+      "expectedCandidate": 5
+    },
+    {
+      "id": "gate-6-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-08-20T12:19:54Z",
+      "volume": "2333333",
+      "expectedCandidate": 5
+    },
+    {
+      "id": "gate-7-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-09-21T19:59:01Z",
+      "volume": "2666667",
+      "expectedCandidate": 7
+    },
+    {
+      "id": "gate-7-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-09-21T19:59:00Z",
+      "volume": "2666667",
+      "expectedCandidate": 6
+    },
+    {
+      "id": "gate-7-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-09-21T19:59:01Z",
+      "volume": "2666666",
+      "expectedCandidate": 6
+    },
+    {
+      "id": "gate-8-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-10-27T09:12:03Z",
+      "volume": "3000000",
+      "expectedCandidate": 8
+    },
+    {
+      "id": "gate-8-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-10-27T09:12:02Z",
+      "volume": "3000000",
+      "expectedCandidate": 7
+    },
+    {
+      "id": "gate-8-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-10-27T09:12:03Z",
+      "volume": "2999999",
+      "expectedCandidate": 7
+    },
+    {
+      "id": "gate-9-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-12-05T11:44:23Z",
+      "volume": "3333334",
+      "expectedCandidate": 9
+    },
+    {
+      "id": "gate-9-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-12-05T11:44:22Z",
+      "volume": "3333334",
+      "expectedCandidate": 8
+    },
+    {
+      "id": "gate-9-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2029-12-05T11:44:23Z",
+      "volume": "3333333",
+      "expectedCandidate": 8
+    },
+    {
+      "id": "gate-10-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-01-17T12:07:58Z",
+      "volume": "3666667",
+      "expectedCandidate": 10
+    },
+    {
+      "id": "gate-10-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-01-17T12:07:57Z",
+      "volume": "3666667",
+      "expectedCandidate": 9
+    },
+    {
+      "id": "gate-10-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-01-17T12:07:58Z",
+      "volume": "3666666",
+      "expectedCandidate": 9
+    },
+    {
+      "id": "gate-11-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-03-05T19:45:53Z",
+      "volume": "4000000",
+      "expectedCandidate": 11
+    },
+    {
+      "id": "gate-11-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-03-05T19:45:52Z",
+      "volume": "4000000",
+      "expectedCandidate": 10
+    },
+    {
+      "id": "gate-11-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-03-05T19:45:53Z",
+      "volume": "3999999",
+      "expectedCandidate": 10
+    },
+    {
+      "id": "gate-12-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-04-26T20:57:37Z",
+      "volume": "4666667",
+      "expectedCandidate": 12
+    },
+    {
+      "id": "gate-12-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-04-26T20:57:36Z",
+      "volume": "4666667",
+      "expectedCandidate": 11
+    },
+    {
+      "id": "gate-12-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-04-26T20:57:37Z",
+      "volume": "4666666",
+      "expectedCandidate": 11
+    },
+    {
+      "id": "gate-13-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-06-23T03:04:30Z",
+      "volume": "5333334",
+      "expectedCandidate": 13
+    },
+    {
+      "id": "gate-13-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-06-23T03:04:29Z",
+      "volume": "5333334",
+      "expectedCandidate": 12
+    },
+    {
+      "id": "gate-13-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-06-23T03:04:30Z",
+      "volume": "5333333",
+      "expectedCandidate": 12
+    },
+    {
+      "id": "gate-14-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-08-25T02:36:05Z",
+      "volume": "6000000",
+      "expectedCandidate": 14
+    },
+    {
+      "id": "gate-14-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-08-25T02:36:04Z",
+      "volume": "6000000",
+      "expectedCandidate": 13
+    },
+    {
+      "id": "gate-14-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-08-25T02:36:05Z",
+      "volume": "5999999",
+      "expectedCandidate": 13
+    },
+    {
+      "id": "gate-15-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-11-02T09:16:49Z",
+      "volume": "6666667",
+      "expectedCandidate": 15
+    },
+    {
+      "id": "gate-15-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-11-02T09:16:48Z",
+      "volume": "6666667",
+      "expectedCandidate": 14
+    },
+    {
+      "id": "gate-15-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2030-11-02T09:16:49Z",
+      "volume": "6666666",
+      "expectedCandidate": 14
+    },
+    {
+      "id": "gate-16-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-01-17T14:13:38Z",
+      "volume": "7333334",
+      "expectedCandidate": 16
+    },
+    {
+      "id": "gate-16-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-01-17T14:13:37Z",
+      "volume": "7333334",
+      "expectedCandidate": 15
+    },
+    {
+      "id": "gate-16-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-01-17T14:13:38Z",
+      "volume": "7333333",
+      "expectedCandidate": 15
+    },
+    {
+      "id": "gate-17-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-04-11T10:04:08Z",
+      "volume": "8000000",
+      "expectedCandidate": 17
+    },
+    {
+      "id": "gate-17-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-04-11T10:04:07Z",
+      "volume": "8000000",
+      "expectedCandidate": 16
+    },
+    {
+      "id": "gate-17-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-04-11T10:04:08Z",
+      "volume": "7999999",
+      "expectedCandidate": 16
+    },
+    {
+      "id": "gate-18-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-07-12T15:05:41Z",
+      "volume": "16000000",
+      "expectedCandidate": 18
+    },
+    {
+      "id": "gate-18-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-07-12T15:05:40Z",
+      "volume": "16000000",
+      "expectedCandidate": 17
+    },
+    {
+      "id": "gate-18-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-07-12T15:05:41Z",
+      "volume": "15999999",
+      "expectedCandidate": 17
+    },
+    {
+      "id": "gate-19-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-10-22T01:25:23Z",
+      "volume": "32000000",
+      "expectedCandidate": 19
+    },
+    {
+      "id": "gate-19-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-10-22T01:25:22Z",
+      "volume": "32000000",
+      "expectedCandidate": 18
+    },
+    {
+      "id": "gate-19-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2031-10-22T01:25:23Z",
+      "volume": "31999999",
+      "expectedCandidate": 18
+    },
+    {
+      "id": "gate-20-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-02-10T15:11:03Z",
+      "volume": "64000000",
+      "expectedCandidate": 20
+    },
+    {
+      "id": "gate-20-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-02-10T15:11:02Z",
+      "volume": "64000000",
+      "expectedCandidate": 19
+    },
+    {
+      "id": "gate-20-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-02-10T15:11:03Z",
+      "volume": "63999999",
+      "expectedCandidate": 19
+    },
+    {
+      "id": "gate-21-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-06-12T08:43:17Z",
+      "volume": "128000000",
+      "expectedCandidate": 21
+    },
+    {
+      "id": "gate-21-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-06-12T08:43:16Z",
+      "volume": "128000000",
+      "expectedCandidate": 20
+    },
+    {
+      "id": "gate-21-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-06-12T08:43:17Z",
+      "volume": "127999999",
+      "expectedCandidate": 20
+    },
+    {
+      "id": "gate-22-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-10-25T08:48:45Z",
+      "volume": "256000000",
+      "expectedCandidate": 22
+    },
+    {
+      "id": "gate-22-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-10-25T08:48:44Z",
+      "volume": "256000000",
+      "expectedCandidate": 21
+    },
+    {
+      "id": "gate-22-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2032-10-25T08:48:45Z",
+      "volume": "255999999",
+      "expectedCandidate": 21
+    },
+    {
+      "id": "gate-23-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2033-03-22T20:54:45Z",
+      "volume": "512000000",
+      "expectedCandidate": 23
+    },
+    {
+      "id": "gate-23-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2033-03-22T20:54:44Z",
+      "volume": "512000000",
+      "expectedCandidate": 22
+    },
+    {
+      "id": "gate-23-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2033-03-22T20:54:45Z",
+      "volume": "511999999",
+      "expectedCandidate": 22
+    },
+    {
+      "id": "gate-24-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2033-09-02T05:25:22Z",
+      "volume": "1024000000",
+      "expectedCandidate": 24
+    },
+    {
+      "id": "gate-24-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2033-09-02T05:25:21Z",
+      "volume": "1024000000",
+      "expectedCandidate": 23
+    },
+    {
+      "id": "gate-24-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2033-09-02T05:25:22Z",
+      "volume": "1023999999",
+      "expectedCandidate": 23
+    },
+    {
+      "id": "gate-25-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2034-02-28T21:59:02Z",
+      "volume": "2048000000",
+      "expectedCandidate": 25
+    },
+    {
+      "id": "gate-25-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2034-02-28T21:59:01Z",
+      "volume": "2048000000",
+      "expectedCandidate": 24
+    },
+    {
+      "id": "gate-25-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2034-02-28T21:59:02Z",
+      "volume": "2047999999",
+      "expectedCandidate": 24
+    },
+    {
+      "id": "gate-26-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2034-09-14T13:48:04Z",
+      "volume": "4096000000",
+      "expectedCandidate": 26
+    },
+    {
+      "id": "gate-26-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2034-09-14T13:48:03Z",
+      "volume": "4096000000",
+      "expectedCandidate": 25
+    },
+    {
+      "id": "gate-26-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2034-09-14T13:48:04Z",
+      "volume": "4095999999",
+      "expectedCandidate": 25
+    },
+    {
+      "id": "gate-27-exact",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2035-04-20T00:00:00Z",
+      "volume": "8192000000",
+      "expectedCandidate": 27
+    },
+    {
+      "id": "gate-27-time-minus-one-second",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2035-04-19T23:59:59Z",
+      "volume": "8192000000",
+      "expectedCandidate": 26
+    },
+    {
+      "id": "gate-27-volume-minus-one",
+      "anchor": "2028-10-20T00:00:00Z",
+      "mtp": "2035-04-20T00:00:00Z",
+      "volume": "8191999999",
+      "expectedCandidate": 26
+    }
+  ],
+  "acceptedChainCases": [
+    {
+      "id": "following-block-boundary",
+      "events": [
+        {
+          "kind": "accept",
+          "block": "A",
+          "parentCandidate": 0,
+          "candidate": 1
+        },
+        {
+          "kind": "accept",
+          "block": "B",
+          "parent": "A",
+          "parentCandidate": 1,
+          "candidate": 1
+        }
+      ],
+      "expectedEventStages": [
+        0,
+        1
+      ],
+      "expectedActiveStage": 1
+    },
+    {
+      "id": "candidate-does-not-self-apply",
+      "events": [
+        {
+          "kind": "accept",
+          "block": "A",
+          "parentCandidate": 0,
+          "candidate": 27
+        }
+      ],
+      "expectedEventStages": [
+        0
+      ],
+      "expectedActiveStage": 0,
+      "expectedPendingStage": 27
+    },
+    {
+      "id": "direct-jump-on-child",
+      "events": [
+        {
+          "kind": "accept",
+          "block": "A",
+          "parentCandidate": 0,
+          "candidate": 17
+        },
+        {
+          "kind": "accept",
+          "block": "B",
+          "parent": "A",
+          "parentCandidate": 17,
+          "candidate": 17
+        }
+      ],
+      "expectedEventStages": [
+        0,
+        17
+      ],
+      "expectedActiveStage": 17
+    },
+    {
+      "id": "rejected-branch-cannot-raise-stage",
+      "acceptedTipParentCandidate": 0,
+      "observedRejectedBranchCandidate": 27,
+      "expectedActiveStage": 0
+    },
+    {
+      "id": "reorg-lowers-activated-stage",
+      "oldAcceptedTipParentCandidate": 17,
+      "replacementAcceptedTipParentCandidate": 0,
+      "expectedActiveStage": 0,
+      "expectedPendingStage": 0,
+      "expectedHistoricalCoverage": "rebuild all newly eligible records, not only replacement blocks"
+    },
+    {
+      "id": "orphaned-pending-trigger-not-carried",
+      "oldAcceptedTipParentCandidate": 0,
+      "oldTipCandidate": 17,
+      "replacementAcceptedTipParentCandidate": 0,
+      "replacementTipCandidate": 0,
+      "expectedActiveStage": 0,
+      "expectedPendingStage": 0
+    },
+    {
+      "id": "lost-ancestor-checkpoint",
+      "checkpointOnAcceptedChain": false,
+      "expectedState": "unavailable",
+      "expectedActions": [
+        "undo rejected effects",
+        "replay accepted branch",
+        "rebuild required coverage"
+      ]
+    }
+  ],
+  "balanceCases": [
+    {
+      "id": "ignored-incoming",
+      "eventStage": 11,
+      "fundingTxidPrefix": "9a",
+      "amount": "7",
+      "previousCovered": "100",
+      "expectedCovered": "100",
+      "expectedDisqualified": false
+    },
+    {
+      "id": "grandfather-funding",
+      "fundingEventStage": 5,
+      "fundingTxidPrefix": "9a",
+      "laterActiveStage": 11,
+      "unspentAmount": "100",
+      "expectedCovered": "100",
+      "expectedGeneralizedTxidLookup": "outside_coverage",
+      "expectedSpendWatch": true
+    },
+    {
+      "id": "historical-compliant-spend",
+      "spendEventStage": 5,
+      "spendTxidPrefix": "9b",
+      "laterActiveStage": 11,
+      "expectedDisqualified": false
+    },
+    {
+      "id": "bad-spend-ignored-output",
+      "eventStage": 11,
+      "spendingTxidPrefix": "9b",
+      "spendsCoveredOutput": false,
+      "spendsIgnoredOutput": true,
+      "expectedDisqualified": false
+    },
+    {
+      "id": "bad-unconfirmed-spend-covered-output",
+      "eventStage": 11,
+      "spendingTxidPrefix": "9b",
+      "spendsCoveredOutput": true,
+      "confirmation": "mempool-only",
+      "expectedDisqualified": false
+    },
+    {
+      "id": "bad-confirmed-spend-covered-output",
+      "eventStage": 11,
+      "spendingTxidPrefix": "9b",
+      "spendsCoveredOutput": true,
+      "confirmation": "accepted-block",
+      "expectedState": "address_disqualified"
+    },
+    {
+      "id": "mixed-input-bad-spend",
+      "eventStage": 11,
+      "spendingTxidPrefix": "9b",
+      "spendsCoveredOutput": true,
+      "spendsIgnoredOutput": true,
+      "confirmation": "accepted-block",
+      "expectedState": "address_disqualified"
+    },
+    {
+      "id": "orphaned-disqualification-restored",
+      "oldConfirmationAccepted": false,
+      "replacementBranchHasDisqualifyingSpend": false,
+      "reconstructionComplete": true,
+      "expectedState": "covered",
+      "expectedDisqualified": false
+    },
+    {
+      "id": "orphaned-disqualification-watch-gap",
+      "oldConfirmationAccepted": false,
+      "replacementBranchHasDisqualifyingSpend": false,
+      "reconstructionComplete": false,
+      "expectedState": "unavailable",
+      "mustNotReturn": [
+        "address_disqualified based on orphan",
+        "covered zero",
+        "stale amount"
+      ]
+    },
+    {
+      "id": "remined-same-spend-lower-rule",
+      "oldEventStage": 11,
+      "replacementEventStage": 5,
+      "spendingTxidPrefix": "9b",
+      "spendsCoveredOutput": true,
+      "confirmation": "accepted-replacement-block",
+      "expectedDisqualified": false
+    },
+    {
+      "id": "remined-same-spend-still-bad",
+      "oldEventStage": 11,
+      "replacementEventStage": 11,
+      "spendingTxidPrefix": "9b",
+      "spendsCoveredOutput": true,
+      "confirmation": "accepted-replacement-block",
+      "expectedState": "address_disqualified"
+    },
+    {
+      "id": "remined-funding-now-ignored",
+      "oldFundingEventStage": 5,
+      "replacementFundingEventStage": 11,
+      "fundingTxidPrefix": "9a",
+      "oldAdmissionBlockAccepted": false,
+      "expectedCovered": "0",
+      "expectedDisqualified": false
+    },
+    {
+      "id": "prefix-loss-is-not-zero",
+      "address": "1CDW1111111111111111111111113dpUUW",
+      "oldStage": 5,
+      "newStage": 6,
+      "expectedState": "outside_coverage",
+      "mustNotReturn": "covered zero as a substitute"
+    },
+    {
+      "id": "reorg-restores-address-prefix",
+      "address": "1CDW1111111111111111111111113dpUUW",
+      "oldStage": 6,
+      "replacementStage": 5,
+      "reconstructionComplete": true,
+      "expectedMayRestoreCoveredBalance": true
+    },
+    {
+      "id": "new-deposit-does-not-reset-current-disqualification",
+      "acceptedHistoryHasDisqualifyingSpend": true,
+      "newFundingPassesCurrentFilter": true,
+      "expectedState": "address_disqualified"
+    }
+  ],
+  "balanceTraceCases": [
+    {
+      "id": "trace-grandfather",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "100"
+      }
+    },
+    {
+      "id": "trace-ignored-new-deposit",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "new-ignored",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000008",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "9"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "100"
+      }
+    },
+    {
+      "id": "trace-compliant-old-spend",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "old-compliant-spend",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "0"
+      }
+    },
+    {
+      "id": "trace-ignored-output-spend",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "ignored-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000006",
+              "inputs": [
+                {
+                  "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "100"
+      }
+    },
+    {
+      "id": "trace-unconfirmed-no-taint",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "100"
+      },
+      "observedUnconfirmedTransactions": [
+        {
+          "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+          "inputs": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "index": 0
+            }
+          ],
+          "outputs": []
+        }
+      ]
+    },
+    {
+      "id": "trace-confirmed-covered-spend",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "bad-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "address_disqualified"
+      }
+    },
+    {
+      "id": "trace-mixed-input-spend",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "mixed-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                },
+                {
+                  "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "address_disqualified"
+      }
+    },
+    {
+      "id": "trace-orphaned-spend-restored",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "replacement-no-spend",
+          "eventStage": 11,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "100"
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "orphaned-bad-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trace-orphaned-spend-watch-gap",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "replacement-no-spend",
+          "eventStage": 11,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": false,
+      "expected": {
+        "state": "unavailable"
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "orphaned-bad-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trace-remined-spend-lower-rule",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "remined-spend",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "0"
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "orphaned-bad-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trace-remined-spend-still-bad",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "remined-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "address_disqualified"
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "orphaned-bad-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trace-remined-funding-ignored",
+      "acceptedBlocks": [
+        {
+          "blockId": "remined-funding",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "0"
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "old-funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trace-address-prefix-loss",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000009",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1CDW1111111111111111111111113dpUUW",
+                  "amount": "70"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 6,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1CDW1111111111111111111111113dpUUW",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "outside_coverage"
+      }
+    },
+    {
+      "id": "trace-address-prefix-restored",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000009",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1CDW1111111111111111111111113dpUUW",
+                  "amount": "70"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "replacement",
+          "eventStage": 5,
+          "transactions": []
+        }
+      ],
+      "queryAddress": "1CDW1111111111111111111111113dpUUW",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "70"
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "orphaned-tightening",
+          "eventStage": 6,
+          "transactions": []
+        }
+      ]
+    },
+    {
+      "id": "trace-new-deposit-no-reset",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "bad-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        },
+        {
+          "blockId": "fresh-deposit",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9900000000000000000000000000000000000000000000000000000000000007",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "150"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "address_disqualified"
+      }
+    },
+    {
+      "id": "trace-valid-spend-debit-credit",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "tightening",
+          "eventStage": 11,
+          "transactions": []
+        },
+        {
+          "blockId": "valid-spend",
+          "eventStage": 11,
+          "transactions": [
+            {
+              "txid": "9900000000000000000000000000000000000000000000000000000000000005",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "amount": "60"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "60"
+      }
+    }
+  ],
+  "reorganizationPolicy": "Only acceptedBlocks govern the derived state. Previously accepted/orphaned blocks and observed unconfirmed transactions are audit/test observations and must not mutate the accepted result. eventStage fields are synthetic already-derived stages; calendar/stage derivation is checked by the separate stage fixtures.",
+  "minimumRecoveryRetentionBlocks": 100,
+  "recoveryRetentionCases": [
+    {
+      "id": "hold-at-retirement-height",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000001,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "hold-99-descendants",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000100,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "hold-100-descendants",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000101,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": true
+    },
+    {
+      "id": "hold-101-descendants",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000102,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": true
+    },
+    {
+      "id": "orphaned-anchor-no-authorization",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": false,
+      "acceptedTipHeight": 1000200,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "lower-accepted-tip-restores-unexpired-hold",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000050,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "previouslyObservedTipHeight": 1000100,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "rejected-high-tip-does-not-age-hold",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000100,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "rejectedSideBranchTipHeight": 1000200,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "live-grandfathered-output-does-not-expire",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000101,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": true,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "ongoing-rebuild-protects-data",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000101,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": true,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "longer-configured-hold-199-descendants",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000200,
+      "configuredRetentionBlocks": 200,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "longer-configured-hold-200-descendants",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000201,
+      "configuredRetentionBlocks": 200,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedPurgePermitted": true
+    },
+    {
+      "id": "no-deep-reorg-reconstruction-path",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000101,
+      "configuredRetentionBlocks": 100,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": false,
+      "expectedPurgePermitted": false
+    },
+    {
+      "id": "configuration-below-required-floor-is-invalid",
+      "retirementHeight": 1000001,
+      "retirementAnchorIsAcceptedAncestor": true,
+      "acceptedTipHeight": 1000101,
+      "configuredRetentionBlocks": 99,
+      "requiredByActiveState": false,
+      "recoveryInProgress": false,
+      "reconstructionPathVerified": true,
+      "expectedConfigurationValid": false,
+      "expectedPurgePermitted": false
+    }
+  ],
+  "recoveryRetentionSemantics": "Each case is a removal authorization check on the current accepted view, not a claim of finality. Require an accepted-ancestor retirement anchor, acceptedTipHeight-retirementHeight >= max(100, configuredRetentionBlocks), no live-state or recovery dependency, and a verified deeper-reorganization reconstruction path. Configurations below 100 are invalid. Previously observed or rejected heights are audit inputs only. A previously purged record made necessary by a deeper reorganization must be reconstructed, with unavailable responses until verified."
+}
