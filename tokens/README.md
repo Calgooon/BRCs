@@ -24,4 +24,4 @@ BRC | Standard
 176  | [BSV-21 — Validity Proofs](./0176.md)
 197  | [Accumulating Right-of-Sale Listings and Purchase Orders](./0197.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./0226.md)
-255  | [HCT — Compact Tokens and Items with Optional Issuer Countersigning](./0255.md)
+255  | [Bitcoin Native Tokens (BNT): Compact Format](./0255.md)
