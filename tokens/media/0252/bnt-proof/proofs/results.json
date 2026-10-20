@@ -1,0 +1,16 @@
+{
+  "merge": {
+    "bytes": 1272656,
+    "seconds": 222.855455334,
+    "txid": "0f9c13ade73d3708b850a316a69352bc83a7638eb8b8558295336cd2f9a5ed21",
+    "verifies": "split"
+  },
+  "mode": "compressed",
+  "sp1": "v6.1.0",
+  "split": {
+    "bytes": 1272656,
+    "seconds": 239.396129958,
+    "txid": "42128ed2c4dabef2b8b0d1b76ba7b9e6b06d232f947dc6f26821020e5a738fc5"
+  },
+  "vkey": "0x008104150cf035722573ab57683c558e390a4a4d35c779b64cd3f5bea29be964"
+}

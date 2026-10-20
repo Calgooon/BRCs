@@ -1,0 +1,55 @@
+setup 3.0 s, key 0x008104150cf035722573ab57683c558e390a4a4d35c779b64cd3f5bea29be964
+proving split…
+stdout: cycle-tracker-start: read
+stdout: cycle-tracker-end: read
+stdout: cycle-tracker-start: claims
+stdout: cycle-tracker-end: claims
+stdout: cycle-tracker-start: parents
+stdout: cycle-tracker-end: parents
+stdout: cycle-tracker-start: step
+stdout: cycle-tracker-end: step
+split: 239.4 s, 1272656 bytes, verified
+proving merge…
+stdout: cycle-tracker-start: read
+stdout: cycle-tracker-end: read
+stdout: cycle-tracker-start: claims
+stdout: cycle-tracker-end: claims
+stdout: cycle-tracker-start: parents
+stdout: cycle-tracker-end: parents
+stdout: cycle-tracker-start: step
+stdout: cycle-tracker-end: step
+merge: 222.9 s, 1272656 bytes, verified
+{
+  "merge": {
+    "bytes": 1272656,
+    "seconds": 222.855455334,
+    "txid": "0f9c13ade73d3708b850a316a69352bc83a7638eb8b8558295336cd2f9a5ed21",
+    "verifies": "split"
+  },
+  "mode": "compressed",
+  "sp1": "v6.1.0",
+  "split": {
+    "bytes": 1272656,
+    "seconds": 239.396129958,
+    "txid": "42128ed2c4dabef2b8b0d1b76ba7b9e6b06d232f947dc6f26821020e5a738fc5"
+  },
+  "vkey": "0x008104150cf035722573ab57683c558e390a4a4d35c779b64cd3f5bea29be964"
+}
+      494.35 real      1120.09 user       183.14 sys
+          3313221632  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+            22094719  page reclaims
+                4345  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              829475  voluntary context switches
+            12585637  involuntary context switches
+      10508676764312  instructions retired
+       3597902287672  cycles elapsed
+         18870320008  peak memory footprint
