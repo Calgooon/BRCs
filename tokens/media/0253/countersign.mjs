@@ -172,6 +172,23 @@ checks.push(
   ['§11 release-branch input resolves once the release is mined', true, resolve({ inputs: [row(100, 'release')], outputs: [row(100)] }, { released: true })],
 )
 
+function audit(tx, deploy, seen = new Set()) {
+  if (tx === deploy || seen.has(tx)) return true
+  seen.add(tx)
+  if (!resolve(tx, { released: true })) return false
+  return tx.inputs.every((i) => audit(i.from, deploy, seen))
+}
+const spend = (from, amount, outs) => ({ inputs: [{ ...row(amount), from }], outputs: outs.map((a) => row(a)) })
+const deployTx = { inputs: [], outputs: [row(100)] }
+const honest = spend(spend(deployTx, 100, [60, 40]), 60, [30, 30])
+const counterfeit = { inputs: [], outputs: [row(1000)] }
+const laundered = spend(counterfeit, 1000, [500, 500])
+checks.push(
+  ['§11 audit passes an honest history back to the deploy', true, audit(honest, deployTx)],
+  ['§11 resolver alone accepts a transfer of counterfeit units', true, resolve(laundered)],
+  ['§11 audit catches the counterfeit units', false, audit(laundered, deployTx)],
+)
+
 let failed = 0
 for (const [name, want, got] of checks) {
   const ok = want === got
