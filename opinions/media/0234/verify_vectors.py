@@ -272,6 +272,7 @@ for c in vectors['balanceTraceCases']:
     outputs = {}
     admitted = {}
     ledger_snapshots = {}
+    ledger_view = c.get('ledgerView', 'baseline')
     family = c['keyFamily']
     query = c['queryKey']
     def get_key(out):
@@ -285,7 +286,8 @@ for c in vectors['balanceTraceCases']:
                 key = (inp['txid'], inp['index'])
                 assert key in outputs, (c['id'], key)
                 outputs.pop(key)
-                if stage <= 12 or txid_match(tx['txid'], stage) or c.get('applyExtraValidatedSpends'):
+                if (stage <= 12 or txid_match(tx['txid'], stage)
+                        or (ledger_view == 'enhanced' and c.get('extraSpendsVerified'))):
                     admitted.pop(key, None)
             for index, out in enumerate(tx['outputs']):
                 key = (tx['txid'], index)
@@ -310,6 +312,10 @@ for c in vectors['balanceTraceCases']:
             result.update(currentStage=current_stage, snapshotStage=snapshot_stage,
                           snapshotKind='current' if snapshot_id == c['acceptedBlocks'][-1]['blockId']
                           else 'historical')
+        if 'ledgerView' in c:
+            result['ledgerView'] = ledger_view
+            if ledger_view == 'enhanced' and snapshot_stage >= 13:
+                result['spendCoverage'] = 'qualifying_txids_plus_declared_extra_spends'
     assert result == c['expected'], (c['id'], result, c['expected'])
     if 'expectedActualUnspentAmount' in c:
         actual_amount = sum(int(o['amount']) for o in outputs.values() if get_key(o) == query)

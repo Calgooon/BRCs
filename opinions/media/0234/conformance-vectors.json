@@ -4055,7 +4055,7 @@
       }
     },
     {
-      "id": "extra-validated-nonqualifying-spend-may-be-applied",
+      "id": "extra-validated-nonqualifying-spend-only-changes-enhanced-view",
       "keyFamily": "address",
       "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
@@ -4108,10 +4108,12 @@
       "expected": {
         "state": "filtered",
         "amount": "0",
-        "spendCoverage": "qualifying_txids_only",
-        "mayIncludeSpentOutputs": true
+        "spendCoverage": "qualifying_txids_plus_declared_extra_spends",
+        "mayIncludeSpentOutputs": true,
+        "ledgerView": "enhanced"
       },
-      "applyExtraValidatedSpends": true
+      "extraSpendsVerified": true,
+      "ledgerView": "enhanced"
     },
     {
       "id": "script-family-stale-spend",
@@ -4549,6 +4551,67 @@
       },
       "expectedActualUnspentAmount": "96",
       "note": "Nonqualifying spends leave old admitted outpoints; qualifying returns admit new outputs. This is a synthetic decoded-effect trace, not a fee-policy or signed-transaction fixture."
+    },
+    {
+      "id": "same-accepted-history-baseline-ignores-provider-extra-spend-knowledge",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true,
+        "ledgerView": "baseline"
+      },
+      "extraSpendsVerified": true,
+      "ledgerView": "baseline"
     }
   ],
   "balanceTraceSemantics": "Stages 0-12 debit all valid accepted confirmed spends of admitted outputs; stages 13+ debit qualifying-TXID spends and may ignore other spends. applyExtraValidatedSpends opts into additional accepted-spend observations. Earlier debits persist. Old/orphaned and mempool observations do not govern accepted state. All-spend UTXO completeness and qualifying-stream completeness are separate promises. These are decoded-effect tests, not signed-transaction proofs.",
