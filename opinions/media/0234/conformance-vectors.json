@@ -6698,5 +6698,552 @@
       "identifierEligible": true,
       "expectedEligible": true
     }
-  ]
+  ],
+  "volumeCountCases": [
+    {
+      "id": "anchor-excluded-and-tip-included",
+      "blocks": [
+        {
+          "blockId": "anchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990001",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990002",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "a",
+          "parent": "anchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990003",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990004",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        }
+      ],
+      "acceptedTipObservations": [
+        {
+          "tip": "anchor",
+          "expectedVolume": 0
+        },
+        {
+          "tip": "a",
+          "expectedVolume": 2
+        }
+      ]
+    },
+    {
+      "id": "coinbase-only-does-not-increment",
+      "blocks": [
+        {
+          "blockId": "anchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990001",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990002",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "a",
+          "parent": "anchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990003",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "empty",
+          "parent": "a",
+          "height": 1000002,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            }
+          ]
+        }
+      ],
+      "acceptedTipObservations": [
+        {
+          "tip": "a",
+          "expectedVolume": 1
+        },
+        {
+          "tip": "empty",
+          "expectedVolume": 1
+        }
+      ]
+    },
+    {
+      "id": "all-versions-prefixes-and-entry-units",
+      "blocks": [
+        {
+          "blockId": "anchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990001",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990002",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "mixed",
+          "parent": "anchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990003",
+              "version": 1,
+              "coinbase": false,
+              "inputCount": 1,
+              "outputCount": 100,
+              "byteSize": 20000,
+              "valueSatoshis": "0",
+              "feeSatoshis": "0"
+            },
+            {
+              "txid": "0000000000000000000000000000000000000000000000000000000000000004",
+              "version": 2,
+              "coinbase": false,
+              "inputCount": 20,
+              "outputCount": 1,
+              "byteSize": 400,
+              "valueSatoshis": "100000000",
+              "feeSatoshis": "1000"
+            },
+            {
+              "txid": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0005",
+              "version": 3,
+              "coinbase": false
+            }
+          ]
+        }
+      ],
+      "acceptedTipObservations": [
+        {
+          "tip": "mixed",
+          "expectedVolume": 3
+        }
+      ],
+      "mempoolTransactions": [
+        {
+          "txid": "9999999999999999999999999999999999999999999999999999999999990006",
+          "version": 1,
+          "coinbase": false
+        }
+      ],
+      "rejectedTransactions": [
+        {
+          "txid": "9999999999999999999999999999999999999999999999999999999999990007",
+          "version": 1,
+          "coinbase": false
+        }
+      ]
+    },
+    {
+      "id": "no-reset-at-runway-notice-stage-adoption-or-restart",
+      "blocks": [
+        {
+          "blockId": "anchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990001",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990002",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "runway",
+          "parent": "anchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990003",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "notice",
+          "parent": "runway",
+          "height": 1000002,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990004",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "transition",
+          "parent": "notice",
+          "height": 1000003,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "0000000000000000000000000000000000000000000000000000000000000005",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        }
+      ],
+      "acceptedTipObservations": [
+        {
+          "tip": "runway",
+          "expectedVolume": 1,
+          "context": "initial runway"
+        },
+        {
+          "tip": "notice",
+          "expectedVolume": 2,
+          "context": "activation waiting period"
+        },
+        {
+          "tip": "transition",
+          "expectedVolume": 3,
+          "context": "stage transition"
+        },
+        {
+          "tip": "transition",
+          "expectedVolume": 3,
+          "context": "late adoption"
+        },
+        {
+          "tip": "transition",
+          "expectedVolume": 3,
+          "context": "restart"
+        }
+      ]
+    },
+    {
+      "id": "reorganization-removes-old-adds-replacement",
+      "blocks": [
+        {
+          "blockId": "anchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990001",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990002",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "common",
+          "parent": "anchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990003",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "old",
+          "parent": "common",
+          "height": 1000002,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990004",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990005",
+              "version": 2,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990006",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "replacement",
+          "parent": "common",
+          "height": 1000002,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990004",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "newtip",
+          "parent": "replacement",
+          "height": 1000003,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "0000000000000000000000000000000000000000000000000000000000000007",
+              "version": 3,
+              "coinbase": false
+            }
+          ]
+        }
+      ],
+      "acceptedTipObservations": [
+        {
+          "tip": "common",
+          "expectedVolume": 1
+        },
+        {
+          "tip": "old",
+          "expectedVolume": 4
+        },
+        {
+          "tip": "replacement",
+          "expectedVolume": 2
+        },
+        {
+          "tip": "newtip",
+          "expectedVolume": 3
+        }
+      ]
+    },
+    {
+      "id": "replacement-anchor-restarts-count-from-new-anchor",
+      "blocks": [
+        {
+          "blockId": "anchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990001",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990002",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "oldtip",
+          "parent": "anchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990003",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990004",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "newanchor",
+          "parent": null,
+          "height": 1000000,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990005",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990006",
+              "version": 1,
+              "coinbase": false
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990007",
+              "version": 1,
+              "coinbase": false
+            }
+          ]
+        },
+        {
+          "blockId": "newtip",
+          "parent": "newanchor",
+          "height": 1000001,
+          "transactions": [
+            {
+              "txid": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "version": 2,
+              "coinbase": true
+            },
+            {
+              "txid": "9999999999999999999999999999999999999999999999999999999999990008",
+              "version": 2,
+              "coinbase": false
+            }
+          ]
+        }
+      ],
+      "acceptedTipObservations": [
+        {
+          "tip": "oldtip",
+          "expectedVolume": 2
+        },
+        {
+          "tip": "newanchor",
+          "expectedVolume": 0
+        },
+        {
+          "tip": "newtip",
+          "expectedVolume": 1
+        }
+      ]
+    }
+  ],
+  "volumeCountSemantics": "Synthetic decoded block entries and accepted-tip changes test count units, anchor exclusion, coinbase exclusion, all-version/unfiltered accumulation and reorganization recounting. Observation contexts label counting invariance only; they do not assert a complete calendar/notice/stage trace or consensus-valid transactions. Each observation is recomputed from its accepted ancestry; local caches, mempool and rejected entries have no authority."
 }

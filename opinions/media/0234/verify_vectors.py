@@ -225,6 +225,44 @@ for c in vectors['gateCases']:
     assert candidate == c['expectedCandidate'], c
 totals['time_and_volume_boundary_cases'] = len(vectors['gateCases'])
 
+# Count decoded block entries independently of filtering and ledger fixtures.
+# Tip changes exercise rollback/addition as well as fresh ancestry reconstruction.
+volume_observations = 0
+for c in vectors['volumeCountCases']:
+    blocks = {b['blockId']: b for b in c['blocks']}
+    assert len(blocks) == len(c['blocks']), c['id']
+    for b in blocks.values():
+        assert sum(tx['coinbase'] for tx in b['transactions']) == 1, b
+    def counted_path(tip):
+        path = []
+        b = blocks[tip]
+        while b['height'] > 1000000:
+            path.append(b['blockId'])
+            parent = blocks[b['parent']]
+            assert parent['height'] == b['height'] - 1, b
+            b = parent
+        assert b['height'] == 1000000, b
+        return b['blockId'], list(reversed(path))
+    def contribution(block_id):
+        return sum(1 for tx in blocks[block_id]['transactions'] if not tx['coinbase'])
+    prior_anchor, prior_path, rolling = None, [], 0
+    for observation in c['acceptedTipObservations']:
+        anchor, path = counted_path(observation['tip'])
+        if anchor != prior_anchor:
+            rolling, prior_path = 0, []
+        common = 0
+        while common < min(len(path), len(prior_path)) and path[common] == prior_path[common]:
+            common += 1
+        rolling -= sum(contribution(b) for b in prior_path[common:])
+        rolling += sum(contribution(b) for b in path[common:])
+        # Fresh reconstruction uses total block entries minus one coinbase each.
+        reconstructed = sum(len(blocks[b]['transactions']) - 1 for b in path)
+        assert rolling == reconstructed == observation['expectedVolume'], (c['id'], observation, rolling)
+        prior_anchor, prior_path = anchor, path
+        volume_observations += 1
+totals['block_volume_count_traces'] = len(vectors['volumeCountCases'])
+totals['block_volume_count_observations'] = volume_observations
+
 # Cross-check both Markdown tables and all approximate display calculations.
 table1 = [line for line in spec.splitlines() if re.match(r'\| \d+ \|', line)][:28]
 for r, line in zip(rows, table1):
