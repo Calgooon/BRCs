@@ -2319,6 +2319,18 @@
         1,
         1,
         null
+      ],
+      "expectedNoticeRoundActive": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "expectedRemainingMtpSeconds": [
+        1209600,
+        1,
+        0,
+        null
       ]
     },
     {
@@ -2559,6 +2571,63 @@
         null
       ],
       "expectedLateJoinStage": 1
+    },
+    {
+      "id": "replacement-branch-already-completed-round-no-publication-duty",
+      "anchor": "2028-10-20T00:00:00Z",
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "old-view-with-no-eligible-stage",
+          "mtp": "2035-05-10T00:00:00Z",
+          "volume": "0"
+        }
+      ],
+      "acceptedBlocks": [
+        {
+          "blockId": "new-trigger",
+          "mtp": "2035-04-20T00:00:00Z",
+          "volume": "2000000"
+        },
+        {
+          "blockId": "new-deadline",
+          "mtp": "2035-05-04T00:00:00Z",
+          "volume": "2000000"
+        },
+        {
+          "blockId": "new-activation-child",
+          "mtp": "2035-05-04T00:00:01Z",
+          "volume": "2000000"
+        }
+      ],
+      "expectedStages": [0, 0, 5],
+      "expectedPendingTargets": [5, 5, null],
+      "expectedNoticeRoundActive": [true, true, false],
+      "expectedRemainingMtpSeconds": [1209600, 0, null],
+      "expectedLateJoinStage": 5,
+      "note": "The replacement branch is first observed on May 10. Its round already completed in chain history; discovery and provider publication do not affect the result."
+    },
+    {
+      "id": "late-observation-of-elapsed-round-still-awaits-child",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
+        {
+          "blockId": "trigger",
+          "mtp": "2035-04-20T00:00:00Z",
+          "volume": "2000000"
+        },
+        {
+          "blockId": "deadline-tip",
+          "mtp": "2035-05-04T00:00:00Z",
+          "volume": "2000000"
+        }
+      ],
+      "expectedStages": [0, 0],
+      "expectedPendingTargets": [5, 5],
+      "expectedNoticeRoundActive": [true, true],
+      "expectedRemainingMtpSeconds": [1209600, 0],
+      "expectedFinalDeadline": "2035-05-04T00:00:00Z",
+      "expectedLateJoinStage": 0,
+      "note": "Even if first observed on May 10, wall-clock time cannot activate the target without its accepted child."
     },
     {
       "id": "orphaned-anchor-profile-inactive",

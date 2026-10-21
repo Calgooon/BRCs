@@ -234,7 +234,7 @@ for c in vectors['noticeRoundCases']:
     # cannot modify an already scheduled event.
     pending = None
     activate_next = None
-    stages, targets = [], []
+    stages, targets, notice_active, remaining_seconds = [], [], [], []
     for b in c['acceptedBlocks']:
         if activate_next is not None:
             current = activate_next
@@ -251,8 +251,15 @@ for c in vectors['noticeRoundCases']:
             activate_next = pending['target']
         stages.append(current)
         targets.append(pending['target'] if pending else None)
+        notice_active.append(pending is not None)
+        remaining_seconds.append(max(0, int((pending['deadline'] - t).total_seconds()))
+                                 if pending else None)
     assert stages == c['expectedStages'], (c['id'], stages)
     assert targets == c['expectedPendingTargets'], (c['id'], targets)
+    if 'expectedNoticeRoundActive' in c:
+        assert notice_active == c['expectedNoticeRoundActive'], (c['id'], notice_active)
+    if 'expectedRemainingMtpSeconds' in c:
+        assert remaining_seconds == c['expectedRemainingMtpSeconds'], (c['id'], remaining_seconds)
     if 'expectedFinalDeadline' in c:
         assert pending['deadline'] == parse_iso(c['expectedFinalDeadline'])
     if 'expectedLateJoinStage' in c:
