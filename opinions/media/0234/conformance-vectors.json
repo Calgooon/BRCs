@@ -4428,6 +4428,127 @@
       "expected": {
         "state": "unavailable"
       }
+    },
+    {
+      "id": "repeated-circulation-inflates-filtered-ledger-without-creating-coins",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "circulation-0",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "circulation-1",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [
+                {
+                  "txid": "99a0000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "99"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "circulation-2",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+                  "index": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "98"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "circulation-3",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "99a0000000000000000000000000000000000000000000000000000000000003",
+                  "index": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "97"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "circulation-4",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000005",
+              "inputs": [
+                {
+                  "txid": "1a00000000000000000000000000000000000000000000000000000000000004",
+                  "index": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "96"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "294",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      },
+      "expectedActualUnspentAmount": "96",
+      "note": "Nonqualifying spends leave old admitted outpoints; qualifying returns admit new outputs. This is a synthetic decoded-effect trace, not a fee-policy or signed-transaction fixture."
     }
   ],
   "balanceTraceSemantics": "Stages 0-12 debit all valid accepted confirmed spends of admitted outputs; stages 13+ debit qualifying-TXID spends and may ignore other spends. applyExtraValidatedSpends opts into additional accepted-spend observations. Earlier debits persist. Old/orphaned and mempool observations do not govern accepted state. All-spend UTXO completeness and qualifying-stream completeness are separate promises. These are decoded-effect tests, not signed-transaction proofs.",

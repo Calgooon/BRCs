@@ -311,6 +311,9 @@ for c in vectors['balanceTraceCases']:
                           snapshotKind='current' if snapshot_id == c['acceptedBlocks'][-1]['blockId']
                           else 'historical')
     assert result == c['expected'], (c['id'], result, c['expected'])
+    if 'expectedActualUnspentAmount' in c:
+        actual_amount = sum(int(o['amount']) for o in outputs.values() if get_key(o) == query)
+        assert str(actual_amount) == c['expectedActualUnspentAmount'], (c['id'], actual_amount)
 totals['accepted_chain_balance_traces'] = len(vectors['balanceTraceCases'])
 
 for c in vectors['recoveryRetentionCases']:
