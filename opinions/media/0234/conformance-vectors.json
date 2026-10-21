@@ -2253,33 +2253,45 @@
     {
       "id": "script-bytes-0",
       "lockingScript": "",
-      "expectedHash160": "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"
+      "expectedHash160": "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb",
+      "nativeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "nativeReversedSha256": "55b852781b9995a44c939b64e441ae2724b96f99c8f4fb9a141cfc9842c4b0e3"
     },
     {
       "id": "script-bytes-1",
       "lockingScript": "51",
-      "expectedHash160": "da1745e9b549bd0bfa1a569971c77eba30cd5a4b"
+      "expectedHash160": "da1745e9b549bd0bfa1a569971c77eba30cd5a4b",
+      "nativeSha256": "4ae81572f06e1b88fd5ced7a1a000945432e83e1551e6f721ee9c00b8cc33260",
+      "nativeReversedSha256": "6032c38c0bc0e91e726f1e55e1832e434509001a7aed5cfd881b6ef07215e84a"
     },
     {
       "id": "script-bytes-2",
       "lockingScript": "6a",
-      "expectedHash160": "41c98a140039816273e50db317422c11c2bfcc88"
+      "expectedHash160": "41c98a140039816273e50db317422c11c2bfcc88",
+      "nativeSha256": "189f40034be7a199f1fa9891668ee3ab6049f82d38c68be70f596eab2e1857b7",
+      "nativeReversedSha256": "b757182eab6e590fe78bc6382df84960abe38e669198faf199a1e74b03409f18"
     },
     {
       "id": "script-bytes-3",
       "lockingScript": "76a914000000000000000000000000000000000000000088ac",
-      "expectedHash160": "fc696d1f3995bc7d9c8e63839d266518658481f5"
+      "expectedHash160": "fc696d1f3995bc7d9c8e63839d266518658481f5",
+      "nativeSha256": "75def5fcc8bd1a6e9718970604e2728eb114750f6cfd2a2e2cca9d319679b8ac",
+      "nativeReversedSha256": "acb87996319dca2c2e2afd6c0f7514b18e72e204069718976e1abdc8fcf5de75"
     },
     {
       "id": "script-bytes-4",
       "lockingScript": "04010203047551",
-      "expectedHash160": "2d2177457f085505f8d0cc204cc7d18c1229d033"
+      "expectedHash160": "2d2177457f085505f8d0cc204cc7d18c1229d033",
+      "nativeSha256": "0c759c06853d4035a3f2535f626657ac76cdf15bd38a874981fa4b09d2072c32",
+      "nativeReversedSha256": "322c07d2094bfa8149878ad35bf1cd76ac5766625f53f2a335403d85069c750c"
     },
     {
       "id": "stage-13-test-script",
       "lockingScript": "04892f00007551",
       "expectedHash160": "7773d1d47a0bceb825f0298f6abfc25b57365e20",
-      "note": "Anyone-can-spend synthetic test script; not a recommendation for funds."
+      "note": "Anyone-can-spend synthetic test script; not a recommendation for funds.",
+      "nativeSha256": "bb5e278c72ec00a5363bd65f0f6b30642fffbfa3b16b05bbfc95afaadb9e3003",
+      "nativeReversedSha256": "03309edbaaaf95fcbb056bb1a3bfff2f64306b0f5fd63b36a500ec728c275ebb"
     }
   ],
   "noticeRoundCases": [
@@ -4723,5 +4735,6 @@
       "expectedDisclosureRequirementMet": true
     }
   ],
-  "recoveryRetentionSemantics": "100 accepted descendants is a SHOULD minimum, not an absolute prohibition or a purge instruction. Operators may depart with published policy and risk disclosure. Live promised state and ongoing supported recovery remain mandatory protections; unverified/orphaned anchors cannot authorize a removal decision. Missing restored data requires unavailable until reconstructed."
+  "recoveryRetentionSemantics": "100 accepted descendants is a SHOULD minimum, not an absolute prohibition or a purge instruction. Operators may depart with published policy and risk disclosure. Live promised state and ongoing supported recovery remain mandatory protections; unverified/orphaned anchors cannot authorize a removal decision. Missing restored data requires unavailable until reconstructed.",
+  "notation": "JSON keys, stages, snapshots, ledger-view names and logical result classifications in these fixtures describe decoded internal test state, not mandatory request/response formats. Conformance concerns required data availability and spend accounting; no new API, metadata fields or status codes are required."
 }

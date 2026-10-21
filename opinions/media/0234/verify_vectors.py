@@ -94,6 +94,10 @@ for c in vectors['scriptHashPredicateCases']:
 totals['script_hash_predicate_cases'] = len(vectors['scriptHashPredicateCases'])
 for c in vectors['scriptHashMappingCases']:
     assert script_hash(c['lockingScript']) == c['expectedHash160'], c
+    native_digest = bytes.fromhex(c['nativeSha256'])
+    assert hashlib.sha256(bytes.fromhex(c['lockingScript'])).digest() == native_digest, c
+    assert hashlib.new('ripemd160', native_digest).hexdigest() == c['expectedHash160'], c
+    assert bytes.fromhex(c['nativeReversedSha256'])[::-1] == native_digest, c
 totals['script_hash_mapping_cases'] = len(vectors['scriptHashMappingCases'])
 
 # Independent exact count: binary search the monotone checked payload for
