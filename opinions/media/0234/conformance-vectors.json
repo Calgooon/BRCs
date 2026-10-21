@@ -1,7 +1,6 @@
 {
   "brcNumber": 234,
   "profileVersion": 1,
-  "description": "Conformance examples for profile logic. Block identities and decoded transaction effects are synthetic inputs, not mainnet block proofs or signed transactions. Predicate addresses are checksum-valid synthetic HASH160 encodings; no private-key ownership is asserted. Implementations must independently validate their actual chain and transaction data.",
   "addressPredicateCases": [
     {
       "id": "address-stage-0-positive",
@@ -1711,236 +1710,880 @@
       "expectedCandidate": 26
     }
   ],
-  "acceptedChainCases": [
+  "description": "Synthetic conformance inputs for the free-index contract. Hash and address predicate fixtures do not assert ownership or a spendable preimage. Decoded transactions, blocks, MTP and stage inputs exercise profile logic, not signatures, real blocks, consensus validity or deployment. Only acceptedBlocks affect state; observed orphan/rejected/mempool lists are audit observations.",
+  "recommendedRecoveryRetentionBlocks": 100,
+  "scriptHashDefinition": "RIPEMD160(SHA256(exact serialized locking-script bytes)), displayed in digest-byte order.",
+  "scriptHashPredicateCases": [
     {
-      "id": "following-block-boundary",
-      "events": [
+      "id": "script-stage-0-low",
+      "stage": 0,
+      "scriptHash": "0000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-0-high",
+      "stage": 0,
+      "scriptHash": "ffffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-1-low",
+      "stage": 1,
+      "scriptHash": "0000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-1-high",
+      "stage": 1,
+      "scriptHash": "7fffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-1-last-bit-flip",
+      "stage": 1,
+      "scriptHash": "8000000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-2-low",
+      "stage": 2,
+      "scriptHash": "4000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-2-high",
+      "stage": 2,
+      "scriptHash": "7fffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-2-last-bit-flip",
+      "stage": 2,
+      "scriptHash": "0000000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-3-low",
+      "stage": 3,
+      "scriptHash": "6000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-3-high",
+      "stage": 3,
+      "scriptHash": "7fffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-3-last-bit-flip",
+      "stage": 3,
+      "scriptHash": "4000000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-4-low",
+      "stage": 4,
+      "scriptHash": "7000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-4-high",
+      "stage": 4,
+      "scriptHash": "7fffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-4-last-bit-flip",
+      "stage": 4,
+      "scriptHash": "6000000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-5-low",
+      "stage": 5,
+      "scriptHash": "7000000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-5-high",
+      "stage": 5,
+      "scriptHash": "77ffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-5-last-bit-flip",
+      "stage": 5,
+      "scriptHash": "7800000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-6-low",
+      "stage": 6,
+      "scriptHash": "7400000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-6-high",
+      "stage": 6,
+      "scriptHash": "77ffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-6-last-bit-flip",
+      "stage": 6,
+      "scriptHash": "7000000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-7-low",
+      "stage": 7,
+      "scriptHash": "7600000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-7-high",
+      "stage": 7,
+      "scriptHash": "77ffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-7-last-bit-flip",
+      "stage": 7,
+      "scriptHash": "7400000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-8-low",
+      "stage": 8,
+      "scriptHash": "7700000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-8-high",
+      "stage": 8,
+      "scriptHash": "77ffffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-8-last-bit-flip",
+      "stage": 8,
+      "scriptHash": "7600000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-9-low",
+      "stage": 9,
+      "scriptHash": "7700000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-9-high",
+      "stage": 9,
+      "scriptHash": "777fffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-9-last-bit-flip",
+      "stage": 9,
+      "scriptHash": "7780000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-10-low",
+      "stage": 10,
+      "scriptHash": "7740000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-10-high",
+      "stage": 10,
+      "scriptHash": "777fffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-10-last-bit-flip",
+      "stage": 10,
+      "scriptHash": "7700000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-11-low",
+      "stage": 11,
+      "scriptHash": "7760000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-11-high",
+      "stage": 11,
+      "scriptHash": "777fffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-11-last-bit-flip",
+      "stage": 11,
+      "scriptHash": "7740000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-12-low",
+      "stage": 12,
+      "scriptHash": "7770000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-12-high",
+      "stage": 12,
+      "scriptHash": "777fffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-12-last-bit-flip",
+      "stage": 12,
+      "scriptHash": "7760000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-13-low",
+      "stage": 13,
+      "scriptHash": "7770000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-13-high",
+      "stage": 13,
+      "scriptHash": "7777ffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-13-last-bit-flip",
+      "stage": 13,
+      "scriptHash": "7778000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-14-low",
+      "stage": 14,
+      "scriptHash": "7774000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-14-high",
+      "stage": 14,
+      "scriptHash": "7777ffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-14-last-bit-flip",
+      "stage": 14,
+      "scriptHash": "7770000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-15-low",
+      "stage": 15,
+      "scriptHash": "7776000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-15-high",
+      "stage": 15,
+      "scriptHash": "7777ffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-15-last-bit-flip",
+      "stage": 15,
+      "scriptHash": "7774000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-16-low",
+      "stage": 16,
+      "scriptHash": "7777000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-16-high",
+      "stage": 16,
+      "scriptHash": "7777ffffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-16-last-bit-flip",
+      "stage": 16,
+      "scriptHash": "7776000000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-17-low",
+      "stage": 17,
+      "scriptHash": "7777000000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-17-high",
+      "stage": 17,
+      "scriptHash": "77777fffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-17-last-bit-flip",
+      "stage": 17,
+      "scriptHash": "7777800000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-18-low",
+      "stage": 18,
+      "scriptHash": "7777760000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-18-high",
+      "stage": 18,
+      "scriptHash": "777777ffffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-18-last-bit-flip",
+      "stage": 18,
+      "scriptHash": "7777740000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-19-low",
+      "stage": 19,
+      "scriptHash": "7777777000000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-19-high",
+      "stage": 19,
+      "scriptHash": "7777777fffffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-19-last-bit-flip",
+      "stage": 19,
+      "scriptHash": "7777776000000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-20-low",
+      "stage": 20,
+      "scriptHash": "7777777740000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-20-high",
+      "stage": 20,
+      "scriptHash": "777777777fffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-20-last-bit-flip",
+      "stage": 20,
+      "scriptHash": "7777777700000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-21-low",
+      "stage": 21,
+      "scriptHash": "7777777777000000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-21-high",
+      "stage": 21,
+      "scriptHash": "7777777777ffffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-21-last-bit-flip",
+      "stage": 21,
+      "scriptHash": "7777777776000000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-22-low",
+      "stage": 22,
+      "scriptHash": "7777777777740000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-22-high",
+      "stage": 22,
+      "scriptHash": "777777777777ffffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-22-last-bit-flip",
+      "stage": 22,
+      "scriptHash": "7777777777700000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-23-low",
+      "stage": 23,
+      "scriptHash": "7777777777777000000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-23-high",
+      "stage": 23,
+      "scriptHash": "7777777777777fffffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-23-last-bit-flip",
+      "stage": 23,
+      "scriptHash": "7777777777776000000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-24-low",
+      "stage": 24,
+      "scriptHash": "7777777777777740000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-24-high",
+      "stage": 24,
+      "scriptHash": "777777777777777fffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-24-last-bit-flip",
+      "stage": 24,
+      "scriptHash": "7777777777777700000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-25-low",
+      "stage": 25,
+      "scriptHash": "7777777777777777000000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-25-high",
+      "stage": 25,
+      "scriptHash": "7777777777777777ffffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-25-last-bit-flip",
+      "stage": 25,
+      "scriptHash": "7777777777777776000000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-26-low",
+      "stage": 26,
+      "scriptHash": "7777777777777777700000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-26-high",
+      "stage": 26,
+      "scriptHash": "777777777777777777ffffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-26-last-bit-flip",
+      "stage": 26,
+      "scriptHash": "7777777777777777780000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-stage-27-low",
+      "stage": 27,
+      "scriptHash": "7777777777777777776000000000000000000000",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-27-high",
+      "stage": 27,
+      "scriptHash": "7777777777777777777fffffffffffffffffffff",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-stage-27-last-bit-flip",
+      "stage": 27,
+      "scriptHash": "7777777777777777774000000000000000000000",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-uppercase-normalization",
+      "stage": 27,
+      "scriptHash": "7777777777777777777AAAAAAAAAAAAAAAAAAAAA",
+      "expectedMatches": true
+    },
+    {
+      "id": "script-malformed-0",
+      "stage": 0,
+      "scriptHash": "777777777777777777777777777777777777777",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-malformed-1",
+      "stage": 0,
+      "scriptHash": "77777777777777777777777777777777777777777",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-malformed-2",
+      "stage": 0,
+      "scriptHash": "0x7777777777777777777777777777777777777777",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-malformed-3",
+      "stage": 0,
+      "scriptHash": " 7777777777777777777777777777777777777777",
+      "expectedMatches": false
+    },
+    {
+      "id": "script-malformed-4",
+      "stage": 0,
+      "scriptHash": "gggggggggggggggggggggggggggggggggggggggg",
+      "expectedMatches": false
+    }
+  ],
+  "scriptHashMappingCases": [
+    {
+      "id": "script-bytes-0",
+      "lockingScript": "",
+      "expectedHash160": "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"
+    },
+    {
+      "id": "script-bytes-1",
+      "lockingScript": "51",
+      "expectedHash160": "da1745e9b549bd0bfa1a569971c77eba30cd5a4b"
+    },
+    {
+      "id": "script-bytes-2",
+      "lockingScript": "6a",
+      "expectedHash160": "41c98a140039816273e50db317422c11c2bfcc88"
+    },
+    {
+      "id": "script-bytes-3",
+      "lockingScript": "76a914000000000000000000000000000000000000000088ac",
+      "expectedHash160": "fc696d1f3995bc7d9c8e63839d266518658481f5"
+    },
+    {
+      "id": "script-bytes-4",
+      "lockingScript": "04010203047551",
+      "expectedHash160": "2d2177457f085505f8d0cc204cc7d18c1229d033"
+    },
+    {
+      "id": "stage-13-test-script",
+      "lockingScript": "04892f00007551",
+      "expectedHash160": "7773d1d47a0bceb825f0298f6abfc25b57365e20",
+      "note": "Anyone-can-spend synthetic test script; not a recommendation for funds."
+    }
+  ],
+  "noticeRoundCases": [
+    {
+      "id": "fresh-notice-exact-deadline-and-following-child",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
         {
-          "kind": "accept",
-          "block": "A",
-          "parentCandidate": 0,
-          "candidate": 1
+          "blockId": "trigger",
+          "mtp": "2029-04-20T00:00:00Z",
+          "volume": "400000"
         },
         {
-          "kind": "accept",
-          "block": "B",
-          "parent": "A",
-          "parentCandidate": 1,
-          "candidate": 1
+          "blockId": "one-second-early",
+          "mtp": "2029-05-03T23:59:59Z",
+          "volume": "400000"
+        },
+        {
+          "blockId": "deadline",
+          "mtp": "2029-05-04T00:00:00Z",
+          "volume": "400000"
+        },
+        {
+          "blockId": "effective-child",
+          "mtp": "2029-05-04T00:00:01Z",
+          "volume": "400000"
         }
       ],
-      "expectedEventStages": [
+      "expectedStages": [
+        0,
+        0,
         0,
         1
       ],
-      "expectedActiveStage": 1
+      "expectedPendingTargets": [
+        1,
+        1,
+        1,
+        null
+      ]
     },
     {
-      "id": "candidate-does-not-self-apply",
-      "events": [
+      "id": "direct-jump-freezes-highest-eligible-target",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
         {
-          "kind": "accept",
-          "block": "A",
-          "parentCandidate": 0,
-          "candidate": 27
-        }
-      ],
-      "expectedEventStages": [
-        0
-      ],
-      "expectedActiveStage": 0,
-      "expectedPendingStage": 27
-    },
-    {
-      "id": "direct-jump-on-child",
-      "events": [
-        {
-          "kind": "accept",
-          "block": "A",
-          "parentCandidate": 0,
-          "candidate": 17
+          "blockId": "trigger",
+          "mtp": "2035-04-20T00:00:00Z",
+          "volume": "8192000000"
         },
         {
-          "kind": "accept",
-          "block": "B",
-          "parent": "A",
-          "parentCandidate": 17,
-          "candidate": 17
+          "blockId": "deadline",
+          "mtp": "2035-05-04T00:00:00Z",
+          "volume": "8192000000"
+        },
+        {
+          "blockId": "child",
+          "mtp": "2035-05-04T00:00:01Z",
+          "volume": "8192000000"
         }
       ],
-      "expectedEventStages": [
+      "expectedStages": [
         0,
-        17
+        0,
+        27
       ],
-      "expectedActiveStage": 17
-    },
-    {
-      "id": "rejected-branch-cannot-raise-stage",
-      "acceptedTipParentCandidate": 0,
-      "observedRejectedBranchCandidate": 27,
-      "expectedActiveStage": 0
-    },
-    {
-      "id": "reorg-lowers-activated-stage",
-      "oldAcceptedTipParentCandidate": 17,
-      "replacementAcceptedTipParentCandidate": 0,
-      "expectedActiveStage": 0,
-      "expectedPendingStage": 0,
-      "expectedHistoricalCoverage": "rebuild all newly eligible records, not only replacement blocks"
-    },
-    {
-      "id": "orphaned-pending-trigger-not-carried",
-      "oldAcceptedTipParentCandidate": 0,
-      "oldTipCandidate": 17,
-      "replacementAcceptedTipParentCandidate": 0,
-      "replacementTipCandidate": 0,
-      "expectedActiveStage": 0,
-      "expectedPendingStage": 0
-    },
-    {
-      "id": "lost-ancestor-checkpoint",
-      "checkpointOnAcceptedChain": false,
-      "expectedState": "unavailable",
-      "expectedActions": [
-        "undo rejected effects",
-        "replay accepted branch",
-        "rebuild required coverage"
-      ]
-    }
-  ],
-  "balanceCases": [
-    {
-      "id": "ignored-incoming",
-      "eventStage": 11,
-      "fundingTxidPrefix": "9a",
-      "amount": "7",
-      "previousCovered": "100",
-      "expectedCovered": "100",
-      "expectedDisqualified": false
-    },
-    {
-      "id": "grandfather-funding",
-      "fundingEventStage": 5,
-      "fundingTxidPrefix": "9a",
-      "laterActiveStage": 11,
-      "unspentAmount": "100",
-      "expectedCovered": "100",
-      "expectedGeneralizedTxidLookup": "outside_coverage",
-      "expectedSpendWatch": true
-    },
-    {
-      "id": "historical-compliant-spend",
-      "spendEventStage": 5,
-      "spendTxidPrefix": "9b",
-      "laterActiveStage": 11,
-      "expectedDisqualified": false
-    },
-    {
-      "id": "bad-spend-ignored-output",
-      "eventStage": 11,
-      "spendingTxidPrefix": "9b",
-      "spendsCoveredOutput": false,
-      "spendsIgnoredOutput": true,
-      "expectedDisqualified": false
-    },
-    {
-      "id": "bad-unconfirmed-spend-covered-output",
-      "eventStage": 11,
-      "spendingTxidPrefix": "9b",
-      "spendsCoveredOutput": true,
-      "confirmation": "mempool-only",
-      "expectedDisqualified": false
-    },
-    {
-      "id": "bad-confirmed-spend-covered-output",
-      "eventStage": 11,
-      "spendingTxidPrefix": "9b",
-      "spendsCoveredOutput": true,
-      "confirmation": "accepted-block",
-      "expectedState": "address_disqualified"
-    },
-    {
-      "id": "mixed-input-bad-spend",
-      "eventStage": 11,
-      "spendingTxidPrefix": "9b",
-      "spendsCoveredOutput": true,
-      "spendsIgnoredOutput": true,
-      "confirmation": "accepted-block",
-      "expectedState": "address_disqualified"
-    },
-    {
-      "id": "orphaned-disqualification-restored",
-      "oldConfirmationAccepted": false,
-      "replacementBranchHasDisqualifyingSpend": false,
-      "reconstructionComplete": true,
-      "expectedState": "covered",
-      "expectedDisqualified": false
-    },
-    {
-      "id": "orphaned-disqualification-watch-gap",
-      "oldConfirmationAccepted": false,
-      "replacementBranchHasDisqualifyingSpend": false,
-      "reconstructionComplete": false,
-      "expectedState": "unavailable",
-      "mustNotReturn": [
-        "address_disqualified based on orphan",
-        "covered zero",
-        "stale amount"
+      "expectedPendingTargets": [
+        27,
+        27,
+        null
       ]
     },
     {
-      "id": "remined-same-spend-lower-rule",
-      "oldEventStage": 11,
-      "replacementEventStage": 5,
-      "spendingTxidPrefix": "9b",
-      "spendsCoveredOutput": true,
-      "confirmation": "accepted-replacement-block",
-      "expectedDisqualified": false
+      "id": "higher-target-needs-a-second-fresh-round",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
+        {
+          "blockId": "target-five",
+          "mtp": "2035-04-20T00:00:00Z",
+          "volume": "2000000"
+        },
+        {
+          "blockId": "higher-candidate",
+          "mtp": "2035-04-21T00:00:00Z",
+          "volume": "8192000000"
+        },
+        {
+          "blockId": "first-deadline",
+          "mtp": "2035-05-04T00:00:00Z",
+          "volume": "8192000000"
+        },
+        {
+          "blockId": "activate-five-and-notice-27",
+          "mtp": "2035-05-04T00:00:01Z",
+          "volume": "8192000000"
+        },
+        {
+          "blockId": "second-deadline",
+          "mtp": "2035-05-18T00:00:01Z",
+          "volume": "8192000000"
+        },
+        {
+          "blockId": "activate-27",
+          "mtp": "2035-05-18T00:00:02Z",
+          "volume": "8192000000"
+        }
+      ],
+      "expectedStages": [
+        0,
+        0,
+        0,
+        5,
+        5,
+        27
+      ],
+      "expectedPendingTargets": [
+        5,
+        5,
+        5,
+        27,
+        27,
+        null
+      ]
     },
     {
-      "id": "remined-same-spend-still-bad",
-      "oldEventStage": 11,
-      "replacementEventStage": 11,
-      "spendingTxidPrefix": "9b",
-      "spendsCoveredOutput": true,
-      "confirmation": "accepted-replacement-block",
-      "expectedState": "address_disqualified"
+      "id": "time-alone-without-volume-cannot-start-notice",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
+        {
+          "blockId": "late-no-volume",
+          "mtp": "2035-07-29T00:00:00Z",
+          "volume": "0"
+        }
+      ],
+      "expectedStages": [
+        0
+      ],
+      "expectedPendingTargets": [
+        null
+      ]
     },
     {
-      "id": "remined-funding-now-ignored",
-      "oldFundingEventStage": 5,
-      "replacementFundingEventStage": 11,
-      "fundingTxidPrefix": "9a",
-      "oldAdmissionBlockAccepted": false,
-      "expectedCovered": "0",
-      "expectedDisqualified": false
+      "id": "volume-alone-before-calendar-cannot-start-notice",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
+        {
+          "blockId": "early-high-volume",
+          "mtp": "2029-04-19T23:59:59Z",
+          "volume": "8192000000"
+        }
+      ],
+      "expectedStages": [
+        0
+      ],
+      "expectedPendingTargets": [
+        null
+      ]
     },
     {
-      "id": "prefix-loss-is-not-zero",
-      "address": "1CDW1111111111111111111111113dpUUW",
-      "oldStage": 5,
-      "newStage": 6,
-      "expectedState": "outside_coverage",
-      "mustNotReturn": "covered zero as a substitute"
+      "id": "rejected-branch-does-not-invent-notice",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
+        {
+          "blockId": "accepted",
+          "mtp": "2029-04-19T23:59:59Z",
+          "volume": "0"
+        }
+      ],
+      "observedRejectedBlocks": [
+        {
+          "blockId": "rejected-high-stage",
+          "mtp": "2035-07-29T00:00:00Z",
+          "volume": "8192000000"
+        }
+      ],
+      "expectedStages": [
+        0
+      ],
+      "expectedPendingTargets": [
+        null
+      ]
     },
     {
-      "id": "reorg-restores-address-prefix",
-      "address": "1CDW1111111111111111111111113dpUUW",
-      "oldStage": 6,
-      "replacementStage": 5,
-      "reconstructionComplete": true,
-      "expectedMayRestoreCoveredBalance": true
+      "id": "orphaned-active-stage-and-notice-are-undone",
+      "anchor": "2028-10-20T00:00:00Z",
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "old-trigger",
+          "mtp": "2029-04-20T00:00:00Z",
+          "volume": "400000"
+        },
+        {
+          "blockId": "old-deadline",
+          "mtp": "2029-05-04T00:00:00Z",
+          "volume": "400000"
+        },
+        {
+          "blockId": "old-active",
+          "mtp": "2029-05-04T00:00:01Z",
+          "volume": "400000"
+        }
+      ],
+      "acceptedBlocks": [
+        {
+          "blockId": "replacement",
+          "mtp": "2029-04-19T23:59:59Z",
+          "volume": "400000"
+        }
+      ],
+      "expectedStages": [
+        0
+      ],
+      "expectedPendingTargets": [
+        null
+      ]
     },
     {
-      "id": "new-deposit-does-not-reset-current-disqualification",
-      "acceptedHistoryHasDisqualifyingSpend": true,
-      "newFundingPassesCurrentFilter": true,
-      "expectedState": "address_disqualified"
+      "id": "replacement-notice-does-not-inherit-old-elapsed-time",
+      "anchor": "2028-10-20T00:00:00Z",
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "old-trigger",
+          "mtp": "2035-04-20T00:00:00Z",
+          "volume": "8192000000"
+        }
+      ],
+      "acceptedBlocks": [
+        {
+          "blockId": "new-trigger",
+          "mtp": "2035-04-30T00:00:00Z",
+          "volume": "8192000000"
+        },
+        {
+          "blockId": "old-deadline-is-too-early",
+          "mtp": "2035-05-04T00:00:00Z",
+          "volume": "8192000000"
+        }
+      ],
+      "expectedStages": [
+        0,
+        0
+      ],
+      "expectedPendingTargets": [
+        27,
+        27
+      ],
+      "expectedFinalDeadline": "2035-05-14T00:00:00Z"
+    },
+    {
+      "id": "same-chain-late-join-and-restart-replay",
+      "anchor": "2028-10-20T00:00:00Z",
+      "acceptedBlocks": [
+        {
+          "blockId": "a",
+          "mtp": "2029-04-20T00:00:00Z",
+          "volume": "400000"
+        },
+        {
+          "blockId": "b",
+          "mtp": "2029-05-04T00:00:00Z",
+          "volume": "400000"
+        },
+        {
+          "blockId": "c",
+          "mtp": "2029-05-04T00:00:01Z",
+          "volume": "400000"
+        }
+      ],
+      "expectedStages": [
+        0,
+        0,
+        1
+      ],
+      "expectedPendingTargets": [
+        1,
+        1,
+        null
+      ],
+      "expectedLateJoinStage": 1
+    },
+    {
+      "id": "orphaned-anchor-profile-inactive",
+      "anchor": "2028-10-20T00:00:00Z",
+      "anchorOnAcceptedChain": false,
+      "acceptedBlocks": [
+        {
+          "blockId": "pre-anchor-view",
+          "mtp": "2035-04-20T00:00:00Z",
+          "volume": "8192000000"
+        }
+      ],
+      "expectedStages": [
+        0
+      ],
+      "expectedPendingTargets": [
+        null
+      ]
     }
   ],
   "balanceTraceCases": [
     {
-      "id": "trace-grandfather",
+      "id": "grandfathered-funding-survives-txid-tightening",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -1952,6 +2595,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -1962,6 +2606,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -1969,20 +2614,23 @@
           ]
         },
         {
-          "blockId": "tightening",
+          "blockId": "later",
           "eventStage": 11,
           "transactions": []
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
         "state": "covered",
-        "amount": "100"
+        "amount": "100",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
       }
     },
     {
-      "id": "trace-ignored-new-deposit",
+      "id": "nonqualifying-incoming-ignored",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -1994,6 +2642,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2004,6 +2653,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2011,36 +2661,35 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
-        },
-        {
-          "blockId": "new-ignored",
-          "eventStage": 11,
+          "blockId": "later",
+          "eventStage": 13,
           "transactions": [
             {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000008",
+              "txid": "1b00000000000000000000000000000000000000000000000000000000000006",
               "inputs": [],
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "9"
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "50"
                 }
               ]
             }
           ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "covered",
-        "amount": "100"
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
       }
     },
     {
-      "id": "trace-compliant-old-spend",
+      "id": "nonqualifying-spend-before-stage-13-is-debited",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2052,6 +2701,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2062,6 +2712,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2069,8 +2720,118 @@
           ]
         },
         {
-          "blockId": "old-compliant-spend",
+          "blockId": "spend",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "0",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
+      }
+    },
+    {
+      "id": "nonqualifying-spend-does-not-disqualify-other-outputs",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
           "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                },
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "60"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "spend",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "60",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
+      }
+    },
+    {
+      "id": "new-funds-after-nonqualifying-spend-remain-admitted",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "spend",
+          "eventStage": 12,
           "transactions": [
             {
               "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
@@ -2085,20 +2846,35 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
+          "blockId": "new",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "99b0000000000000000000000000000000000000000000000000000000000005",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "50"
+                }
+              ]
+            }
+          ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
         "state": "covered",
-        "amount": "0"
+        "amount": "50",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
       }
     },
     {
-      "id": "trace-ignored-output-spend",
+      "id": "ignored-only-input-before-boundary-no-covered-debit",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2110,6 +2886,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2120,6 +2897,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2127,16 +2905,11 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
-        },
-        {
-          "blockId": "ignored-spend",
-          "eventStage": 11,
+          "blockId": "spend",
+          "eventStage": 12,
           "transactions": [
             {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000006",
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
               "inputs": [
                 {
                   "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
@@ -2148,15 +2921,18 @@
           ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
         "state": "covered",
-        "amount": "100"
+        "amount": "100",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
       }
     },
     {
-      "id": "trace-unconfirmed-no-taint",
+      "id": "ignored-only-input-after-boundary-no-covered-debit",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2168,6 +2944,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2178,6 +2955,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2185,20 +2963,79 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
+          "blockId": "spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "unconfirmed-spend-not-a-confirmed-debit",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "later",
+          "eventStage": 13,
           "transactions": []
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "covered",
-        "amount": "100"
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
       },
       "observedUnconfirmedTransactions": [
         {
-          "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+          "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
           "inputs": [
             {
               "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
@@ -2210,7 +3047,9 @@
       ]
     },
     {
-      "id": "trace-confirmed-covered-spend",
+      "id": "stage-13-nonqualifying-spend-may-remain-stale",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2222,6 +3061,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2232,6 +3072,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2239,13 +3080,8 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
-        },
-        {
-          "blockId": "bad-spend",
-          "eventStage": 11,
+          "blockId": "spend",
+          "eventStage": 13,
           "transactions": [
             {
               "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
@@ -2260,14 +3096,18 @@
           ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "address_disqualified"
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
       }
     },
     {
-      "id": "trace-mixed-input-spend",
+      "id": "stage-13-qualifying-spend-must-be-debited",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2279,6 +3119,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2289,6 +3130,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2296,16 +3138,69 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
-        },
-        {
-          "blockId": "mixed-spend",
-          "eventStage": 11,
+          "blockId": "spend",
+          "eventStage": 13,
           "transactions": [
             {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000004",
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "qualifying-mixed-input-spend-debits-covered-input",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
               "inputs": [
                 {
                   "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
@@ -2321,14 +3216,18 @@
           ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "address_disqualified"
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
       }
     },
     {
-      "id": "trace-orphaned-spend-restored",
+      "id": "nonqualifying-mixed-input-spend-may-be-stale",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2340,6 +3239,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2350,6 +3250,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2357,26 +3258,335 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
+          "blockId": "spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                },
+                {
+                  "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "pre-boundary-debit-does-not-resurrect-after-13",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
         },
         {
-          "blockId": "replacement-no-spend",
-          "eventStage": 11,
+          "blockId": "spend",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        },
+        {
+          "blockId": "later",
+          "eventStage": 13,
           "transactions": []
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "covered",
-        "amount": "100"
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "historical-qualifying-spend-not-retested-at-later-filter",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        },
+        {
+          "blockId": "later",
+          "eventStage": 18,
+          "transactions": []
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "orphaned-spend-undone",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "replacement",
+          "eventStage": 13,
+          "transactions": []
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
       },
       "previouslyAcceptedButNowOrphanedBlocks": [
         {
-          "blockId": "orphaned-bad-spend",
-          "eventStage": 11,
+          "blockId": "old-spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orphaned-funding-not-preserved",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "accepted-empty",
+          "eventStage": 13,
+          "transactions": []
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-spend-remined-before-boundary-debits",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "replacement",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "covered",
+        "amount": "0",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "old",
+          "eventStage": 13,
           "transactions": [
             {
               "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
@@ -2393,7 +3603,9 @@
       ]
     },
     {
-      "id": "trace-orphaned-spend-watch-gap",
+      "id": "same-spend-remined-after-boundary-may-be-stale",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2405,6 +3617,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2415,6 +3628,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2422,244 +3636,203 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
+          "blockId": "replacement",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      },
+      "previouslyAcceptedButNowOrphanedBlocks": [
+        {
+          "blockId": "old",
+          "eventStage": 12,
+          "transactions": [
+            {
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qualifying-stream-gap-is-unavailable",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
         },
         {
-          "blockId": "replacement-no-spend",
-          "eventStage": 11,
+          "blockId": "later",
+          "eventStage": 13,
           "transactions": []
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "reconstructionComplete": false,
+      "expected": {
+        "state": "unavailable"
+      }
+    },
+    {
+      "id": "all-spend-gap-before-boundary-is-unavailable",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "later",
+          "eventStage": 12,
+          "transactions": []
+        }
+      ],
+      "reconstructionComplete": false,
+      "expected": {
+        "state": "unavailable"
+      }
+    },
+    {
+      "id": "reorg-below-13-requires-complete-backfill",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "replacement",
+          "eventStage": 12,
+          "transactions": []
+        }
+      ],
       "reconstructionComplete": false,
       "expected": {
         "state": "unavailable"
       },
       "previouslyAcceptedButNowOrphanedBlocks": [
         {
-          "blockId": "orphaned-bad-spend",
-          "eventStage": 11,
-          "transactions": [
-            {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
-              "inputs": [
-                {
-                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-                  "index": 0
-                }
-              ],
-              "outputs": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "trace-remined-spend-lower-rule",
-      "acceptedBlocks": [
-        {
-          "blockId": "funding",
-          "eventStage": 5,
-          "transactions": [
-            {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "100"
-                }
-              ]
-            },
-            {
-              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "7"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blockId": "remined-spend",
-          "eventStage": 5,
-          "transactions": [
-            {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
-              "inputs": [
-                {
-                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-                  "index": 0
-                }
-              ],
-              "outputs": []
-            }
-          ]
-        }
-      ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-      "reconstructionComplete": true,
-      "expected": {
-        "state": "covered",
-        "amount": "0"
-      },
-      "previouslyAcceptedButNowOrphanedBlocks": [
-        {
-          "blockId": "orphaned-bad-spend",
-          "eventStage": 11,
-          "transactions": [
-            {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
-              "inputs": [
-                {
-                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-                  "index": 0
-                }
-              ],
-              "outputs": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "trace-remined-spend-still-bad",
-      "acceptedBlocks": [
-        {
-          "blockId": "funding",
-          "eventStage": 5,
-          "transactions": [
-            {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "100"
-                }
-              ]
-            },
-            {
-              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "7"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blockId": "tightening",
-          "eventStage": 11,
+          "blockId": "old",
+          "eventStage": 13,
           "transactions": []
-        },
-        {
-          "blockId": "remined-spend",
-          "eventStage": 11,
-          "transactions": [
-            {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
-              "inputs": [
-                {
-                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-                  "index": 0
-                }
-              ],
-              "outputs": []
-            }
-          ]
-        }
-      ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-      "reconstructionComplete": true,
-      "expected": {
-        "state": "address_disqualified"
-      },
-      "previouslyAcceptedButNowOrphanedBlocks": [
-        {
-          "blockId": "orphaned-bad-spend",
-          "eventStage": 11,
-          "transactions": [
-            {
-              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
-              "inputs": [
-                {
-                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-                  "index": 0
-                }
-              ],
-              "outputs": []
-            }
-          ]
         }
       ]
     },
     {
-      "id": "trace-remined-funding-ignored",
-      "acceptedBlocks": [
-        {
-          "blockId": "remined-funding",
-          "eventStage": 11,
-          "transactions": [
-            {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "100"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-      "reconstructionComplete": true,
-      "expected": {
-        "state": "covered",
-        "amount": "0"
-      },
-      "previouslyAcceptedButNowOrphanedBlocks": [
-        {
-          "blockId": "old-funding",
-          "eventStage": 5,
-          "transactions": [
-            {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "100"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "trace-address-prefix-loss",
+      "id": "address-prefix-loss-is-not-zero",
+      "keyFamily": "address",
+      "queryKey": "1CDW1111111111111111111111113dpUUW",
       "acceptedBlocks": [
         {
           "blockId": "funding",
           "eventStage": 5,
           "transactions": [
             {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000009",
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
               "inputs": [],
               "outputs": [
                 {
                   "address": "1CDW1111111111111111111111113dpUUW",
+                  "lockingScript": "76a9147b069548eb7fdcf43d809ff51895fc8cb304897688ac",
                   "amount": "70"
                 }
               ]
@@ -2667,30 +3840,32 @@
           ]
         },
         {
-          "blockId": "tightening",
+          "blockId": "later",
           "eventStage": 6,
           "transactions": []
         }
       ],
-      "queryAddress": "1CDW1111111111111111111111113dpUUW",
       "reconstructionComplete": true,
       "expected": {
-        "state": "outside_coverage"
+        "state": "outside_free_coverage"
       }
     },
     {
-      "id": "trace-address-prefix-restored",
+      "id": "reorg-restores-address-prefix-after-reconstruction",
+      "keyFamily": "address",
+      "queryKey": "1CDW1111111111111111111111113dpUUW",
       "acceptedBlocks": [
         {
           "blockId": "funding",
           "eventStage": 5,
           "transactions": [
             {
-              "txid": "9a00000000000000000000000000000000000000000000000000000000000009",
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
               "inputs": [],
               "outputs": [
                 {
                   "address": "1CDW1111111111111111111111113dpUUW",
+                  "lockingScript": "76a9147b069548eb7fdcf43d809ff51895fc8cb304897688ac",
                   "amount": "70"
                 }
               ]
@@ -2703,22 +3878,25 @@
           "transactions": []
         }
       ],
-      "queryAddress": "1CDW1111111111111111111111113dpUUW",
       "reconstructionComplete": true,
       "expected": {
         "state": "covered",
-        "amount": "70"
+        "amount": "70",
+        "spendCoverage": "all_confirmed_spends",
+        "mayIncludeSpentOutputs": false
       },
       "previouslyAcceptedButNowOrphanedBlocks": [
         {
-          "blockId": "orphaned-tightening",
+          "blockId": "old",
           "eventStage": 6,
           "transactions": []
         }
       ]
     },
     {
-      "id": "trace-new-deposit-no-reset",
+      "id": "valid-spend-can-debit-and-admit-change",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "acceptedBlocks": [
         {
           "blockId": "funding",
@@ -2730,6 +3908,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "100"
                 }
               ]
@@ -2740,6 +3919,7 @@
               "outputs": [
                 {
                   "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
                   "amount": "7"
                 }
               ]
@@ -2747,13 +3927,72 @@
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
+          "blockId": "spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "60"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "60",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "extra-validated-nonqualifying-spend-may-be-applied",
+      "keyFamily": "address",
+      "queryKey": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+      "acceptedBlocks": [
+        {
+          "blockId": "funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "100"
+                }
+              ]
+            },
+            {
+              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
+              "inputs": [],
+              "outputs": [
+                {
+                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "76a914805cc3010b23c67b6e5fa59274b5fe75b14e5ba188ac",
+                  "amount": "7"
+                }
+              ]
+            }
+          ]
         },
         {
-          "blockId": "bad-spend",
-          "eventStage": 11,
+          "blockId": "spend",
+          "eventStage": 13,
           "transactions": [
             {
               "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
@@ -2766,35 +4005,24 @@
               "outputs": []
             }
           ]
-        },
-        {
-          "blockId": "fresh-deposit",
-          "eventStage": 11,
-          "transactions": [
-            {
-              "txid": "9900000000000000000000000000000000000000000000000000000000000007",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "150"
-                }
-              ]
-            }
-          ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "address_disqualified"
-      }
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      },
+      "applyExtraValidatedSpends": true
     },
     {
-      "id": "trace-valid-spend-debit-credit",
+      "id": "script-family-stale-spend",
+      "keyFamily": "scriptHash",
+      "queryKey": "7773d1d47a0bceb825f0298f6abfc25b57365e20",
       "acceptedBlocks": [
         {
-          "blockId": "funding",
+          "blockId": "script-funding",
           "eventStage": 5,
           "transactions": [
             {
@@ -2802,207 +4030,225 @@
               "inputs": [],
               "outputs": [
                 {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
+                  "lockingScript": "04892f00007551",
                   "amount": "100"
-                }
-              ]
-            },
-            {
-              "txid": "1a00000000000000000000000000000000000000000000000000000000000002",
-              "inputs": [],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "7"
                 }
               ]
             }
           ]
         },
         {
-          "blockId": "tightening",
-          "eventStage": 11,
-          "transactions": []
-        },
-        {
-          "blockId": "valid-spend",
-          "eventStage": 11,
+          "blockId": "script-spend",
+          "eventStage": 13,
           "transactions": [
             {
-              "txid": "9900000000000000000000000000000000000000000000000000000000000005",
+              "txid": "9b00000000000000000000000000000000000000000000000000000000000003",
               "inputs": [
                 {
                   "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
                   "index": 0
                 }
               ],
-              "outputs": [
-                {
-                  "address": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
-                  "amount": "60"
-                }
-              ]
+              "outputs": []
             }
           ]
         }
       ],
-      "queryAddress": "1ChickenNuggetVzzzzzzzzzzzzzyMbzZ3",
       "reconstructionComplete": true,
       "expected": {
-        "state": "covered",
-        "amount": "60"
+        "state": "filtered",
+        "amount": "100",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "script-family-required-debit",
+      "keyFamily": "scriptHash",
+      "queryKey": "7773d1d47a0bceb825f0298f6abfc25b57365e20",
+      "acceptedBlocks": [
+        {
+          "blockId": "script-funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "lockingScript": "04892f00007551",
+                  "amount": "100"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "script-spend",
+          "eventStage": 13,
+          "transactions": [
+            {
+              "txid": "99a0000000000000000000000000000000000000000000000000000000000004",
+              "inputs": [
+                {
+                  "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+                  "index": 0
+                }
+              ],
+              "outputs": []
+            }
+          ]
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "filtered",
+        "amount": "0",
+        "spendCoverage": "qualifying_txids_only",
+        "mayIncludeSpentOutputs": true
+      }
+    },
+    {
+      "id": "script-prefix-loss",
+      "keyFamily": "scriptHash",
+      "queryKey": "7773d1d47a0bceb825f0298f6abfc25b57365e20",
+      "acceptedBlocks": [
+        {
+          "blockId": "script-funding",
+          "eventStage": 5,
+          "transactions": [
+            {
+              "txid": "9a00000000000000000000000000000000000000000000000000000000000001",
+              "inputs": [],
+              "outputs": [
+                {
+                  "lockingScript": "04892f00007551",
+                  "amount": "100"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockId": "later",
+          "eventStage": 14,
+          "transactions": []
+        }
+      ],
+      "reconstructionComplete": true,
+      "expected": {
+        "state": "outside_free_coverage"
       }
     }
   ],
-  "reorganizationPolicy": "Only acceptedBlocks govern the derived state. Previously accepted/orphaned blocks and observed unconfirmed transactions are audit/test observations and must not mutate the accepted result. eventStage fields are synthetic already-derived stages; calendar/stage derivation is checked by the separate stage fixtures.",
-  "minimumRecoveryRetentionBlocks": 100,
+  "balanceTraceSemantics": "Stages 0-12 debit all valid accepted confirmed spends of admitted outputs; stages 13+ debit qualifying-TXID spends and may ignore other spends. applyExtraValidatedSpends opts into additional accepted-spend observations. Earlier debits persist. Old/orphaned and mempool observations do not govern accepted state. All-spend UTXO completeness and qualifying-stream completeness are separate promises. These are decoded-effect tests, not signed-transaction proofs.",
   "recoveryRetentionCases": [
     {
-      "id": "hold-at-retirement-height",
+      "id": "retirement-block",
       "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
       "acceptedTipHeight": 1000001,
-      "configuredRetentionBlocks": 100,
+      "retirementAnchorIsAcceptedAncestor": true,
       "requiredByActiveState": false,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": false
+      "expectedRecommendedHold": true,
+      "expectedMandatoryProtection": false
     },
     {
-      "id": "hold-99-descendants",
+      "id": "99-descendants",
       "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
       "acceptedTipHeight": 1000100,
-      "configuredRetentionBlocks": 100,
+      "retirementAnchorIsAcceptedAncestor": true,
       "requiredByActiveState": false,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": false
+      "expectedRecommendedHold": true,
+      "expectedMandatoryProtection": false
     },
     {
-      "id": "hold-100-descendants",
+      "id": "100-descendants",
       "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
       "acceptedTipHeight": 1000101,
-      "configuredRetentionBlocks": 100,
+      "retirementAnchorIsAcceptedAncestor": true,
       "requiredByActiveState": false,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": true
+      "expectedRecommendedHold": false,
+      "expectedMandatoryProtection": false
     },
     {
-      "id": "hold-101-descendants",
+      "id": "101-descendants",
       "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
       "acceptedTipHeight": 1000102,
-      "configuredRetentionBlocks": 100,
+      "retirementAnchorIsAcceptedAncestor": true,
       "requiredByActiveState": false,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": true
+      "expectedRecommendedHold": false,
+      "expectedMandatoryProtection": false
     },
     {
-      "id": "orphaned-anchor-no-authorization",
+      "id": "orphaned-anchor-cannot-authorize-age",
       "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": false,
       "acceptedTipHeight": 1000200,
-      "configuredRetentionBlocks": 100,
+      "retirementAnchorIsAcceptedAncestor": false,
       "requiredByActiveState": false,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": false
+      "expectedRecommendedHold": true,
+      "expectedMandatoryProtection": true
     },
     {
-      "id": "lower-accepted-tip-restores-unexpired-hold",
+      "id": "lower-tip-hold-still-recommended",
       "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
       "acceptedTipHeight": 1000050,
-      "configuredRetentionBlocks": 100,
+      "retirementAnchorIsAcceptedAncestor": true,
       "requiredByActiveState": false,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "previouslyObservedTipHeight": 1000100,
-      "expectedPurgePermitted": false
+      "expectedRecommendedHold": true,
+      "expectedMandatoryProtection": false
     },
     {
-      "id": "rejected-high-tip-does-not-age-hold",
+      "id": "live-grandfathered-data-still-required",
       "retirementHeight": 1000001,
+      "acceptedTipHeight": 1000200,
       "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000100,
-      "configuredRetentionBlocks": 100,
-      "requiredByActiveState": false,
-      "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "rejectedSideBranchTipHeight": 1000200,
-      "expectedPurgePermitted": false
-    },
-    {
-      "id": "live-grandfathered-output-does-not-expire",
-      "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000101,
-      "configuredRetentionBlocks": 100,
       "requiredByActiveState": true,
       "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": false
+      "expectedRecommendedHold": false,
+      "expectedMandatoryProtection": true
     },
     {
-      "id": "ongoing-rebuild-protects-data",
+      "id": "ongoing-recovery-data-still-required",
       "retirementHeight": 1000001,
+      "acceptedTipHeight": 1000200,
       "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000101,
-      "configuredRetentionBlocks": 100,
       "requiredByActiveState": false,
       "recoveryInProgress": true,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": false
-    },
-    {
-      "id": "longer-configured-hold-199-descendants",
-      "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000200,
-      "configuredRetentionBlocks": 200,
-      "requiredByActiveState": false,
-      "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": false
-    },
-    {
-      "id": "longer-configured-hold-200-descendants",
-      "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000201,
-      "configuredRetentionBlocks": 200,
-      "requiredByActiveState": false,
-      "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedPurgePermitted": true
-    },
-    {
-      "id": "no-deep-reorg-reconstruction-path",
-      "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000101,
-      "configuredRetentionBlocks": 100,
-      "requiredByActiveState": false,
-      "recoveryInProgress": false,
-      "reconstructionPathVerified": false,
-      "expectedPurgePermitted": false
-    },
-    {
-      "id": "configuration-below-required-floor-is-invalid",
-      "retirementHeight": 1000001,
-      "retirementAnchorIsAcceptedAncestor": true,
-      "acceptedTipHeight": 1000101,
-      "configuredRetentionBlocks": 99,
-      "requiredByActiveState": false,
-      "recoveryInProgress": false,
-      "reconstructionPathVerified": true,
-      "expectedConfigurationValid": false,
-      "expectedPurgePermitted": false
+      "expectedRecommendedHold": false,
+      "expectedMandatoryProtection": true
     }
   ],
-  "recoveryRetentionSemantics": "Each case is a removal authorization check on the current accepted view, not a claim of finality. Require an accepted-ancestor retirement anchor, acceptedTipHeight-retirementHeight >= max(100, configuredRetentionBlocks), no live-state or recovery dependency, and a verified deeper-reorganization reconstruction path. Configurations below 100 are invalid. Previously observed or rejected heights are audit inputs only. A previously purged record made necessary by a deeper reorganization must be reconstructed, with unavailable responses until verified."
+  "retentionDeviationCases": [
+    {
+      "configuredMinimumBlocks": 20,
+      "riskDisclosurePublished": true,
+      "expectedMinimumRecommendationMet": false,
+      "expectedDisclosureRequirementMet": true
+    },
+    {
+      "configuredMinimumBlocks": 20,
+      "riskDisclosurePublished": false,
+      "expectedMinimumRecommendationMet": false,
+      "expectedDisclosureRequirementMet": false
+    },
+    {
+      "configuredMinimumBlocks": 100,
+      "riskDisclosurePublished": true,
+      "expectedMinimumRecommendationMet": true,
+      "expectedDisclosureRequirementMet": true
+    },
+    {
+      "configuredMinimumBlocks": 200,
+      "riskDisclosurePublished": true,
+      "expectedMinimumRecommendationMet": true,
+      "expectedDisclosureRequirementMet": true
+    }
+  ],
+  "recoveryRetentionSemantics": "100 accepted descendants is a SHOULD minimum, not an absolute prohibition or a purge instruction. Operators may depart with published policy and risk disclosure. Live promised state and ongoing supported recovery remain mandatory protections; unverified/orphaned anchors cannot authorize a removal decision. Missing restored data requires unavailable until reconstructed."
 }
