@@ -271,6 +271,7 @@ totals['deterministic_notice_chain_traces'] = len(vectors['noticeRoundCases'])
 for c in vectors['balanceTraceCases']:
     outputs = {}
     admitted = {}
+    ledger_snapshots = {}
     family = c['keyFamily']
     query = c['queryKey']
     def get_key(out):
@@ -291,15 +292,24 @@ for c in vectors['balanceTraceCases']:
                 outputs[key] = out
                 if txid_match(tx['txid'], stage) and matches(get_key(out), stage):
                     admitted[key] = out
+        ledger_snapshots[block['blockId']] = (stage, admitted.copy())
+    current_stage = stage
+    snapshot_id = c.get('snapshotBlockId', c['acceptedBlocks'][-1]['blockId'])
+    snapshot = ledger_snapshots.get(snapshot_id)
     if not matches(query, stage):
         result = {'state': 'outside_free_coverage'}
-    elif not c['reconstructionComplete']:
+    elif not c['reconstructionComplete'] or snapshot is None:
         result = {'state': 'unavailable'}
     else:
-        amount = sum(int(o['amount']) for o in admitted.values() if get_key(o) == query)
-        result = {'state': 'covered' if stage <= 12 else 'filtered', 'amount': str(amount),
-            'spendCoverage':'all_confirmed_spends' if stage <= 12 else 'qualifying_txids_only',
-            'mayIncludeSpentOutputs':stage >= 13}
+        snapshot_stage, snapshot_ledger = snapshot
+        amount = sum(int(o['amount']) for o in snapshot_ledger.values() if get_key(o) == query)
+        result = {'state': 'covered' if snapshot_stage <= 12 else 'filtered', 'amount': str(amount),
+            'spendCoverage':'all_confirmed_spends' if snapshot_stage <= 12 else 'qualifying_txids_only',
+            'mayIncludeSpentOutputs':snapshot_stage >= 13}
+        if 'snapshotBlockId' in c:
+            result.update(currentStage=current_stage, snapshotStage=snapshot_stage,
+                          snapshotKind='current' if snapshot_id == c['acceptedBlocks'][-1]['blockId']
+                          else 'historical')
     assert result == c['expected'], (c['id'], result, c['expected'])
 totals['accepted_chain_balance_traces'] = len(vectors['balanceTraceCases'])
 
