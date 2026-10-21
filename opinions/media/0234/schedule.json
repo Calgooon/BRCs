@@ -23,7 +23,8 @@
       "scriptHashBits": 0,
       "scriptHashRule": "all",
       "scriptHashTrials": "1",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 1,
@@ -43,7 +44,8 @@
       "scriptHashBits": 1,
       "scriptHashRule": "[0-7]",
       "scriptHashTrials": "2",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 2,
@@ -63,7 +65,8 @@
       "scriptHashBits": 2,
       "scriptHashRule": "[4-7]",
       "scriptHashTrials": "4",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 3,
@@ -83,7 +86,8 @@
       "scriptHashBits": 3,
       "scriptHashRule": "[67]",
       "scriptHashTrials": "8",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 4,
@@ -103,7 +107,8 @@
       "scriptHashBits": 4,
       "scriptHashRule": "7",
       "scriptHashTrials": "16",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 5,
@@ -123,7 +128,8 @@
       "scriptHashBits": 5,
       "scriptHashRule": "7[0-7]",
       "scriptHashTrials": "32",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 6,
@@ -143,7 +149,8 @@
       "scriptHashBits": 6,
       "scriptHashRule": "7[4-7]",
       "scriptHashTrials": "64",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 7,
@@ -163,7 +170,8 @@
       "scriptHashBits": 7,
       "scriptHashRule": "7[67]",
       "scriptHashTrials": "128",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 8,
@@ -183,7 +191,8 @@
       "scriptHashBits": 8,
       "scriptHashRule": "77",
       "scriptHashTrials": "256",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 9,
@@ -203,7 +212,8 @@
       "scriptHashBits": 9,
       "scriptHashRule": "77[0-7]",
       "scriptHashTrials": "512",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 10,
@@ -223,7 +233,8 @@
       "scriptHashBits": 10,
       "scriptHashRule": "77[4-7]",
       "scriptHashTrials": "1024",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 11,
@@ -243,7 +254,8 @@
       "scriptHashBits": 11,
       "scriptHashRule": "77[67]",
       "scriptHashTrials": "2048",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 12,
@@ -263,7 +275,8 @@
       "scriptHashBits": 12,
       "scriptHashRule": "777",
       "scriptHashTrials": "4096",
-      "spendAccountingMode": "all_confirmed_spends"
+      "spendAccountingMode": "all_confirmed_spends",
+      "requiredTransactionVersion": null
     },
     {
       "stage": 13,
@@ -283,7 +296,8 @@
       "scriptHashBits": 13,
       "scriptHashRule": "777[0-7]",
       "scriptHashTrials": "8192",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 14,
@@ -303,7 +317,8 @@
       "scriptHashBits": 14,
       "scriptHashRule": "777[4-7]",
       "scriptHashTrials": "16384",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 15,
@@ -323,7 +338,8 @@
       "scriptHashBits": 15,
       "scriptHashRule": "777[67]",
       "scriptHashTrials": "32768",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 16,
@@ -343,7 +359,8 @@
       "scriptHashBits": 16,
       "scriptHashRule": "7777",
       "scriptHashTrials": "65536",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 17,
@@ -363,7 +380,8 @@
       "scriptHashBits": 17,
       "scriptHashRule": "7777[0-7]",
       "scriptHashTrials": "131072",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 18,
@@ -383,7 +401,8 @@
       "scriptHashBits": 23,
       "scriptHashRule": "77777[67]",
       "scriptHashTrials": "8388608",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 19,
@@ -403,7 +422,8 @@
       "scriptHashBits": 28,
       "scriptHashRule": "7777777",
       "scriptHashTrials": "268435456",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 20,
@@ -423,7 +443,8 @@
       "scriptHashBits": 34,
       "scriptHashRule": "77777777[4-7]",
       "scriptHashTrials": "17179869184",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 21,
@@ -443,7 +464,8 @@
       "scriptHashBits": 40,
       "scriptHashRule": "7777777777",
       "scriptHashTrials": "1099511627776",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 22,
@@ -463,7 +485,8 @@
       "scriptHashBits": 46,
       "scriptHashRule": "77777777777[4-7]",
       "scriptHashTrials": "70368744177664",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 23,
@@ -483,7 +506,8 @@
       "scriptHashBits": 52,
       "scriptHashRule": "7777777777777",
       "scriptHashTrials": "4503599627370496",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 24,
@@ -503,7 +527,8 @@
       "scriptHashBits": 58,
       "scriptHashRule": "77777777777777[4-7]",
       "scriptHashTrials": "288230376151711744",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 25,
@@ -523,7 +548,8 @@
       "scriptHashBits": 64,
       "scriptHashRule": "7777777777777777",
       "scriptHashTrials": "18446744073709551616",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 26,
@@ -543,7 +569,8 @@
       "scriptHashBits": 69,
       "scriptHashRule": "77777777777777777[0-7]",
       "scriptHashTrials": "590295810358705651712",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     },
     {
       "stage": 27,
@@ -563,12 +590,13 @@
       "scriptHashBits": 75,
       "scriptHashRule": "777777777777777777[67]",
       "scriptHashTrials": "37778931862957161709568",
-      "spendAccountingMode": "qualifying_txids_only"
+      "spendAccountingMode": "qualifying_version_1_txids_only",
+      "requiredTransactionVersion": 1
     }
   ],
   "calculationNotes": {
     "addressTrials": "2^160 / eligibleHash160Values; all mainnet Base58Check encodings are counted, including checksum constraints; private-key search assumes uniform HASH160 outputs",
-    "txidTrials": "2^txidBits; assumes uniformly distributed valid transaction candidates",
+    "txidTrials": "2^txidBits; assumes uniformly distributed valid transaction candidates, restricted to version 1 from stage 13; other versions cannot qualify then.",
     "nominalElapsedMonths": "6 + 72 times the exact post-grace cumulative weight fraction; a review display, not a calendar-month activation rule",
     "calendarRule": "T1=T0+6 calendar months; T27=T0+78 calendar months; intermediate eligibility gates use ceiling integer-second interpolation. Actual activations additionally require fresh deterministic 14-day MTP notice rounds and a following block.",
     "rounding": "Expected trials and nominal month displays are nonnormative approximations; stage predicates, volume thresholds and time formulas are exact",
@@ -593,5 +621,6 @@
   "ledgerViewRule": "Baseline admissions and required debits are canonical for the same key family, key and accepted snapshot. Extra validated nonqualifying spends affect only a separately offered enhanced guarantee, using existing service arrangements. No view selector, revision identifier, pagination format or API change is required.",
   "conformanceMeaning": "Availability of the required in-scope data and fulfillment of the defined spend-accounting guarantees, independent of any API, wire format or delivery method. No provider-specific API defines conformance.",
   "retrievalCapsRule": "Declared historical windows and record-count caps are allowed for TXID retrieval and address/script-hash history. Providers document the selection rule and its stage/filter/reorg interaction and make all records within that promise available. An offered output/balance ledger remains complete for every admitted output while its query key is eligible, regardless of retrieval caps.",
-  "providerWithdrawalRule": "Individual closure, paid-only conversion, withdrawal of an offered operation/family or changes to declared retrieval/history caps follow existing provider service terms. Providers communicate changes and cease withdrawn guarantee claims. No additional BRC minimum notice period, local timer or new API is imposed; accepted-chain stage and notice state remain unchanged."
+  "providerWithdrawalRule": "Individual closure, paid-only conversion, withdrawal of an offered operation/family or changes to declared retrieval/history caps follow existing provider service terms. Providers communicate changes and cease withdrawn guarantee claims. No additional BRC minimum notice period, local timer or new API is imposed; accepted-chain stage and notice state remain unchanged.",
+  "transactionVersionRule": "Stages 0-12 add no transaction-version restriction. From stage 13, every TXID-filtered operation requires decoded serialized version == 1 as well as the prefix. Current retrieval/history uses current stage; admission/spends use event stage. Earlier admitted outputs and debits survive, including other versions; all-version backfill is required on replay below 13. Volume counts remain all-version."
 }

@@ -66,10 +66,27 @@ def txid_match(t, stage):
     return bits[:n] == target[:n]
 
 
+def transaction_match(tx, stage):
+    return txid_match(tx['txid'], stage) and (stage <= 12 or tx['version'] == 1)
+
+
 assert [r['stage'] for r in rows] == list(range(28))
 assert rows[-1]['txidBits'] == 52 and rows[-1]['volume'] == 8192000000
 assert schedule['recommendedRecoveryRetentionBlocks'] == vectors['recommendedRecoveryRetentionBlocks'] == 100
 assert schedule['noticePeriodSeconds'] == 1209600
+for r in rows:
+    assert r['requiredTransactionVersion'] == (None if r['stage'] <= 12 else 1)
+    assert r['spendAccountingMode'] == ('all_confirmed_spends' if r['stage'] <= 12
+                                       else 'qualifying_version_1_txids_only')
+for c in vectors['transactionEligibilityCases']:
+    assert transaction_match(c, c['stage']) == c['expectedEligible'], c
+totals['transaction_version_eligibility_cases'] = len(vectors['transactionEligibilityCases'])
+for c in vectors['versionRetrievalCases']:
+    eligible = transaction_match(c, c['currentStage'])
+    if c['family'] != 'txid':
+        eligible = eligible and c['identifierEligible']
+    assert eligible == c['expectedEligible'], c
+totals['current_version_retrieval_cases'] = len(vectors['versionRetrievalCases'])
 for c in vectors['addressPredicateCases']:
     assert address_match(c['address'], c['stage']) == c['expectedMatches'], c
 totals['address_predicate_cases'] = len(vectors['addressPredicateCases'])
@@ -212,7 +229,7 @@ totals['time_and_volume_boundary_cases'] = len(vectors['gateCases'])
 table1 = [line for line in spec.splitlines() if re.match(r'\| \d+ \|', line)][:28]
 for r, line in zip(rows, table1):
     cells = [x.strip() for x in line.split('|')[1:-1]]
-    assert cells == [str(r['stage']), f"`{r['addressRule']}`", f"`{r['scriptHashRule']}` ({r['scriptHashBits']})", str(r['txidBits']), f"{r['volume']:,}"], cells
+    assert cells == [str(r['stage']), f"`{r['addressRule']}`", f"`{r['scriptHashRule']}` ({r['scriptHashBits']})", str(r['txidBits']), 'any' if r['stage'] <= 12 else '1', f"{r['volume']:,}"], cells
 table2 = [line for line in spec.splitlines() if re.match(r'\| \d+ \|', line)][28:]
 assert len(table1) == 28 and len(table2) == 27
 for r, line in zip(rows[1:], table2):
@@ -290,13 +307,13 @@ for c in vectors['balanceTraceCases']:
                 key = (inp['txid'], inp['index'])
                 assert key in outputs, (c['id'], key)
                 outputs.pop(key)
-                if (stage <= 12 or txid_match(tx['txid'], stage)
+                if (stage <= 12 or transaction_match(tx, stage)
                         or (ledger_view == 'enhanced' and c.get('extraSpendsVerified'))):
                     admitted.pop(key, None)
             for index, out in enumerate(tx['outputs']):
                 key = (tx['txid'], index)
                 outputs[key] = out
-                if txid_match(tx['txid'], stage) and matches(get_key(out), stage):
+                if transaction_match(tx, stage) and matches(get_key(out), stage):
                     admitted[key] = out
         ledger_snapshots[block['blockId']] = (stage, admitted.copy())
     current_stage = stage
@@ -310,7 +327,7 @@ for c in vectors['balanceTraceCases']:
         snapshot_stage, snapshot_ledger = snapshot
         amount = sum(int(o['amount']) for o in snapshot_ledger.values() if get_key(o) == query)
         result = {'state': 'covered' if snapshot_stage <= 12 else 'filtered', 'amount': str(amount),
-            'spendCoverage':'all_confirmed_spends' if snapshot_stage <= 12 else 'qualifying_txids_only',
+            'spendCoverage':'all_confirmed_spends' if snapshot_stage <= 12 else 'qualifying_version_1_txids_only',
             'mayIncludeSpentOutputs':snapshot_stage >= 13}
         if 'snapshotBlockId' in c:
             result.update(currentStage=current_stage, snapshotStage=snapshot_stage,
@@ -319,7 +336,7 @@ for c in vectors['balanceTraceCases']:
         if 'ledgerView' in c:
             result['ledgerView'] = ledger_view
             if ledger_view == 'enhanced' and snapshot_stage >= 13:
-                result['spendCoverage'] = 'qualifying_txids_plus_declared_extra_spends'
+                result['spendCoverage'] = 'qualifying_version_1_txids_plus_declared_extra_spends'
     assert result == c['expected'], (c['id'], result, c['expected'])
     if 'expectedActualUnspentAmount' in c:
         actual_amount = sum(int(o['amount']) for o in outputs.values() if get_key(o) == query)
