@@ -54,6 +54,7 @@ BRC | Standard
 208  | [Vault Sub-Accounts](./0208.md)
 209  | [1Color Minimal Resource Profile](./0209.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
+221  | [Deterministic, Order-Independent Coin Selection for Privacy Wallets](./0221.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./0325.md)
 326  | [Wallet Failure Presentation](./0326.md)
