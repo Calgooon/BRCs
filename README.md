@@ -293,6 +293,7 @@ BRC | Standard
 233  | [Subject BEEF](./transactions/0233.md)
 248  | [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
 251  | [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./tokens/0251.md)
+252  | [Short Proofs for Bitcoin Native Tokens](./tokens/0252.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 326  | [Wallet Failure Presentation](./wallet/0326.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
