@@ -297,6 +297,7 @@ BRC | Standard
 253  | [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./tokens/0253.md)
 254  | [Market Offers and Direct Swaps for Wallet Assets](./tokens/0254.md)
 255  | [Bitcoin Native Tokens (BNT): Compact Format](./tokens/0255.md)
+256  | [Cross-Chain Atomic Swaps Between Wallets](./payments/0256.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 326  | [Wallet Failure Presentation](./wallet/0326.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
