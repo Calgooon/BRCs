@@ -26,3 +26,4 @@ BRC | Standard
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./0226.md)
 251  | [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./0251.md)
 252  | [Short Proofs for Bitcoin Native Tokens](./0252.md)
+253  | [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./0253.md)

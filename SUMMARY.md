@@ -152,6 +152,7 @@
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 * [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./tokens/0251.md)
 * [Short Proofs for Bitcoin Native Tokens](./tokens/0252.md)
+* [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./tokens/0253.md)
 
 ## Overlays
 
