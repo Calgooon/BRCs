@@ -149,6 +149,7 @@
 * [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
 * [BSV-21 — Validity Proofs](./tokens/0176.md)
 * [Accumulating Right-of-Sale Listings and Purchase Orders](./tokens/0197.md)
+* [Authenticated 1Sat Inscription](./tokens/0217.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 * [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./tokens/0251.md)
 * [Short Proofs for Bitcoin Native Tokens](./tokens/0252.md)

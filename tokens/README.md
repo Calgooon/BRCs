@@ -23,6 +23,7 @@ BRC | Standard
 174  | [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./0174.md)
 176  | [BSV-21 — Validity Proofs](./0176.md)
 197  | [Accumulating Right-of-Sale Listings and Purchase Orders](./0197.md)
+217  | [Authenticated 1Sat Inscription](./0217.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./0226.md)
 251  | [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./0251.md)
 252  | [Short Proofs for Bitcoin Native Tokens](./0252.md)
