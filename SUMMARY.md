@@ -153,6 +153,7 @@
 * [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./tokens/0251.md)
 * [Short Proofs for Bitcoin Native Tokens](./tokens/0252.md)
 * [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./tokens/0253.md)
+* [Market Offers and Direct Swaps for Wallet Assets](./tokens/0254.md)
 
 ## Overlays
 

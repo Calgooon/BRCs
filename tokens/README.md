@@ -27,3 +27,4 @@ BRC | Standard
 251  | [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./0251.md)
 252  | [Short Proofs for Bitcoin Native Tokens](./0252.md)
 253  | [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./0253.md)
+254  | [Market Offers and Direct Swaps for Wallet Assets](./0254.md)
