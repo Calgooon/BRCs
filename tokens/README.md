@@ -28,3 +28,4 @@ BRC | Standard
 252  | [Short Proofs for Bitcoin Native Tokens](./0252.md)
 253  | [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./0253.md)
 254  | [Market Offers and Direct Swaps for Wallet Assets](./0254.md)
+255  | [Bitcoin Native Tokens (BNT): Compact Format](./0255.md)
